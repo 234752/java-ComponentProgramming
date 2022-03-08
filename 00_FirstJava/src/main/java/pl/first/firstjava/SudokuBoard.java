@@ -1,12 +1,29 @@
 package pl.first.firstjava;
-import java.util.Collections;
 import java.util.Random;
+import java.util.Vector;
 
 public class SudokuBoard
 {
+  Random random = new Random();
     private int[][] board = new int[9][9];
 
-    public static boolean isValid(int[][] board, int row, int col, int n)
+//    public int getRandomInt(int[] v)
+//    {
+//        while(true)
+//        {
+//
+//            int index = random.nextInt(8);
+//            //System.out.println(index);
+//            if(v[index] != 0)
+//            {
+//                int n = v[index];
+//                v[index] = 0;
+//                return n;
+//            }
+//        }
+//    }
+
+    public boolean isValid(int row, int col, int n)
     {
         for (int i = 0; i < 9; i++)
         {
@@ -34,8 +51,9 @@ public class SudokuBoard
         return true;                                                                                                    //if all 3 are OK
     }
 
-    public boolean fillBoard()
+    private boolean solveBoard()
     {
+
         int row = -1;
         int col = -1;
         boolean isEmpty = true;
@@ -57,21 +75,38 @@ public class SudokuBoard
 
         for (int num = 1; num <= 9; num++)
         {
-            if (isValid(board, row, col, num))
+            if (isValid(row, col, num))
             {
                 board[row][col] = num;
-                if (fillBoard())
+                if (solveBoard())
                 {
-                    // print(board, n);
                     return true;
                 }
                 else
                 {
-                    // replace it
                     board[row][col] = 0;
                 }
             }
         }
+
+//        for (int i = 0; i < 9; i++)
+//        {
+//            int[] values = new int[] {1,2,3,4,5,6,7,8,9};
+//            int n = getRandomInt(values);
+//            //System.out.println(i+" "+n);
+//            if (isValid(row, col, n))
+//            {
+//                board[row][col] = n;
+//                if (fillBoard())
+//                {
+//                    return true;
+//                }
+//                else
+//                {
+//                    board[row][col] = 0;
+//                }
+//            }
+//        }
         return false;
     }
 
@@ -87,13 +122,28 @@ public class SudokuBoard
             System.out.print("\n");
         }
     }
+    public void fillBoard()
+    {
+        for(int i=1; i<=9; i++)
+        {
+            board[random.nextInt(9)][random.nextInt(9)] = i;
+        }
 
+        this.solveBoard();
+    }
     public static void main(String[] args)
     {
         SudokuBoard sb = new SudokuBoard();
 
-        sb.fillBoard();
-        sb.print();
+        for(int i=0; i<10; i++)
+        {
+            sb.fillBoard();
+
+            sb.print();
+            System.out.println("-----");
+        }
+
+
     }
 
 }
