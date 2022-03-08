@@ -1,93 +1,128 @@
 package pl.first.firstjava;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Collections;
+import java.util.Random;
 
 public class SudokuBoard
 {
-    private int[][] board = new int[10][10];
+    public static boolean isValid(int[][] board, int row, int col, int n)
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            if (board[row][i] == n) { return false; }
+        }
 
-    private boolean checkRow(int rowIndex, int number)
-    {
-        for(int i = 1; i<=9; i++)
+        for (int i = 0; i < 9; i++)
         {
-            if(board[i][rowIndex] == number) return false;
+            if (board[i][col] == n) { return false; }
         }
-        return true;
-    }
-    private boolean checkColumn(int columnIndex, int number)
-    {
-        for(int i = 1; i<=9; i++)
+
+        int boxRowStart = row - row % 3;
+        int boxColStart = col - col % 3;
+
+        for (int iR = boxRowStart; iR < boxRowStart + 3; iR++)
         {
-            if(board[columnIndex][i] == number) return false;
-        }
-        return true;
-    }
-    private boolean checkSquare(int startX, int startY, int number)
-    {
-        for(int iX = startX; iX<=startX+2; iX++)
-        {
-            for(int iY = startY; iY<=startY+2; iY++)
+            for (int iC = boxColStart; iC < boxColStart + 3; iC++)
             {
-                if(board[iX][iY]==number) return false;
+                if (board[iR][iC] == n)
+                {
+                    return false;
+                }
             }
         }
         return true;
     }
-    private int findCoordinates(int index)
+
+    public static boolean fillBoard(int[][] board, int n)
     {
-        if(index<=3) return 1;
-        else if(index<=6) return 4;
-        else return 7;
-    }
-    private boolean checkNumber(int column, int row, int n)
-    {
-        return (checkColumn(column, n) && checkRow(row, n) && checkSquare(findCoordinates(column), findCoordinates(row), n));
-        //&& checkSquare(findCoordinates(column), findCoordinates(row), n)
-    }
-    public void fillBoard()
-    {
-        for(int row=1; row<=9;row++)
+        int row = -1;
+        int col = -1;
+        boolean isEmpty = true;
+        for (int i = 0; i < n; i++)
         {
-            for(int column=1; column<=9; column++)
+            for (int j = 0; j < n; j++)
             {
-                board[column][row] = ThreadLocalRandom.current().nextInt(1, 10);
+                if (board[i][j] == 0)
+                {
+                    row = i;
+                    col = j;
+
+                    // We still have some remaining
+                    // missing values in Sudoku
+                    isEmpty = false;
+                    break;
+                }
+            }
+            if (!isEmpty) {
+                break;
             }
         }
-    }
-    public boolean verifyBoard()
-    {
-        for(int row=1; row<=9;row++)
+
+        // No empty space left
+        if (isEmpty)
         {
-            for(int column=1; column<=9; column++)
+            return true;
+        }
+
+        // Else for each-row backtrack
+        for (int num = 1; num <= n; num++)
+        {
+            if (isValid(board, row, col, num))
             {
-                if(!checkNumber(column, row, board[column][row])) return false;
+                board[row][col] = num;
+                if (fillBoard(board, n))
+                {
+                    // print(board, n);
+                    return true;
+                }
+                else
+                {
+                    // replace it
+                    board[row][col] = 0;
+                }
             }
-        }return true;
+        }
+        return false;
     }
-    public void displayBoard()
+
+    public static void print(
+            int[][] board, int N)
     {
-        for(int column=1; column<=9;column++)
+
+        // We got the answer, just print it
+        for (int r = 0; r < N; r++)
         {
-            for(int row=1; row<=9; row++)
+            for (int d = 0; d < N; d++)
             {
-                System.out.print(board[column][row]);
+                System.out.print(board[r][d]);
+                System.out.print(" ");
             }
             System.out.print("\n");
+
+            if ((r + 1) % (int)Math.sqrt(N) == 0)
+            {
+                System.out.print("");
+            }
         }
     }
 
-
-    public static void main(String [] args)
+    // Driver Code
+    public static void main(String args[])
     {
-        SudokuBoard sb = new SudokuBoard();
-        int i =0;
-        while(true)
-        {
-            sb.fillBoard();
-            if(sb.verifyBoard()) break;
-            i++;
-            if(i%1000000==0) System.out.println(i);
-        }
-        sb.displayBoard();
 
+        int[][] board = new int[9][9];
+
+        for(int i=0; i<9;i++)   for(int ii=0; ii<9;ii++)    board[i][ii] = 0;
+
+        int N = board.length;
+
+        if (fillBoard(board, N))
+        {
+            // print solution
+            print(board, N);
+        }
+        else {
+            System.out.println("No solution");
+        }
     }
+
 }
