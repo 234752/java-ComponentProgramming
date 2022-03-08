@@ -32,14 +32,14 @@ public class SudokuBoard
         return true;
     }
 
-    public static boolean fillBoard(int[][] board, int n)
+    public static boolean fillBoard(int[][] board)
     {
         int row = -1;
         int col = -1;
         boolean isEmpty = true;
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < 9; i++)
         {
-            for (int j = 0; j < n; j++)
+            for (int j = 0; j < 9; j++)
             {
                 if (board[i][j] == 0)
                 {
@@ -64,12 +64,12 @@ public class SudokuBoard
         }
 
         // Else for each-row backtrack
-        for (int num = 1; num <= n; num++)
+        for (int num = 1; num <= 9; num++)
         {
             if (isValid(board, row, col, num))
             {
                 board[row][col] = num;
-                if (fillBoard(board, n))
+                if (fillBoard(board))
                 {
                     // print(board, n);
                     return true;
@@ -84,45 +84,27 @@ public class SudokuBoard
         return false;
     }
 
-    public static void print(
-            int[][] board, int N)
+    public static void print(int[][] board)
     {
-
-        // We got the answer, just print it
-        for (int r = 0; r < N; r++)
+        for (int iR = 0; iR < 9; iR++)
         {
-            for (int d = 0; d < N; d++)
+            for (int iC = 0; iC < 9; iC++)
             {
-                System.out.print(board[r][d]);
+                System.out.print(board[iR][iC]);
                 System.out.print(" ");
             }
             System.out.print("\n");
-
-            if ((r + 1) % (int)Math.sqrt(N) == 0)
-            {
-                System.out.print("");
-            }
         }
     }
 
-    // Driver Code
     public static void main(String args[])
     {
-
         int[][] board = new int[9][9];
 
         for(int i=0; i<9;i++)   for(int ii=0; ii<9;ii++)    board[i][ii] = 0;
 
-        int N = board.length;
-
-        if (fillBoard(board, N))
-        {
-            // print solution
-            print(board, N);
-        }
-        else {
-            System.out.println("No solution");
-        }
+        fillBoard(board);
+        print(board);
     }
 
 }
