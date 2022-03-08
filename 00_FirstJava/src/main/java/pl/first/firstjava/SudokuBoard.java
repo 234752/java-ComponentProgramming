@@ -97,7 +97,7 @@ public class SudokuBoard
         }
     }
 
-    public static void main(String args[])
+    public static void main(String[] args)
     {
         int[][] board = new int[9][9];
 
