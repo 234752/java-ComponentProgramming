@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class SudokuBoard
 {
+    private int[][] board = new int[9][9];
     public static boolean isValid(int[][] board, int row, int col, int n)
     {
         for (int i = 0; i < 9; i++)
@@ -32,19 +33,19 @@ public class SudokuBoard
         return true;
     }
 
-    public static boolean fillBoard(int[][] board)
+    public boolean fillBoard()
     {
         int row = -1;
         int col = -1;
         boolean isEmpty = true;
-        for (int i = 0; i < 9; i++)
+        for (int iR = 0; iR < 9; iR++)
         {
-            for (int j = 0; j < 9; j++)
+            for (int iC = 0; iC < 9; iC++)
             {
-                if (board[i][j] == 0)
+                if (board[iR][iC] == 0)
                 {
-                    row = i;
-                    col = j;
+                    row = iR;
+                    col = iC;
 
                     // We still have some remaining
                     // missing values in Sudoku
@@ -69,7 +70,7 @@ public class SudokuBoard
             if (isValid(board, row, col, num))
             {
                 board[row][col] = num;
-                if (fillBoard(board))
+                if (fillBoard())
                 {
                     // print(board, n);
                     return true;
@@ -84,7 +85,7 @@ public class SudokuBoard
         return false;
     }
 
-    public static void print(int[][] board)
+    public void print()
     {
         for (int iR = 0; iR < 9; iR++)
         {
@@ -99,12 +100,10 @@ public class SudokuBoard
 
     public static void main(String[] args)
     {
-        int[][] board = new int[9][9];
+        SudokuBoard sb = new SudokuBoard();
 
-        for(int i=0; i<9;i++)   for(int ii=0; ii<9;ii++)    board[i][ii] = 0;
-
-        fillBoard(board);
-        print(board);
+        sb.fillBoard();
+        sb.print();
     }
 
 }
