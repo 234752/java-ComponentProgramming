@@ -5,16 +5,17 @@ import java.util.Random;
 public class SudokuBoard
 {
     private int[][] board = new int[9][9];
+
     public static boolean isValid(int[][] board, int row, int col, int n)
     {
         for (int i = 0; i < 9; i++)
         {
-            if (board[row][i] == n) { return false; }
+            if (board[row][i] == n) { return false; }                                                                   //check columns
         }
 
         for (int i = 0; i < 9; i++)
         {
-            if (board[i][col] == n) { return false; }
+            if (board[i][col] == n) { return false; }                                                                   //check rows
         }
 
         int boxRowStart = row - row % 3;
@@ -26,11 +27,11 @@ public class SudokuBoard
             {
                 if (board[iR][iC] == n)
                 {
-                    return false;
+                    return false;                                                                                       //check squares
                 }
             }
         }
-        return true;
+        return true;                                                                                                    //if all 3 are OK
     }
 
     public boolean fillBoard()
@@ -46,25 +47,14 @@ public class SudokuBoard
                 {
                     row = iR;
                     col = iC;
-
-                    // We still have some remaining
-                    // missing values in Sudoku
                     isEmpty = false;
                     break;
                 }
-            }
-            if (!isEmpty) {
-                break;
-            }
+            }if (!isEmpty) { break; }
         }
+        if (isEmpty) { return true; }                                                                                   //end with all fields filled
 
-        // No empty space left
-        if (isEmpty)
-        {
-            return true;
-        }
 
-        // Else for each-row backtrack
         for (int num = 1; num <= 9; num++)
         {
             if (isValid(board, row, col, num))
