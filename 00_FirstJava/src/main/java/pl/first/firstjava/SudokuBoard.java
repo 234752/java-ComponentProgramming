@@ -1,12 +1,11 @@
 package pl.first.firstjava;
 
 import java.util.Random;
-import java.util.Vector;
 
 public class SudokuBoard {
+
   Random random = new Random();
   private int[][] board = new int[9][9];
-
 
     public boolean isValid(int row, int col, int n) {
         for (int i = 0; i < 9; i++) {
@@ -55,7 +54,6 @@ public class SudokuBoard {
             return true;
         }
 
-
         for (int num = 1; num <= 9; num++) {
             if (isValid(row, col, num)) {
                 board[row][col] = num;
@@ -83,9 +81,7 @@ public class SudokuBoard {
         for (int i = 1; i <= 9; i++) {
             board[random.nextInt(9)][random.nextInt(9)] = i;
         }
-
         this.solveBoard();
     }
-
 
 }
