@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="10.0">
 <file name="C:\Users\BY\Desktop\Java-ComponentProgramming\00_FirstJava\src\main\java\pl\first\firstjava\SudokuBoard.java">
-<error line="27" column="18" severity="error" message="Local variable name &apos;iR&apos; must match pattern &apos;^[a-z]([a-z0-9][a-zA-Z0-9]*)?$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
-<error line="28" column="22" severity="error" message="Local variable name &apos;iC&apos; must match pattern &apos;^[a-z]([a-z0-9][a-zA-Z0-9]*)?$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
-<error line="41" column="18" severity="error" message="Local variable name &apos;iR&apos; must match pattern &apos;^[a-z]([a-z0-9][a-zA-Z0-9]*)?$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
-<error line="42" column="22" severity="error" message="Local variable name &apos;iC&apos; must match pattern &apos;^[a-z]([a-z0-9][a-zA-Z0-9]*)?$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
-<error line="73" column="18" severity="error" message="Local variable name &apos;iR&apos; must match pattern &apos;^[a-z]([a-z0-9][a-zA-Z0-9]*)?$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
-<error line="74" column="22" severity="error" message="Local variable name &apos;iC&apos; must match pattern &apos;^[a-z]([a-z0-9][a-zA-Z0-9]*)?$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
 </file>
 </checkstyle>

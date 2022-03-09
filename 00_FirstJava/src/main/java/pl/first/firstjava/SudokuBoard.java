@@ -24,9 +24,9 @@ public class SudokuBoard {
         int boxRowStart = row - row % 3;
         int boxColStart = col - col % 3;
 
-        for (int iR = boxRowStart; iR < boxRowStart + 3; iR++) {
-            for (int iC = boxColStart; iC < boxColStart + 3; iC++) {
-                if (board[iR][iC] == n) {
+        for (int rowIterator = boxRowStart; rowIterator < boxRowStart + 3; rowIterator++) {
+            for (int colIterator = boxColStart; colIterator < boxColStart + 3; colIterator++) {
+                if (board[rowIterator][colIterator] == n) {
                     return false;
                 }
             }
@@ -38,11 +38,11 @@ public class SudokuBoard {
         int row = -1;
         int col = -1;
         boolean isEmpty = true;
-        for (int iR = 0; iR < 9; iR++) {
-            for (int iC = 0; iC < 9; iC++) {
-                if (board[iR][iC] == 0) {
-                    row = iR;
-                    col = iC;
+        for (int rowIterator = 0; rowIterator < 9; rowIterator++) {
+            for (int colIterator = 0; colIterator < 9; colIterator++) {
+                if (board[rowIterator][colIterator] == 0) {
+                    row = rowIterator;
+                    col = colIterator;
                     isEmpty = false;
                     break;
                 }
@@ -70,9 +70,9 @@ public class SudokuBoard {
     }
 
     public void print() {
-        for (int iR = 0; iR < 9; iR++) {
-            for (int iC = 0; iC < 9; iC++) {
-                System.out.print(board[iR][iC]);
+        for (int rowIterator = 0; rowIterator < 9; rowIterator++) {
+            for (int colIterator = 0; colIterator < 9; colIterator++) {
+                System.out.print(board[rowIterator][colIterator]);
                 System.out.print(" ");
             }
             System.out.print("\n");
