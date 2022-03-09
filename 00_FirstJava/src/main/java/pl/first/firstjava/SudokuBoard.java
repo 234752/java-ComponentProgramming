@@ -10,11 +10,15 @@ public class SudokuBoard {
 
     public boolean isValid(int row, int col, int n) {
         for (int i = 0; i < 9; i++) {
-            if (board[row][i] == n) { return false; }                                               //check columns
+            if (board[row][i] == n) {
+                return false;
+            }
         }
 
         for (int i = 0; i < 9; i++) {
-            if (board[i][col] == n) { return false; }                                               //check rows
+            if (board[i][col] == n) {
+                return false;
+            }
         }
 
         int boxRowStart = row - row % 3;
@@ -23,11 +27,11 @@ public class SudokuBoard {
         for (int iR = boxRowStart; iR < boxRowStart + 3; iR++) {
             for (int iC = boxColStart; iC < boxColStart + 3; iC++) {
                 if (board[iR][iC] == n) {
-                    return false;                                                                   //check squares
+                    return false;
                 }
             }
         }
-        return true;                                                                                //if all 3 are OK
+        return true;
     }
 
     private boolean solveBoard() {
@@ -42,9 +46,14 @@ public class SudokuBoard {
                     isEmpty = false;
                     break;
                 }
-            }if (!isEmpty) { break; }
+            }
+            if (!isEmpty) {
+                break;
+            }
         }
-        if (isEmpty) { return true; }                                                                //end with all fields filled
+        if (isEmpty) {
+            return true;
+        }
 
 
         for (int num = 1; num <= 9; num++) {
@@ -52,8 +61,7 @@ public class SudokuBoard {
                 board[row][col] = num;
                 if (solveBoard()) {
                     return true;
-                }
-                else {
+                } else {
                     board[row][col] = 0;
                 }
             }
@@ -70,8 +78,9 @@ public class SudokuBoard {
             System.out.print("\n");
         }
     }
+
     public void fillBoard() {
-        for(int i=1; i<=9; i++) {
+        for (int i = 1; i <= 9; i++) {
             board[random.nextInt(9)][random.nextInt(9)] = i;
         }
 
