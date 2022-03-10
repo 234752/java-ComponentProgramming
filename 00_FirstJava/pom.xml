@@ -9,6 +9,10 @@
 
     <name>00_${project.artifactId}-${project.version}</name>
 
+<!--    <modules>-->
+<!--        <module>../ChildProject</module>-->
+<!--    </modules>-->
+
     <url>http://maven.apache.org</url>
     
     <reporting>

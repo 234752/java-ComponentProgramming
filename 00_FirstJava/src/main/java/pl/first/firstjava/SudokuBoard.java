@@ -7,7 +7,11 @@ public class SudokuBoard {
   Random random = new Random();
   private int[][] board = new int[9][9];
 
-    public boolean isValid(int row, int col, int n) {
+  public int getNumber(int row, int col) {
+      return board[row][col];
+  }
+
+    private boolean isValid(int row, int col, int n) {
         for (int i = 0; i < 9; i++) {
             if (board[row][i] == n) {
                 return false;
