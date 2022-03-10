@@ -51,22 +51,30 @@ public class SudokuBoardTest {
 
     @Test
     public void testMultipleBoards() {
-        SudokuBoard testedBoard = new SudokuBoard();
-        testedBoard.fillBoard();                    //fill for the first time
+        SudokuBoard testedBoard1 = new SudokuBoard();
+        testedBoard1.fillBoard();                    //fill 1st
 
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                if (!checkNumber(testedBoard, row, col, testedBoard.getNumber(row, col))) fail("one of the numbers is not valid after 1st fillBoard()");
+                if (!checkNumber(testedBoard1, row, col, testedBoard1.getNumber(row, col))) fail("one of the numbers is not valid in 1st board");
             }
         }
-
-        testedBoard.fillBoard();                   //fill again
+        SudokuBoard testedBoard2 = new SudokuBoard();
+        testedBoard2.fillBoard();                   //fill 2nd
 
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                if (!checkNumber(testedBoard, row, col, testedBoard.getNumber(row, col))) fail("one of the numbers is not valid after 2nd fillBoard()");
+                if (!checkNumber(testedBoard2, row, col, testedBoard2.getNumber(row, col))) fail("one of the numbers is not valid in 2nd board");
             }
         }
+
+        //compare
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (testedBoard1.getNumber(row, col) != testedBoard2.getNumber(row, col)) return;
+            }
+        }
+        fail("all numbers are on the same positions in both boards");
     }
 
 }
