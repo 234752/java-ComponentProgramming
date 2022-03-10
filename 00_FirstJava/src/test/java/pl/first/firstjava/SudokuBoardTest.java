@@ -41,6 +41,7 @@ public class SudokuBoardTest {
     public void testBoard() {
         SudokuBoard testedBoard = new SudokuBoard();
         testedBoard.fillBoard();
+
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 if (!checkNumber(testedBoard, row, col, testedBoard.getNumber(row, col))) fail("one of the numbers is not valid");
@@ -51,7 +52,7 @@ public class SudokuBoardTest {
     @Test
     public void testMultipleBoards() {
         SudokuBoard testedBoard = new SudokuBoard();
-        testedBoard.fillBoard();
+        testedBoard.fillBoard();                    //fill for the first time
 
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
@@ -59,7 +60,7 @@ public class SudokuBoardTest {
             }
         }
 
-        testedBoard.fillBoard();
+        testedBoard.fillBoard();                   //fill again
 
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
