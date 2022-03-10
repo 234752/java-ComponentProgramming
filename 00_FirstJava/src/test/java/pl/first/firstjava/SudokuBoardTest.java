@@ -43,14 +43,29 @@ public class SudokuBoardTest {
         testedBoard.fillBoard();
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                if ( !checkNumber(testedBoard, row, col, testedBoard.getNumber(row, col)) ) fail("one of the numbers is not valid");
+                if (!checkNumber(testedBoard, row, col, testedBoard.getNumber(row, col))) fail("one of the numbers is not valid");
             }
         }
     }
 
     @Test
     public void testMultipleBoards() {
+        SudokuBoard testedBoard = new SudokuBoard();
+        testedBoard.fillBoard();
 
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (!checkNumber(testedBoard, row, col, testedBoard.getNumber(row, col))) fail("one of the numbers is not valid after 1st fillBoard()");
+            }
+        }
+
+        testedBoard.fillBoard();
+
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (!checkNumber(testedBoard, row, col, testedBoard.getNumber(row, col))) fail("one of the numbers is not valid after 2nd fillBoard()");
+            }
+        }
     }
 
 }

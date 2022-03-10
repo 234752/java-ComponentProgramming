@@ -82,6 +82,13 @@ public class SudokuBoard {
     }
 
     public void fillBoard() {
+
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+               board[row][col] = 0;
+            }
+        }
+
         for (int i = 1; i <= 9; i++) {
             board[random.nextInt(9)][random.nextInt(9)] = i;
         }

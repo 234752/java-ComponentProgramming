@@ -6,5 +6,8 @@ public class Sudoku {
         SudokuBoard sb = new SudokuBoard();
         sb.fillBoard();
         sb.print();
+        System.out.println("--------------");
+        sb.fillBoard();
+        sb.print();
     }
 }
