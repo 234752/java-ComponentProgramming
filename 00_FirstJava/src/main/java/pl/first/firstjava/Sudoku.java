@@ -1,5 +1,6 @@
 package pl.first.firstjava;
 
+
 public class Sudoku {
 
     public static void main(String[] args) {

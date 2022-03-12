@@ -10,15 +10,15 @@ public class SudokuBoardTest {
 
     private boolean checkNumber(SudokuBoard SB, int row, int col, int n) {
         for (int i = 0; i < 9; i++) {
-            if (SB.getNumber(row, i) == n) {
-                if (i == col) break;
+            if (SB.getNumber(row, i) == n && i != col) {
+                //if (i == col) break;
                 return false;
             }
         }
 
         for (int i = 0; i < 9; i++) {
-            if (SB.getNumber(i, col) == n) {
-                if (i == row) break;
+            if (SB.getNumber(i, col) == n && i != row) {
+                //if (i == row) break;
                 return false;
             }
         }
@@ -28,8 +28,8 @@ public class SudokuBoardTest {
 
         for (int rowIterator = boxRowStart; rowIterator < boxRowStart + 3; rowIterator++) {
             for (int colIterator = boxColStart; colIterator < boxColStart + 3; colIterator++) {
-                if (SB.getNumber(rowIterator, colIterator) == n) {
-                    if(rowIterator == row && colIterator == col) break;
+                if (SB.getNumber(rowIterator, colIterator) == n && (rowIterator != row || colIterator != col)) {
+                    //if(rowIterator == row && colIterator == col) break;
                     return false;
                 }
             }
