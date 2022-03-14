@@ -78,16 +78,6 @@ public class SudokuBoard {
         return false;                                             //if none of the values make board solvable - backtrack
     }
 
-    public void print() {                                         //output method
-        for (int rowIterator = 0; rowIterator < 9; rowIterator++) {
-            for (int colIterator = 0; colIterator < 9; colIterator++) {
-                System.out.print(board[rowIterator][colIterator]);
-                System.out.print(" ");
-            }
-            System.out.print("\n");
-        }
-    }
-
     public void fillBoard() {
         for (int row = 0; row < 9; row++) {                       //fill with 0s
             for (int col = 0; col < 9; col++) {
