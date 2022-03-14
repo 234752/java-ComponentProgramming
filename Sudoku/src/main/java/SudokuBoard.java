@@ -1,4 +1,8 @@
+import java.util.Collections;
 import java.util.Random;
+import java.util.List;
+import java.util.Arrays;
+
 
 public class SudokuBoard {
 
@@ -56,9 +60,14 @@ public class SudokuBoard {
             return true;                                          //board is filled, return from recursion
         }
 
-        for (int num = 1; num <= 9; num++) {
-            if (isValid(row, col, num)) {                         //check if any of numbers 1-9 can fit current field
-                board[row][col] = num;
+        Integer[] values = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        List<Integer> valList = Arrays.asList(values);
+        Collections.shuffle(valList);
+        valList.toArray(values);
+
+        for (int num = 0; num < 9; num++) {
+            if (isValid(row, col, values[num])) {                         //check if any of numbers 1-9 can fit current field
+                board[row][col] = values[num];
                 if (solveBoard()) {                               //recursively check if this insertion leads to solution
                     return true;
                 } else {
