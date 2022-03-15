@@ -12,6 +12,10 @@ public class SudokuBoard {
         return board[row][col];
     }
 
+    public void setNumber(int row, int col, int number){
+        board[row][col] = number;
+    }
+
     private boolean isValid(int row, int col, int n) {
         for (int i = 0; i < 9; i++) {
             if (board[row][i] == n) {                             //check for repetition in row
