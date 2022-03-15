@@ -1,8 +1,7 @@
-import java.util.Collections;
-import java.util.Random;
-import java.util.List;
 import java.util.Arrays;
-
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class SudokuBoard {
 
