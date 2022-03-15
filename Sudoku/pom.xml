@@ -165,5 +165,14 @@
         </dependency>
     </dependencies>
 
+    <developers>
+        <developer>
+            <id>234752</id>
+            <name>Patryk Gielczynski</name>
+            <email>234752@edu.p.lodz.pl</email>
+        </developer>
+    </developers>
+
+    <description>Laboratory group MKW_MON_1000_05</description>
 
 </project>
