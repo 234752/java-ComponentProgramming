@@ -10,13 +10,13 @@ public class SudokuBoardTest {
 
     private boolean checkNumber(SudokuBoard SB, int row, int col, int n) {
         for (int i = 0; i < 9; i++) {
-            if (SB.getNumber(row, i) == n && i != col) {
+            if (SB.get(row, i) == n && i != col) {
                 return false;
             }
         }
 
         for (int i = 0; i < 9; i++) {
-            if (SB.getNumber(i, col) == n && i != row) {
+            if (SB.get(i, col) == n && i != row) {
                 return false;
             }
         }
@@ -26,7 +26,7 @@ public class SudokuBoardTest {
 
         for (int rowIterator = boxRowStart; rowIterator < boxRowStart + 3; rowIterator++) {
             for (int colIterator = boxColStart; colIterator < boxColStart + 3; colIterator++) {
-                if (SB.getNumber(rowIterator, colIterator) == n && (rowIterator != row || colIterator != col)) {
+                if (SB.get(rowIterator, colIterator) == n && (rowIterator != row || colIterator != col)) {
                     return false;
                 }
             }
@@ -41,7 +41,7 @@ public class SudokuBoardTest {
 
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                if (!checkNumber(testedBoard, row, col, testedBoard.getNumber(row, col))) fail("one of the numbers is not valid");
+                if (!checkNumber(testedBoard, row, col, testedBoard.get(row, col))) fail("one of the numbers is not valid");
             }
         }
     }
@@ -53,7 +53,7 @@ public class SudokuBoardTest {
 
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                if (!checkNumber(testedBoard1, row, col, testedBoard1.getNumber(row, col))) fail("one of the numbers is not valid in 1st board");
+                if (!checkNumber(testedBoard1, row, col, testedBoard1.get(row, col))) fail("one of the numbers is not valid in 1st board");
             }
         }
         SudokuBoard testedBoard2 = new SudokuBoard();
@@ -61,14 +61,14 @@ public class SudokuBoardTest {
 
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                if (!checkNumber(testedBoard2, row, col, testedBoard2.getNumber(row, col))) fail("one of the numbers is not valid in 2nd board");
+                if (!checkNumber(testedBoard2, row, col, testedBoard2.get(row, col))) fail("one of the numbers is not valid in 2nd board");
             }
         }
 
         //compare
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                if (testedBoard1.getNumber(row, col) != testedBoard2.getNumber(row, col)) return;
+                if (testedBoard1.get(row, col) != testedBoard2.get(row, col)) return;
             }
         }
         fail("all numbers are on the same positions in both boards");

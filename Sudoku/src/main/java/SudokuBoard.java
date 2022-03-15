@@ -8,12 +8,12 @@ public class SudokuBoard {
     Random random = new Random();
     private int[][] board = new int[9][9];
 
-    public int getNumber(int row, int col) {
+    public int get(int row, int col) {
         return board[row][col];
     }
 
-    public void setNumber(int row, int col, int number){
-        board[row][col] = number;
+    public void set(int row, int col, int value){
+        board[row][col] = value;
     }
 
     private boolean isValid(int row, int col, int n) {
