@@ -58,7 +58,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
 
         for (int num = 0; num < 9; num++) {
             if (isValid(board, row, col, values[num])) {                         //check if any of numbers 1-9 can fit current field
-                board.set(row,col, values[num]);
+                board.set(row, col, values[num]);
                 if (solveBoard(board)) {                               //recursively check if this insertion leads to solution
                     return true;
                 } else {
@@ -70,6 +70,6 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
     }
 
     public void solve(SudokuBoard board) {
-
+        this.solveBoard(board);
     }
 }

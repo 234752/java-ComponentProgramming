@@ -37,7 +37,7 @@ public class SudokuBoardTest {
     @Test
     public void testBoard() {
         SudokuBoard testedBoard = new SudokuBoard();
-        testedBoard.fillBoard();
+        testedBoard.solveGame();
 
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
@@ -49,7 +49,7 @@ public class SudokuBoardTest {
     @Test
     public void testMultipleBoards() {
         SudokuBoard testedBoard1 = new SudokuBoard();
-        testedBoard1.fillBoard();                    //fill 1st
+        testedBoard1.solveGame();                    //fill 1st
 
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
@@ -57,7 +57,7 @@ public class SudokuBoardTest {
             }
         }
         SudokuBoard testedBoard2 = new SudokuBoard();
-        testedBoard2.fillBoard();                   //fill 2nd
+        testedBoard2.solveGame();                   //fill 2nd
 
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
