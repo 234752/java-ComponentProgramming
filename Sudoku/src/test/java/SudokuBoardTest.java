@@ -36,7 +36,7 @@ public class SudokuBoardTest {
 
     @Test
     public void testBoard() {
-        SudokuBoard testedBoard = new SudokuBoard();
+        SudokuBoard testedBoard = new SudokuBoard(new BacktrackingSudokuSolver());
         testedBoard.solveGame();
 
         for (int row = 0; row < 9; row++) {
@@ -48,7 +48,7 @@ public class SudokuBoardTest {
 
     @Test
     public void testMultipleBoards() {
-        SudokuBoard testedBoard1 = new SudokuBoard();
+        SudokuBoard testedBoard1 = new SudokuBoard(new BacktrackingSudokuSolver());
         testedBoard1.solveGame();                    //fill 1st
 
         for (int row = 0; row < 9; row++) {
@@ -56,7 +56,7 @@ public class SudokuBoardTest {
                 if (!checkNumber(testedBoard1, row, col, testedBoard1.get(row, col))) fail("one of the numbers is not valid in 1st board");
             }
         }
-        SudokuBoard testedBoard2 = new SudokuBoard();
+        SudokuBoard testedBoard2 = new SudokuBoard(new BacktrackingSudokuSolver());
         testedBoard2.solveGame();                   //fill 2nd
 
         for (int row = 0; row < 9; row++) {
