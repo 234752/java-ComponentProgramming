@@ -6,7 +6,7 @@ import java.util.Random;
 public class SudokuBoard {
 
     Random random = new Random();
-    private int[][] board = new int[9][9];
+    //private int[][] board = new int[9][9];
 
     public int get(int row, int col) {
         return board[row][col];
@@ -16,7 +16,7 @@ public class SudokuBoard {
         board[row][col] = value;
     }
 
-    private boolean isValid(int row, int col, int n) {
+    private boolean isValid(SudokuBoard board, int row, int col, int n) {
         for (int i = 0; i < 9; i++) {
             if (board[row][i] == n) {                             //check for repetition in row
                 return false;
@@ -42,7 +42,7 @@ public class SudokuBoard {
         return true;
     }
 
-    private boolean solveBoard() {
+    private boolean solveBoard(SudokuBoard board) {
         int row = -1;
         int col = -1;
         boolean isEmpty = true;
