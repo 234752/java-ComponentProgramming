@@ -44,7 +44,7 @@ public class SudokuBoard {
         return true;
     } //check for repetition in 3x3 box/square
 
-    private boolean isValid(SudokuBoard board, int row, int col, int n) {
+    public boolean isValid(int row, int col, int n) {
         return (isValidRow(row, n) && isValidCol(col, n) && isValidBox(row, col, n));
     } //combine 3 isValid methods
 
