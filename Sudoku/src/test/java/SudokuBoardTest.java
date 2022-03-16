@@ -38,33 +38,28 @@ public class SudokuBoardTest {
     public void testBoard() {
         SudokuBoard testedBoard = new SudokuBoard(new BacktrackingSudokuSolver());
         testedBoard.solveGame();
-
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 if (!checkNumber(testedBoard, row, col, testedBoard.get(row, col))) fail("one of the numbers is not valid");
             }
         }
+
+        testedBoard.set(0,0,1);
+        testedBoard.set(0,1,1);
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (!checkNumber(testedBoard, row, col, testedBoard.get(row, col))) return;
+            }
+        }
+        fail("invalid board passed checking process");
     }
 
     @Test
-    public void testMultipleBoards() {
+    public void testIfBoardsAreDifferent() {
         SudokuBoard testedBoard1 = new SudokuBoard(new BacktrackingSudokuSolver());
         testedBoard1.solveGame();                    //fill 1st
-
-        for (int row = 0; row < 9; row++) {
-            for (int col = 0; col < 9; col++) {
-                if (!checkNumber(testedBoard1, row, col, testedBoard1.get(row, col))) fail("one of the numbers is not valid in 1st board");
-            }
-        }
         SudokuBoard testedBoard2 = new SudokuBoard(new BacktrackingSudokuSolver());
         testedBoard2.solveGame();                   //fill 2nd
-
-        for (int row = 0; row < 9; row++) {
-            for (int col = 0; col < 9; col++) {
-                if (!checkNumber(testedBoard2, row, col, testedBoard2.get(row, col))) fail("one of the numbers is not valid in 2nd board");
-            }
-        }
-
         //compare
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
