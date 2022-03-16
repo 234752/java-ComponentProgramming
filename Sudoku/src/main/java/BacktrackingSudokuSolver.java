@@ -4,19 +4,23 @@ import java.util.List;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
 
-    private boolean isValid(SudokuBoard board, int row, int col, int n) {
+    private boolean isValidRow(SudokuBoard board, int row, int col, int n) {
         for (int i = 0; i < 9; i++) {
             if (board.get(row,i) == n) {                             //check for repetition in row
                 return false;
             }
         }
-
+        return true;
+    }
+    private boolean isValidCol(SudokuBoard board, int row, int col, int n) {
         for (int i = 0; i < 9; i++) {
             if (board.get(i, col) == n) {                             //check for repetition in column
                 return false;
             }
         }
-
+        return true;
+    }
+    private boolean isValidBox(SudokuBoard board, int row, int col, int n) {
         int boxRowStart = row - row % 3;
         int boxColStart = col - col % 3;
 
@@ -28,6 +32,9 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
             }
         }
         return true;
+    }
+    private boolean isValid(SudokuBoard board, int row, int col, int n) {
+        return (isValidRow(board, row, col, n) && isValidCol(board, row, col, n) && isValidBox(board, row, col, n));
     }
 
     private boolean backtrackingAlgorithm(SudokuBoard board) {
