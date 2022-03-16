@@ -4,42 +4,6 @@ import java.util.List;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
 
-    private boolean isValidRow(SudokuBoard board, int row, int col, int n) {
-        for (int i = 0; i < 9; i++) {
-            if (board.get(row,i) == n) {
-                return false;
-            }
-        }
-        return true;
-    } //check for repetition in row
-
-    private boolean isValidCol(SudokuBoard board, int row, int col, int n) {
-        for (int i = 0; i < 9; i++) {
-            if (board.get(i, col) == n) {
-                return false;
-            }
-        }
-        return true;
-    } //check for repetition in column
-
-    private boolean isValidBox(SudokuBoard board, int row, int col, int n) {
-        int boxRowStart = row - row % 3;
-        int boxColStart = col - col % 3;
-
-        for (int rowIterator = boxRowStart; rowIterator < boxRowStart + 3; rowIterator++) {
-            for (int colIterator = boxColStart; colIterator < boxColStart + 3; colIterator++) {
-                if (board.get(rowIterator, colIterator) == n) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    } //check for repetition in 3x3 box/square
-
-    private boolean isValid(SudokuBoard board, int row, int col, int n) {
-        return (isValidRow(board, row, col, n) && isValidCol(board, row, col, n) && isValidBox(board, row, col, n));
-    } //combine 3 isValid methods
-
     private boolean backtrackingAlgorithm(SudokuBoard board) {
         int row = -1;
         int col = -1;
