@@ -8,11 +8,11 @@ public class SudokuBoard {
         return internalBoard[x][y];
     }
 
-    public void set(int x, int y, int value){
+    public void set(int x, int y, int value) {
         internalBoard[x][y] = value;
     }
 
     public void solveGame() {
-        sudokuSolver.solve(this);                                       //fill remaining fields according to sudoku rules
+        sudokuSolver.solve(this);
     }
 }
