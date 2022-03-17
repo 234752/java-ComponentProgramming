@@ -1,3 +1,3 @@
 public interface SudokuSolver {
-    void solve(SudokuBoard board);
+    boolean solve(SudokuBoard board);
 }

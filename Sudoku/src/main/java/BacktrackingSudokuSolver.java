@@ -4,7 +4,8 @@ import java.util.List;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
 
-    private boolean backtrackingAlgorithm(SudokuBoard board) {
+    @Override
+    public boolean solve(SudokuBoard board) {
         int row = -1;
         int col = -1;
         boolean isEmpty = true;
@@ -33,7 +34,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         for (int num = 0; num < 9; num++) {
             if (board.isValid(row, col, values[num])) {           //check if any of numbers 1-9 can fit current field
                 board.set(row, col, values[num]);
-                if (backtrackingAlgorithm(board)) {               //recursively check if this insertion leads to solution
+                if (solve(board)) {               //recursively check if this insertion leads to solution
                     return true;
                 } else {
                     board.set(row, col, 0);
@@ -43,8 +44,5 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         return false;                                             //if none of the values make board solvable - backtrack
     }
 
-    @Override
-    public void solve(SudokuBoard board) {
-        this.backtrackingAlgorithm(board);
-    }
+
 }
