@@ -22,4 +22,11 @@ public class SudokuBoardTest {
         testedBoard.set(8,0,1);
         assertFalse(testedBoard.isValid(0,0,1));
     }
+
+    @Test
+    public void testInvalidBox() {
+        assertTrue(testedBoard.isValid(0,0,1));
+        testedBoard.set(2,2,1);
+        assertFalse(testedBoard.isValid(0,0,1));
+    }
 }
