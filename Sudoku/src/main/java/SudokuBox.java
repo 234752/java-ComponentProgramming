@@ -1,2 +1,2 @@
-public class SudokuBox {
+public class SudokuBox extends SudokuSetOfNineFields {
 }
