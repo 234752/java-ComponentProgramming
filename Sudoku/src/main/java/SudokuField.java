@@ -2,6 +2,10 @@ public class SudokuField {
 
     private int value;
 
+    SudokuField() {
+        value = 0;
+    }
+
     public int getFieldValue() {
         return value;
     }

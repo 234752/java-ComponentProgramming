@@ -1,19 +1,24 @@
 
 public class SudokuBoard {
 
-    private int[][] internalBoard = new int[9][9];
+    private SudokuField[][] internalBoard = new SudokuField[9][9];
     private SudokuSolver sudokuSolver;
 
     public SudokuBoard(SudokuSolver solver) {
         sudokuSolver = solver;
+        for (int x=0; x<9; x++) {
+            for (int y=0; y<9; y++) {
+                internalBoard[x][y] = new SudokuField();
+            }
+        }
     }
 
     public int get(int x, int y) {
-        return internalBoard[x][y];
+        return internalBoard[x][y].getFieldValue();
     }
 
     public void set(int x, int y, int value) {
-        internalBoard[x][y] = value;
+        internalBoard[x][y].setFieldValue(value);
     }
 
     private boolean isValidRow(int row, int n) {
