@@ -1,10 +1,8 @@
 public class SudokuSetOfNineFields {
 
-    private SudokuField[] fields = new SudokuField[9];
+    public boolean verifyFields(SudokuField[] fields) {
 
-    public boolean verify() {
-
-        int[] values = new int[10];
+        int[] values = new int[10]; //counter for each digit 1-9
 
         for (int i=0; i<9; i++) {
             values[fields[i].getFieldValue()]++;
