@@ -43,6 +43,10 @@ public class SudokuBoard {
         return rows[y];
     }
 
+    public SudokuBox getBox(int x, int y) {
+        return boxes[x][y];
+    }
+
 
     private boolean isValidCol(int col, int n) {
         for (int i = 0; i < 9; i++) {
@@ -68,7 +72,7 @@ public class SudokuBoard {
     } //check for repetition in 3x3 box/square
 
     public boolean isValid(int row, int col, int n) {
-        return (getRow(row).verify() && isValidCol(col, n) && isValidBox(row, col, n));
+        return (getRow(row).verify() && isValidCol(col, n) && getBox(row, col).verify());
     } //combine 3 isValid methods
 
     public void solveGame() {
