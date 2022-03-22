@@ -51,32 +51,8 @@ public class SudokuBoard {
         return boxes[x][y];
     }
 
-
-    private boolean isValidCol(int col, int n) {
-        for (int i = 0; i < 9; i++) {
-            if (this.get(i, col) == n) {
-                return false;
-            }
-        }
-        return true;
-    } //check for repetition in column
-
-    private boolean isValidBox(int row, int col, int n) {
-        int boxRowStart = row - row % 3;
-        int boxColStart = col - col % 3;
-
-        for (int rowIterator = boxRowStart; rowIterator < boxRowStart + 3; rowIterator++) {
-            for (int colIterator = boxColStart; colIterator < boxColStart + 3; colIterator++) {
-                if (this.get(rowIterator, colIterator) == n) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    } //check for repetition in 3x3 box/square
-
-    public boolean isValid(int row, int col, int n) {
-        return (getRow(row).verify() && isValidCol(col, n) && getBox(row, col).verify());
+    public boolean isValid(int row, int col) {
+        return (getRow(row).verify() && getColumn(col).verify() && getBox(row, col).verify());
     } //combine 3 isValid methods
 
     public void solveGame() {
