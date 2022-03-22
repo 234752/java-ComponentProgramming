@@ -48,7 +48,7 @@ public class SudokuBoard {
     }
 
     public SudokuBox getBox(int x, int y) {
-        return boxes[x][y];
+        return boxes[(x - x%3)/3][(y - y%3)/3];
     }
 
     public boolean isValid(int row, int col) {

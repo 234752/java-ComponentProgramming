@@ -32,13 +32,17 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
         valList.toArray(values);
 
         for (int num = 0; num < 9; num++) {
-            if (board.isValid(row, col, values[num])) {           //check if any of numbers 1-9 can fit current field
-                board.set(row, col, values[num]);
+
+            board.set(row, col, values[num]);
+            if (board.isValid(row, col)) {           //check if any of numbers 1-9 can fit current field
+
                 if (solve(board)) {               //recursively check if this insertion leads to solution
                     return true;
                 } else {
                     board.set(row, col, 0);
                 }
+            } else {
+                board.set(row, col, 0);
             }
         }
         return false;                                             //if none of the values make board solvable - backtrack
