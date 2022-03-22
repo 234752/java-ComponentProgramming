@@ -35,10 +35,10 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
             board.set(row, col, values[num]);
             if (board.isValid(row, col) && solve(board)) {        //check if any of numbers 1-9 can fit current field
                 return true;                                      //and if it leads to solution (recursively)
-            } else board.set(row, col, 0);
+            } else {
+                board.set(row, col, 0);
+            }
         }
         return false;                                             //if none of the values make board solvable - backtrack
     }
-
-
 }

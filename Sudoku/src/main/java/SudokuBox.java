@@ -10,8 +10,8 @@ public class SudokuBox extends SudokuSetOfNineFields {
         int index = 0;
         SudokuField[] flatBox = new SudokuField[9];
 
-        for (int x=0; x<3; x++) {
-            for (int y=0; y<3; y++) {
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
                 flatBox[index] = box[x][y];
                 index++;
             }

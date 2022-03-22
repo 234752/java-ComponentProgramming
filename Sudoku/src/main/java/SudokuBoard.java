@@ -9,24 +9,25 @@ public class SudokuBoard {
 
     public SudokuBoard(SudokuSolver solver) {
 
-        for (int i=0; i<9; i++) {
+        for (int i = 0; i < 9; i++) {
             rows[i] = new SudokuRow();
             columns[i] = new SudokuColumn();
         }
-        for (int x=0; x<3; x++) {
-            for (int y=0; y<3; y++) {
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
                 boxes[x][y] = new SudokuBox();
             }
         }
 
         sudokuSolver = solver;
-        for (int row=0; row<9; row++) {
-            for (int col=0; col<9; col++) {
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
                 internalBoard[row][col] = new SudokuField();
 
                 rows[row].set(col, internalBoard[row][col]); //assigment to rows
                 columns[col].set(row, internalBoard[row][col]); //assigment to columns
-                boxes[(row - row%3)/3][(col - col%3)/3].set(row%3, col%3, internalBoard[row][col]);
+                boxes[(row - row % 3) / 3][(col - col % 3) / 3].set(row % 3, col % 3, internalBoard[row][col]);
+                //assignment to boxes
             }
         }
     }
@@ -48,7 +49,7 @@ public class SudokuBoard {
     }
 
     public SudokuBox getBox(int x, int y) {
-        return boxes[(x - x%3)/3][(y - y%3)/3];
+        return boxes[(x - x % 3) / 3][(y - y % 3) / 3];
     }
 
     public boolean isValid(int row, int col) {
