@@ -4,11 +4,13 @@ public class SudokuBoard {
     private SudokuField[][] internalBoard = new SudokuField[9][9];
     private SudokuSolver sudokuSolver;
     private SudokuRow[] rows = new SudokuRow[9];
+    private SudokuColumn[] columns = new SudokuColumn[9];
 
     public SudokuBoard(SudokuSolver solver) {
 
         for (int i=0; i<9; i++) {
             rows[i] = new SudokuRow();
+            columns[i] = new SudokuColumn();
         }
 
         sudokuSolver = solver;
@@ -17,6 +19,7 @@ public class SudokuBoard {
                 internalBoard[row][col] = new SudokuField();
 
                 rows[row].set(col, internalBoard[row][col]); //assigment to rows
+                columns[col].set(row, internalBoard[row][col]); //assigment to columns
             }
         }
     }
