@@ -43,6 +43,10 @@ public class SudokuBoard {
         return rows[y];
     }
 
+    public SudokuColumn getColumn(int x) {
+        return columns[x];
+    }
+
     public SudokuBox getBox(int x, int y) {
         return boxes[x][y];
     }
