@@ -13,6 +13,7 @@ public class SudokuBox extends SudokuSetOfNineFields {
         for (int x=0; x<3; x++) {
             for (int y=0; y<3; y++) {
                 flatBox[index] = box[x][y];
+                index++;
             }
         }
         return verifyFields(flatBox);

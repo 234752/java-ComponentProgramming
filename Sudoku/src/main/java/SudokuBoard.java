@@ -5,12 +5,18 @@ public class SudokuBoard {
     private SudokuSolver sudokuSolver;
     private SudokuRow[] rows = new SudokuRow[9];
     private SudokuColumn[] columns = new SudokuColumn[9];
+    private SudokuBox[][] boxes = new SudokuBox[3][3];
 
     public SudokuBoard(SudokuSolver solver) {
 
         for (int i=0; i<9; i++) {
             rows[i] = new SudokuRow();
             columns[i] = new SudokuColumn();
+        }
+        for (int x=0; x<3; x++) {
+            for (int y=0; y<3; y++) {
+                boxes[x][y] = new SudokuBox();
+            }
         }
 
         sudokuSolver = solver;
@@ -20,6 +26,7 @@ public class SudokuBoard {
 
                 rows[row].set(col, internalBoard[row][col]); //assigment to rows
                 columns[col].set(row, internalBoard[row][col]); //assigment to columns
+                boxes[(row - row%3)/3][(col - col%3)/3].set(row%3, col%3, internalBoard[row][col]);
             }
         }
     }
