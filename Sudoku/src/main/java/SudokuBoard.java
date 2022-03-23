@@ -11,7 +11,6 @@ public class SudokuBoard {
     public SudokuBoard(SudokuSolver solver) {
 
         sudokuSolver = solver;
-        observer = new Observer();
 
         for (int i = 0; i < 9; i++) {
             rows[i] = new SudokuRow();
@@ -35,13 +34,17 @@ public class SudokuBoard {
         }
     }
 
+    public void addObserver(Observer newObserver) {
+        observer = newObserver;
+    }
+
     public int get(int x, int y) {
         return internalBoard[x][y].getFieldValue();
     }
 
     public void set(int x, int y, int value) {
         internalBoard[x][y].setFieldValue(value);
-        observer.update(this);
+        if (observer != null) observer.update(this);
     }
 
     public SudokuRow getRow(int x) {
