@@ -6,8 +6,12 @@ public class SudokuBoard {
     private SudokuRow[] rows = new SudokuRow[9];
     private SudokuColumn[] columns = new SudokuColumn[9];
     private SudokuBox[][] boxes = new SudokuBox[3][3];
+    private Observer observer;
 
     public SudokuBoard(SudokuSolver solver) {
+
+        sudokuSolver = solver;
+        observer = new Observer();
 
         for (int i = 0; i < 9; i++) {
             rows[i] = new SudokuRow();
@@ -19,7 +23,6 @@ public class SudokuBoard {
             }
         }
 
-        sudokuSolver = solver;
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 internalBoard[row][col] = new SudokuField();
@@ -38,6 +41,7 @@ public class SudokuBoard {
 
     public void set(int x, int y, int value) {
         internalBoard[x][y].setFieldValue(value);
+        observer.update();
     }
 
     private boolean checkBoard() {
