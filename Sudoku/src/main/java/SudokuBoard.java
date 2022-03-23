@@ -40,6 +40,30 @@ public class SudokuBoard {
         internalBoard[x][y].setFieldValue(value);
     }
 
+    private boolean checkBoard() {
+
+        for (int col = 0; col < 9; col++) {
+            if (!getColumn(col).verify()) {
+                return false;
+            }
+        }
+
+        for (int row = 0; row < 9; row++) {
+            if (!getRow(row).verify()) {
+                return false;
+            }
+        }
+
+        for (int row = 0; row < 9; row += 3) {
+            for (int col = 0; col < 9; col += 3) {
+                if (!getBox(row,col).verify()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    } //used for checking whole board
+
     public SudokuRow getRow(int x) {
         return rows[x];
     }
