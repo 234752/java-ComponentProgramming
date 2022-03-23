@@ -40,12 +40,12 @@ public class SudokuBoard {
         internalBoard[x][y].setFieldValue(value);
     }
 
-    public SudokuRow getRow(int y) {
-        return rows[y];
+    public SudokuRow getRow(int x) {
+        return rows[x];
     }
 
-    public SudokuColumn getColumn(int x) {
-        return columns[x];
+    public SudokuColumn getColumn(int y) {
+        return columns[y];
     }
 
     public SudokuBox getBox(int x, int y) {
