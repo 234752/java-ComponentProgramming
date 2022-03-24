@@ -14,5 +14,6 @@ public class SudokuField {
 
     public void setFieldValue(int newValue) {
         value = newValue;
+        observer.notifyBoard();
     }
 }

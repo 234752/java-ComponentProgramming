@@ -6,7 +6,6 @@ public class SudokuBoard {
     private SudokuRow[] rows = new SudokuRow[9];
     private SudokuColumn[] columns = new SudokuColumn[9];
     private SudokuBox[][] boxes = new SudokuBox[3][3];
-    private Observer observer; //this field is optional, need to use addObserver in order to detect changes
 
     public SudokuBoard(SudokuSolver solver) {
 
@@ -34,12 +33,10 @@ public class SudokuBoard {
         }
     }
 
-    public void addObserver(Observer newObserver) {
-        observer = newObserver;
-    }
 
-    //private boolean checkBoard() {}
-    //method moved to observer class
+    public void notifyBoard() {
+        System.out.println("value of field changed");
+    }
 
     public int get(int x, int y) {
         return internalBoard[x][y].getFieldValue();
@@ -47,9 +44,6 @@ public class SudokuBoard {
 
     public void set(int x, int y, int value) {
         internalBoard[x][y].setFieldValue(value);
-        if (observer != null) {
-            observer.update(this);
-        }
     }
 
     public SudokuRow getRow(int x) {
