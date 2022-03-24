@@ -1,9 +1,11 @@
 public class SudokuField {
 
     private int value;
+    private SudokuBoard observer;
 
-    SudokuField() {
+    SudokuField(SudokuBoard observingBoard) {
         value = 0;
+        observer = observingBoard;
     }
 
     public int getFieldValue() {

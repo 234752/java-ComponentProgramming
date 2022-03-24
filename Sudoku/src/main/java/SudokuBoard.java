@@ -24,7 +24,7 @@ public class SudokuBoard {
 
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                internalBoard[row][col] = new SudokuField();
+                internalBoard[row][col] = new SudokuField(this);
 
                 rows[row].set(col, internalBoard[row][col]); //assigment to rows
                 columns[col].set(row, internalBoard[row][col]); //assigment to columns
