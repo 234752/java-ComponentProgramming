@@ -13,7 +13,7 @@ public class ObserverTest {
         testedBoard.set(8,8,1);
         testedBoard.set(7,7,1);//error message should NOT be printed
 
-        testedBoard.addObserver(new Observer());
+        testedBoard.switchObserver(true);
         //row
         testedBoard.set(8,8,4);
         testedBoard.set(8,0,4); //error message should be printed

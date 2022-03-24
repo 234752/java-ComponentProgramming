@@ -6,6 +6,7 @@ public class SudokuBoard {
     private SudokuRow[] rows = new SudokuRow[9];
     private SudokuColumn[] columns = new SudokuColumn[9];
     private SudokuBox[][] boxes = new SudokuBox[3][3];
+    private boolean observerTurnedOn = false;
 
     public SudokuBoard(SudokuSolver solver) {
 
@@ -33,9 +34,14 @@ public class SudokuBoard {
         }
     }
 
+    public void switchObserver(boolean isTurnedOn) {
+        observerTurnedOn = isTurnedOn;
+    }
 
     public void notifyBoard() {
-        System.out.println("value of field changed");
+        if (observerTurnedOn) {
+            System.out.println("value of field changed");
+        }
     }
 
     public int get(int x, int y) {
