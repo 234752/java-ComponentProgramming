@@ -26,6 +26,10 @@ public class Observer {
     } //used for checking whole board
 
     public void update(SudokuBoard board) {
-        if (!checkBoard(board)) System.out.println("invalid value was inserted");
+        if (checkBoard(board)) {
+            System.out.println("valid value was inserted");
+        } else {
+            System.out.println("invalid value was inserted");
+        } //placeholders, need changes after implementing GUI
     }
 }

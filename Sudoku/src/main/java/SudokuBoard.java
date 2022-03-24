@@ -47,7 +47,9 @@ public class SudokuBoard {
 
     public void set(int x, int y, int value) {
         internalBoard[x][y].setFieldValue(value);
-        if (observer != null) observer.update(this);
+        if (observer != null) {
+            observer.update(this);
+        }
     }
 
     public SudokuRow getRow(int x) {
