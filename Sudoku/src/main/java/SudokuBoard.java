@@ -40,7 +40,11 @@ public class SudokuBoard {
 
     public void notifyBoard() {
         if (observerTurnedOn) {
-            System.out.println("value of field changed");
+            if (checkBoard()) {
+                System.out.println("valid value of field inserted");
+            } else {
+                System.out.println("invalid value of field inserted");
+            }
         }
     }
 
