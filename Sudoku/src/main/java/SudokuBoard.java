@@ -1,7 +1,7 @@
 
 public class SudokuBoard {
 
-    private SudokuField[][] internalBoard = new SudokuField[9][9];
+    private SudokuField[][] fields = new SudokuField[9][9];
     private SudokuSolver sudokuSolver;
     private SudokuRow[] rows = new SudokuRow[9];
     private SudokuColumn[] columns = new SudokuColumn[9];
@@ -24,18 +24,18 @@ public class SudokuBoard {
 
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                internalBoard[row][col] = new SudokuField(this);
+                fields[row][col] = new SudokuField(this);
 
-                rows[row].set(col, internalBoard[row][col]); //assigment to rows
-                columns[col].set(row, internalBoard[row][col]); //assigment to columns
-                boxes[(row - row % 3) / 3][(col - col % 3) / 3].set(row % 3, col % 3, internalBoard[row][col]);
+                rows[row].set(col, fields[row][col]); //assigment to rows
+                columns[col].set(row, fields[row][col]); //assigment to columns
+                boxes[(row - row % 3) / 3][(col - col % 3) / 3].set(row % 3, col % 3, fields[row][col]);
                 //assignment to boxes
             }
         }
     }
 
-    public void switchObserver(boolean isTurnedOn) {
-        observerTurnedOn = isTurnedOn;
+    public void switchObserver(boolean observerTurnedOn) {
+        this.observerTurnedOn = observerTurnedOn;
     }
 
     public void notifyBoard() {
@@ -45,12 +45,36 @@ public class SudokuBoard {
     }
 
     public int get(int x, int y) {
-        return internalBoard[x][y].getFieldValue();
+        return fields[x][y].getFieldValue();
     }
 
     public void set(int x, int y, int value) {
-        internalBoard[x][y].setFieldValue(value);
+        fields[x][y].setFieldValue(value);
     }
+
+    private boolean checkBoard() {
+
+        for (int col = 0; col < 9; col++) {
+            if (!getColumn(col).verify()) {
+                return false;
+            }
+        }
+
+        for (int row = 0; row < 9; row++) {
+            if (!getRow(row).verify()) {
+                return false;
+            }
+        }
+
+        for (int row = 0; row < 9; row += 3) {
+            for (int col = 0; col < 9; col += 3) {
+                if (!getBox(row,col).verify()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    } //used for checking whole board
 
     public SudokuRow getRow(int x) {
         return rows[x];
