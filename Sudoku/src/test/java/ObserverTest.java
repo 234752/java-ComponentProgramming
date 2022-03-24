@@ -12,8 +12,19 @@ public class ObserverTest {
     public void testIfObserverActivates() {
         testedBoard.set(8,8,1);
         testedBoard.set(7,7,1);//error message should NOT be printed
+
         testedBoard.addObserver(new Observer());
-        testedBoard.set(7,7,0); //info message should be printed
-        testedBoard.set(7,7,1); //error message should be printed
+        //row
+        testedBoard.set(8,8,4);
+        testedBoard.set(8,0,4); //error message should be printed
+        testedBoard.set(8,0,0);
+        //column
+        testedBoard.set(8,8,5);
+        testedBoard.set(0,8,5); //error message should be printed
+        testedBoard.set(0,8,0);
+        //box
+        testedBoard.set(8,8,6);
+        testedBoard.set(7,7,6); //error message should be printed
+        testedBoard.set(7,7,0);
     }
 }
