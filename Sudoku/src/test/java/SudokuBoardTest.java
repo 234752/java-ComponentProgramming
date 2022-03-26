@@ -62,7 +62,8 @@ public class SudokuBoardTest {
                 assertEquals(testedBoard.getRow(x).verify(),true);
                 assertEquals(testedBoard.getColumn(y).verify(),true);
                 assertEquals(testedBoard.getBox(x,y).verify(),true);
-            }
+                //System.out.print(testedBoard.get(x,y) + " ");
+            } //System.out.println("");
         }
 
     }
