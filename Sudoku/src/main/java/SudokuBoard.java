@@ -6,7 +6,7 @@ public class SudokuBoard {
 
     private SudokuField[][] fields = new SudokuField[9][9];
     private SudokuSolver sudokuSolver;
-    private List<SudokuRow> rows = new ArrayList<SudokuRow>();
+    //private List<SudokuRow> rows = new ArrayList<SudokuRow>();
     private SudokuColumn[] columns = new SudokuColumn[9];
     private SudokuBox[][] boxes = new SudokuBox[3][3];
     private boolean observerTurnedOn = false;
@@ -17,7 +17,7 @@ public class SudokuBoard {
 
         for (int i = 0; i < 9; i++) {
             //rows[i] = new SudokuRow();
-            rows.add(new SudokuRow());
+            //rows.add(new SudokuRow());
             columns[i] = new SudokuColumn();
         }
         for (int x = 0; x < 3; x++) {
@@ -30,7 +30,7 @@ public class SudokuBoard {
             for (int col = 0; col < 9; col++) {
                 fields[row][col] = new SudokuField(this);
 
-                rows.get(row).set(col, fields[row][col]); //assigment to rows
+                //rows.get(row).set(col, fields[row][col]); //assigment to rows
                 columns[col].set(row, fields[row][col]); //assigment to columns
                 boxes[(row - row % 3) / 3][(col - col % 3) / 3].set(row % 3, col % 3, fields[row][col]);
                 //assignment to boxes
@@ -85,7 +85,11 @@ public class SudokuBoard {
     } //used for checking whole board
 
     public SudokuRow getRow(int x) {
-        return rows.get(x);
+        SudokuRow row = new SudokuRow();
+        for (int y = 0; y < 9; y++) {
+            row.set(y, fields[x][y]);
+        }
+        return row;
     }
 
     public SudokuColumn getColumn(int y) {
