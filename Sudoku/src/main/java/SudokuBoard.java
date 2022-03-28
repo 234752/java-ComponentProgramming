@@ -29,7 +29,6 @@ public class SudokuBoard {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 fields[row][col] = new SudokuField(this);
-
                 //rows.get(row).set(col, fields[row][col]); //assigment to rows
                 //columns[col].set(row, fields[row][col]); //assigment to columns
                 //boxes[(row - row % 3) / 3][(col - col % 3) / 3].set(row % 3, col % 3, fields[row][col]);
@@ -102,8 +101,10 @@ public class SudokuBoard {
 
     public SudokuBox getBox(int x, int y) {
         SudokuBox box = new SudokuBox();
-        for (int row = x; row < x +3; row++) {
-            for (int col = y; col < y + 3; col++) {
+        int rowStart = x - x % 3;
+        int colStart = y - y % 3;
+        for (int row = rowStart; row < rowStart + 3; row++) {
+            for (int col = colStart; col < colStart + 3; col++) {
                 box.set(fields[row][col]);
             }
         }
