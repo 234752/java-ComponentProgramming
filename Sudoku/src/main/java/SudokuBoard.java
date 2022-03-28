@@ -8,7 +8,7 @@ public class SudokuBoard {
     private SudokuSolver sudokuSolver;
     //private List<SudokuRow> rows = new ArrayList<SudokuRow>();
     //private SudokuColumn[] columns = new SudokuColumn[9];
-    private SudokuBox[][] boxes = new SudokuBox[3][3];
+    //private SudokuBox[][] boxes = new SudokuBox[3][3];
     private boolean observerTurnedOn = false;
 
     public SudokuBoard(SudokuSolver solver) {
@@ -22,7 +22,7 @@ public class SudokuBoard {
         }
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
-                boxes[x][y] = new SudokuBox();
+                //boxes[x][y] = new SudokuBox();
             }
         }
 
@@ -32,7 +32,7 @@ public class SudokuBoard {
 
                 //rows.get(row).set(col, fields[row][col]); //assigment to rows
                 //columns[col].set(row, fields[row][col]); //assigment to columns
-                boxes[(row - row % 3) / 3][(col - col % 3) / 3].set(row % 3, col % 3, fields[row][col]);
+                //boxes[(row - row % 3) / 3][(col - col % 3) / 3].set(row % 3, col % 3, fields[row][col]);
                 //assignment to boxes
             }
         }
@@ -101,7 +101,13 @@ public class SudokuBoard {
     }
 
     public SudokuBox getBox(int x, int y) {
-        return boxes[(x - x % 3) / 3][(y - y % 3) / 3];
+        SudokuBox box = new SudokuBox();
+        for (int row = x; row < x +3; row++) {
+            for (int col = y; col < y + 3; col++) {
+                box.set(fields[row][col]);
+            }
+        }
+        return box;
     }
 
     public boolean isValid(int row, int col) {
