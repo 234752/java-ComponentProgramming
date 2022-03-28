@@ -87,7 +87,7 @@ public class SudokuBoard {
     public SudokuRow getRow(int x) {
         SudokuRow row = new SudokuRow();
         for (int y = 0; y < 9; y++) {
-            row.set(y, fields[x][y]);
+            row.set(fields[x][y]);
         }
         return row;
     }
@@ -95,7 +95,7 @@ public class SudokuBoard {
     public SudokuColumn getColumn(int y) {
         SudokuColumn col = new SudokuColumn();
         for (int x = 0; x < 9; x++) {
-            col.set(x, fields[x][y]);
+            col.set(fields[x][y]);
         }
         return col;
     }
