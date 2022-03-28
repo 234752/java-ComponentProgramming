@@ -1,11 +1,16 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class SudokuSetOfNineFields {
 
-    public boolean verifyFields(SudokuField[] fields) {
+    private List<SudokuField> fields = new ArrayList<>();
+
+    public boolean verify() {
 
         int[] values = new int[10]; //counter for each digit 1-9
 
         for (int i = 0; i < 9; i++) {
-            values[fields[i].getFieldValue()]++;
+            values[fields.get(i).getFieldValue()]++;
         } //count amount of appearances of each digit
         for (int v = 1; v <= 9; v++) {
             if (values[v] >= 2) {
@@ -13,5 +18,9 @@ public class SudokuSetOfNineFields {
             }
         } //check if any digit repeats
         return true;
+    }
+
+    public void set(SudokuField field) {
+        fields.add(field);
     }
 }
