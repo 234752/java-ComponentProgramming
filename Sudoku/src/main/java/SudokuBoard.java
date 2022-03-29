@@ -1,6 +1,10 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class SudokuBoard {
 
-    private SudokuField[][] fields = new SudokuField[9][9];
+    //private SudokuField[][] fields = new SudokuField[9][9];
+    private List<List<SudokuField>> fields = new ArrayList<>();
     private SudokuSolver sudokuSolver;
     //private List<SudokuRow> rows = new ArrayList<SudokuRow>();
     //private SudokuColumn[] columns = new SudokuColumn[9];
@@ -23,8 +27,10 @@ public class SudokuBoard {
         }
 
         for (int row = 0; row < 9; row++) {
+            fields.add(new ArrayList<SudokuField>());
             for (int col = 0; col < 9; col++) {
-                fields[row][col] = new SudokuField(this);
+                //fields[row][col] = new SudokuField(this);
+                fields.get(row).add(new SudokuField(this));
                 //rows.get(row).set(col, fields[row][col]); //assigment to rows
                 //columns[col].set(row, fields[row][col]); //assigment to columns
                 //boxes[(row - row % 3) / 3][(col - col % 3) / 3].set(row % 3, col % 3, fields[row][col]);
@@ -48,11 +54,11 @@ public class SudokuBoard {
     }
 
     public int get(int x, int y) {
-        return fields[x][y].getFieldValue();
+        return fields.get(x).get(y).getFieldValue();
     }
 
     public void set(int x, int y, int value) {
-        fields[x][y].setFieldValue(value);
+        fields.get(x).get(y).setFieldValue(value);
     }
 
     private boolean checkBoard() {
@@ -82,7 +88,7 @@ public class SudokuBoard {
     public SudokuRow getRow(int x) {
         SudokuRow row = new SudokuRow();
         for (int y = 0; y < 9; y++) {
-            row.addNextField(fields[x][y]);
+            row.addNextField(fields.get(x).get(y));
         }
         return row;
     }
@@ -90,7 +96,7 @@ public class SudokuBoard {
     public SudokuColumn getColumn(int y) {
         SudokuColumn col = new SudokuColumn();
         for (int x = 0; x < 9; x++) {
-            col.addNextField(fields[x][y]);
+            col.addNextField(fields.get(x).get(y));
         }
         return col;
     }
@@ -101,7 +107,7 @@ public class SudokuBoard {
         int colStart = y - y % 3;
         for (int row = rowStart; row < rowStart + 3; row++) {
             for (int col = colStart; col < colStart + 3; col++) {
-                box.addNextField(fields[row][col]);
+                box.addNextField(fields.get(row).get(col));
             }
         }
         return box;
