@@ -1,7 +1,3 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 public class SudokuBoard {
 
     private SudokuField[][] fields = new SudokuField[9][9];
@@ -86,7 +82,7 @@ public class SudokuBoard {
     public SudokuRow getRow(int x) {
         SudokuRow row = new SudokuRow();
         for (int y = 0; y < 9; y++) {
-            row.set(fields[x][y]);
+            row.addNextField(fields[x][y]);
         }
         return row;
     }
@@ -94,7 +90,7 @@ public class SudokuBoard {
     public SudokuColumn getColumn(int y) {
         SudokuColumn col = new SudokuColumn();
         for (int x = 0; x < 9; x++) {
-            col.set(fields[x][y]);
+            col.addNextField(fields[x][y]);
         }
         return col;
     }
@@ -105,7 +101,7 @@ public class SudokuBoard {
         int colStart = y - y % 3;
         for (int row = rowStart; row < rowStart + 3; row++) {
             for (int col = colStart; col < colStart + 3; col++) {
-                box.set(fields[row][col]);
+                box.addNextField(fields[row][col]);
             }
         }
         return box;

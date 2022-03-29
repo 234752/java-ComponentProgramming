@@ -20,7 +20,7 @@ public class SudokuSetOfNineFields {
         return true;
     }
 
-    public void set(SudokuField field) {
+    public void addNextField(SudokuField field) {
         fields.add(field);
     }
 }
