@@ -16,12 +16,9 @@ public class SudokuBoard extends Observer {
         }
     }
 
-    public void switchObserver(boolean observerTurnedOn) {
-        this.observerTurnedOn = observerTurnedOn;
-    }
-
-    public void notifyBoard() {
-        if (observerTurnedOn) {
+    @Override
+    public void update() {
+        if (observerIsTurnedOn) {
             if (checkBoard()) {
                 System.out.println("valid value of field inserted");
             } else {

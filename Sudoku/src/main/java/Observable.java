@@ -2,11 +2,11 @@ public abstract class Observable {
 
     private Observer observer;
 
-    public void setObserver(Observer observer) {
+    protected void setObserver(Observer observer) {
         this.observer = observer;
     }
 
-    private void notifyObserver() {
+    protected void notifyObserver() {
         observer.update();
     }
 }

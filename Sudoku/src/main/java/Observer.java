@@ -1,7 +1,10 @@
 public abstract class Observer {
-    protected boolean isTurnedOn = false;
+
+    protected boolean observerIsTurnedOn = false;
+
     abstract void update();
-    public void switchObserver(boolean isTurnedOn) {
-        this.isTurnedOn = isTurnedOn;
+
+    public void switchObserver(boolean observerIsTurnedOn) {
+        this.observerIsTurnedOn = observerIsTurnedOn;
     }
 }

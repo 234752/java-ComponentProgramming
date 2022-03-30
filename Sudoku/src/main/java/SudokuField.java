@@ -1,10 +1,10 @@
 public class SudokuField extends Observable {
 
     private int value;
-    private SudokuBoard observer;
 
     SudokuField(Observer observer) {
         value = 0;
+        setObserver(observer);
     }
 
     public int getFieldValue() {
@@ -13,5 +13,6 @@ public class SudokuField extends Observable {
 
     public void setFieldValue(int newValue) {
         value = newValue;
+        notifyObserver();
     }
 }
