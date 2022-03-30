@@ -1,11 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class SudokuBoard {
+public class SudokuBoard extends Observer {
 
     private List<List<SudokuField>> fields = new ArrayList<>();
     private SudokuSolver sudokuSolver;
-    private boolean observerTurnedOn = false;
 
     public SudokuBoard(SudokuSolver solver) {
         sudokuSolver = solver;

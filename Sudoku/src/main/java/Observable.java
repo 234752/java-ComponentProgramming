@@ -2,7 +2,7 @@ public abstract class Observable {
 
     private Observer observer;
 
-    Observable(Observer observer) {
+    public void setObserver(Observer observer) {
         this.observer = observer;
     }
 
