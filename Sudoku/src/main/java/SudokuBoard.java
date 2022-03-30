@@ -92,7 +92,7 @@ public class SudokuBoard {
     }
 
     public boolean isValid(int row, int col) {
-        return (getRow(row).verify() && getColumn(col).verify() && getBox(row, col).verify());
+        return getRow(row).verify() && getColumn(col).verify() && getBox(row, col).verify();
     } //combine 3 isValid methods
 
     public void solveGame() {

@@ -1,4 +1,3 @@
-
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
@@ -65,6 +64,5 @@ public class SudokuBoardTest {
                 //System.out.print(testedBoard.get(x,y) + " ");
             } //System.out.println("");
         }
-
     }
 }
