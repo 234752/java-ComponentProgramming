@@ -36,7 +36,7 @@ public class BacktrackingSudokuSolverTest {
         testedBoard.solveGame();
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                if (!checkNumber(testedBoard, row, col, testedBoard.get(row, col))) fail("one of the numbers is not valid");
+                assertTrue(checkNumber(testedBoard, row, col, testedBoard.get(row, col)));
             }
         }
 
@@ -63,6 +63,19 @@ public class BacktrackingSudokuSolverTest {
             }
         }
         fail("all numbers are on the same positions in both boards");
+    }
+
+    @Test
+    public void bruteForceChecker() {
+        for(int count = 0; count < 10; count++) {
+            SudokuBoard testedBoard = new SudokuBoard(new BacktrackingSudokuSolver());
+            testedBoard.solveGame();
+            for (int row = 0; row < 9; row++) {
+                for (int col = 0; col < 9; col++) {
+                    assertTrue(checkNumber(testedBoard, row, col, testedBoard.get(row, col)));
+                }
+            }
+        }
     }
 
 }
