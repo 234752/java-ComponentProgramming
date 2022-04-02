@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class SudokuBoard extends Observer {
 
     private SudokuField[][] fields = new SudokuField[9][9];
@@ -9,9 +6,7 @@ public class SudokuBoard extends Observer {
     public SudokuBoard(SudokuSolver solver) {
         sudokuSolver = solver;
         for (int row = 0; row < 9; row++) {
-            //fields.add(new ArrayList<SudokuField>());
             for (int col = 0; col < 9; col++) {
-                //fields.get(row).add(new SudokuField(this));
                 fields[row][col] = new SudokuField(this);
             }
         }
