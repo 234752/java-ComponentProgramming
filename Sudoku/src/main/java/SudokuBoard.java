@@ -3,15 +3,16 @@ import java.util.List;
 
 public class SudokuBoard extends Observer {
 
-    private List<List<SudokuField>> fields = new ArrayList<>();
+    private SudokuField[][] fields = new SudokuField[9][9];
     private SudokuSolver sudokuSolver;
 
     public SudokuBoard(SudokuSolver solver) {
         sudokuSolver = solver;
         for (int row = 0; row < 9; row++) {
-            fields.add(new ArrayList<SudokuField>());
+            //fields.add(new ArrayList<SudokuField>());
             for (int col = 0; col < 9; col++) {
-                fields.get(row).add(new SudokuField(this));
+                //fields.get(row).add(new SudokuField(this));
+                fields[row][col] = new SudokuField(this);
             }
         }
     }
@@ -28,11 +29,11 @@ public class SudokuBoard extends Observer {
     }
 
     public int get(int x, int y) {
-        return fields.get(x).get(y).getFieldValue();
+        return fields[x][y].getFieldValue();
     }
 
     public void set(int x, int y, int value) {
-        fields.get(x).get(y).setFieldValue(value);
+        fields[x][y].setFieldValue(value);
     }
 
     private boolean checkBoard() {
@@ -62,7 +63,7 @@ public class SudokuBoard extends Observer {
     public SudokuRow getRow(int x) {
         SudokuRow row = new SudokuRow();
         for (int y = 0; y < 9; y++) {
-            row.addNextField(fields.get(x).get(y));
+            row.addNextField(fields[x][y]);
         }
         return row;
     }
@@ -70,7 +71,7 @@ public class SudokuBoard extends Observer {
     public SudokuColumn getColumn(int y) {
         SudokuColumn col = new SudokuColumn();
         for (int x = 0; x < 9; x++) {
-            col.addNextField(fields.get(x).get(y));
+            col.addNextField(fields[x][y]);
         }
         return col;
     }
@@ -81,7 +82,7 @@ public class SudokuBoard extends Observer {
         int colStart = y - y % 3;
         for (int row = rowStart; row < rowStart + 3; row++) {
             for (int col = colStart; col < colStart + 3; col++) {
-                box.addNextField(fields.get(row).get(col));
+                box.addNextField(fields[row][col]);
             }
         }
         return box;
