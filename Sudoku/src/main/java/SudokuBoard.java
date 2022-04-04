@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.Objects;
+
 public class SudokuBoard extends Observer {
 
     private SudokuField[][] fields = new SudokuField[9][9];
@@ -96,5 +99,13 @@ public class SudokuBoard extends Observer {
         return "SudokuBoard{" +
                 "observerIsTurnedOn=" + observerIsTurnedOn +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SudokuBoard that = (SudokuBoard) o;
+        return Arrays.equals(fields, that.fields) && Objects.equals(sudokuSolver, that.sudokuSolver);
     }
 }

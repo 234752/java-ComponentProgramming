@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class SudokuField extends Observable {
 
     private int value;
@@ -21,5 +23,13 @@ public class SudokuField extends Observable {
         return "SudokuField{" +
                 "value=" + value +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SudokuField that = (SudokuField) o;
+        return value == that.value;
     }
 }

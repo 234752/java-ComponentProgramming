@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SudokuSetOfNineFields {
 
@@ -29,5 +30,13 @@ public class SudokuSetOfNineFields {
         return "SudokuSetOfNineFields{" +
                 "fields=" + fields +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SudokuSetOfNineFields that = (SudokuSetOfNineFields) o;
+        return Objects.equals(fields, that.fields);
     }
 }
