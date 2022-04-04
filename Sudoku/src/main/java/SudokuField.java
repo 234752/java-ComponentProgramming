@@ -32,4 +32,9 @@ public class SudokuField extends Observable {
         SudokuField that = (SudokuField) o;
         return value == that.value;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
 }

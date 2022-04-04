@@ -39,4 +39,9 @@ public class SudokuSetOfNineFields {
         SudokuSetOfNineFields that = (SudokuSetOfNineFields) o;
         return Objects.equals(fields, that.fields);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fields);
+    }
 }

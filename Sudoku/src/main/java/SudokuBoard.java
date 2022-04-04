@@ -108,4 +108,11 @@ public class SudokuBoard extends Observer {
         SudokuBoard that = (SudokuBoard) o;
         return Arrays.equals(fields, that.fields) && Objects.equals(sudokuSolver, that.sudokuSolver);
     }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(sudokuSolver);
+        result = 31 * result + Arrays.hashCode(fields);
+        return result;
+    }
 }
