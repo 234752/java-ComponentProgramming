@@ -23,4 +23,11 @@ public class SudokuSetOfNineFields {
     public void addNextField(SudokuField field) {
         fields.add(field);
     }
+
+    @Override
+    public String toString() {
+        return "SudokuSetOfNineFields{" +
+                "fields=" + fields +
+                '}';
+    }
 }

@@ -15,4 +15,11 @@ public class SudokuField extends Observable {
         value = newValue;
         notifyObserver();
     }
+
+    @Override
+    public String toString() {
+        return "SudokuField{" +
+                "value=" + value +
+                '}';
+    }
 }

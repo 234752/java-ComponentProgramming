@@ -90,4 +90,11 @@ public class SudokuBoard extends Observer {
     public void solveGame() {
         sudokuSolver.solve(this);
     }
+
+    @Override
+    public String toString() {
+        return "SudokuBoard{" +
+                "observerIsTurnedOn=" + observerIsTurnedOn +
+                '}';
+    }
 }
