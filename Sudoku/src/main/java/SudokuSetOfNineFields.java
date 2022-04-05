@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class SudokuSetOfNineFields {
@@ -30,5 +33,21 @@ public class SudokuSetOfNineFields {
         return new ToStringBuilder(this)
                 .append("fields", fields)
                 .toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SudokuSetOfNineFields that = (SudokuSetOfNineFields) o;
+
+        return new EqualsBuilder().append(fields, that.fields).isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37).append(fields).toHashCode();
     }
 }
