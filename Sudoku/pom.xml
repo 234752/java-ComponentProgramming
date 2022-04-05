@@ -65,14 +65,14 @@
                 <version>3.16.0</version>
             </plugin>
 
-            <plugin>
+            <!--<plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>HelloFX</mainClass>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <!--            new-->
         </plugins>
     </reporting>
@@ -180,6 +180,12 @@
             <version>3.12.0</version>
         </dependency>
         <!-- new library -->
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>17.0.1</version>
+        </dependency>
     </dependencies>
 
     <developers>
