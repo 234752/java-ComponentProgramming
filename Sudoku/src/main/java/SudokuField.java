@@ -17,24 +17,4 @@ public class SudokuField extends Observable {
         value = newValue;
         notifyObserver();
     }
-
-    @Override
-    public String toString() {
-        return "SudokuField{" +
-                "value=" + value +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SudokuField that = (SudokuField) o;
-        return value == that.value;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
 }

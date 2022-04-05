@@ -24,24 +24,4 @@ public class SudokuSetOfNineFields {
     public void addNextField(SudokuField field) {
         fields.add(field);
     }
-
-    @Override
-    public String toString() {
-        return "SudokuSetOfNineFields{" +
-                "fields=" + fields +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SudokuSetOfNineFields that = (SudokuSetOfNineFields) o;
-        return Objects.equals(fields, that.fields);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(fields);
-    }
 }
