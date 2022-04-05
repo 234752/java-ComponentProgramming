@@ -1,4 +1,4 @@
-import java.util.Objects;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class SudokuField extends Observable {
 
@@ -16,5 +16,12 @@ public class SudokuField extends Observable {
     public void setFieldValue(int newValue) {
         value = newValue;
         notifyObserver();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("value", value)
+                .toString();
     }
 }

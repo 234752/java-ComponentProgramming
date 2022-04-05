@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class SudokuSetOfNineFields {
 
@@ -23,5 +23,12 @@ public class SudokuSetOfNineFields {
 
     public void addNextField(SudokuField field) {
         fields.add(field);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("fields", fields)
+                .toString();
     }
 }

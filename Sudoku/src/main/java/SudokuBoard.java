@@ -1,5 +1,4 @@
-import java.util.Arrays;
-import java.util.Objects;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class SudokuBoard extends Observer {
 
@@ -92,5 +91,13 @@ public class SudokuBoard extends Observer {
 
     public void solveGame() {
         sudokuSolver.solve(this);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("fields", fields)
+                .append("sudokuSolver", sudokuSolver)
+                .toString();
     }
 }
