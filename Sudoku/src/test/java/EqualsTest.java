@@ -8,6 +8,17 @@ public class EqualsTest {
     SudokuBoard testedBoard = new SudokuBoard(new BacktrackingSudokuSolver());
 
     @Test
+    public void testEqualFields() {
+        SudokuField testedField1 = new SudokuField(testedBoard);
+        testedField1.setFieldValue(7);
+        SudokuField testedField2 = new SudokuField(testedBoard);
+        testedField1.setFieldValue(7);
+        assertFalse(testedField1.equals(testedField2));
+        SudokuField testedField3 = testedField2;
+        assertTrue(testedField3.equals(testedField2));
+    }
+
+    @Test
     public void testEqualBox() {
         testedBoard.set(0,8,5);
         testedBoard.set(1,1,6);
