@@ -4,6 +4,14 @@ import java.util.List;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
 
+    private List<Integer> digits = new ArrayList<>();
+
+    public BacktrackingSudokuSolver() {
+        for (int i = 1; i <= 9; i++) {
+            digits.add(i);
+        }
+    }
+
     @Override
     public boolean solve(SudokuBoard board) {
         int row = -1;
@@ -26,10 +34,7 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
             return true;                                          //board is filled, return from recursion
         }
 
-        List<Integer> values = new ArrayList<>();
-        for (int i = 1; i <= 9; i++) {
-            values.add(i);
-        }
+        List<Integer> values = new ArrayList<>(digits);
         Collections.shuffle(values);
 
         for (int num = 0; num < 9; num++) {
