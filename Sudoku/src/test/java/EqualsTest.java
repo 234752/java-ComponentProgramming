@@ -55,9 +55,11 @@ public class EqualsTest {
 
         assertTrue(testedBoard.getBox(0,0).equals(testedBoard.getBox(2,1)));
         assertTrue(testedBoard.getBox(5,5).equals(testedBoard.getBox(3,3)));
+        assertEquals(testedBoard.getBox(5,5).hashCode(), testedBoard.getBox(3,3).hashCode());
 
         assertFalse(testedBoard.getBox(0,0).equals(testedBoard.getBox(3,0)));
         assertFalse(testedBoard.getBox(5,5).equals(testedBoard.getBox(3,2)));
+        assertNotEquals(testedBoard.getBox(5,5).hashCode(), testedBoard.getBox(3,2).hashCode());
 
 
     }
