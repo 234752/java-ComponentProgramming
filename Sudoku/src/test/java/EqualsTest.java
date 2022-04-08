@@ -19,6 +19,15 @@ public class EqualsTest {
     }
 
     @Test
+    public void checkConsistency()
+    {
+        SudokuField testedField1 = new SudokuField(testedBoard);
+        testedField1.setFieldValue(7);
+        SudokuField testedField2 = testedField1;
+        assertEquals(testedField1.hashCode(), testedField2.hashCode());
+    }
+
+    @Test
     public void testEqualBox() {
         testedBoard.set(0,8,5);
         testedBoard.set(1,1,6);
