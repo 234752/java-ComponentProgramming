@@ -95,4 +95,14 @@ public class EqualsTest {
         assertFalse(b1.equals(null));
         assertFalse(b1.equals(new SudokuRow()));
     }
+
+    @Test
+    public void testToString() {
+        SudokuBoard b1 = new SudokuBoard(new BacktrackingSudokuSolver());
+        SudokuRow r1 = new SudokuRow();
+        SudokuField f1 = new SudokuField(b1);
+        b1.toString();
+        r1.toString();
+        f1.toString();
+    }
 }
