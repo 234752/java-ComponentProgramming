@@ -16,17 +16,27 @@ public class EqualsTest {
         assertFalse(testedField1.equals(testedField2));
         SudokuField testedField3 = testedField2;
         assertTrue(testedField3.equals(testedField2));
-        assertFalse(testedField1.equals(new SudokuRow()));
+
+        //need code coverage in tests
+        SudokuRow r1 = new SudokuRow();
+        assertFalse(testedField1.equals(r1));
+        assertFalse(testedField1.equals(null));
     }
 
     @Test
     public void testEqualRow() {
+        SudokuRow r1 = new SudokuRow();
+        SudokuRow r2 = r1;
+        assertTrue(r1.equals(r2));
         assertTrue(testedBoard.getRow(1).equals(testedBoard.getRow(1)));
         assertEquals(testedBoard.getRow(1).hashCode(), testedBoard.getRow(2).hashCode());
         testedBoard.set(0,0,7);
         assertFalse(testedBoard.getRow(1).equals(testedBoard.getRow(0)));
         assertNotEquals(testedBoard.getRow(1).hashCode(), testedBoard.getRow(0).hashCode());
         assertFalse(testedBoard.getRow(1).equals(testedBoard.getColumn(2)));
+
+        assertFalse(r1.equals(new SudokuField(testedBoard)));
+        assertFalse(r1.equals(null));
     }
 
     @Test
@@ -78,6 +88,11 @@ public class EqualsTest {
         SudokuBoard b1 = new SudokuBoard(new BacktrackingSudokuSolver());
         SudokuBoard b2 = new SudokuBoard(new BacktrackingSudokuSolver());
         b1.set(5,7,9);
+        assertTrue(b1.equals(b1));
         assertFalse(b2.equals(b1));
+        assertNotEquals(b1.hashCode(), b2.hashCode());
+
+        assertFalse(b1.equals(null));
+        assertFalse(b1.equals(new SudokuRow()));
     }
 }
