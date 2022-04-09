@@ -16,6 +16,17 @@ public class EqualsTest {
         assertFalse(testedField1.equals(testedField2));
         SudokuField testedField3 = testedField2;
         assertTrue(testedField3.equals(testedField2));
+        assertFalse(testedField1.equals(new SudokuRow()));
+    }
+
+    @Test
+    public void testEqualRow() {
+        assertTrue(testedBoard.getRow(1).equals(testedBoard.getRow(1)));
+        assertEquals(testedBoard.getRow(1).hashCode(), testedBoard.getRow(2).hashCode());
+        testedBoard.set(0,0,7);
+        assertFalse(testedBoard.getRow(1).equals(testedBoard.getRow(0)));
+        assertNotEquals(testedBoard.getRow(1).hashCode(), testedBoard.getRow(0).hashCode());
+        assertFalse(testedBoard.getRow(1).equals(testedBoard.getColumn(2)));
     }
 
     @Test
