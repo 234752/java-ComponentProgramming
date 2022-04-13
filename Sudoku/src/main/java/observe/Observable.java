@@ -1,3 +1,5 @@
+package observe;
+
 public abstract class Observable {
 
     private Observer observer;

@@ -1,3 +1,7 @@
+package model;
+import observe.Observable;
+import observe.Observer;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -6,7 +10,7 @@ public class SudokuField extends Observable {
 
     private int value;
 
-    SudokuField(Observer observer) {
+    public SudokuField(Observer observer) {
         value = 0;
         setObserver(observer);
     }

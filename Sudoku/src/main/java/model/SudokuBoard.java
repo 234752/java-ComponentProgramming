@@ -1,6 +1,10 @@
+package model;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import solver.SudokuSolver;
+import observe.Observer;
 
 public class SudokuBoard extends Observer {
 

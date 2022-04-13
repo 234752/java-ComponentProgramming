@@ -1,5 +1,10 @@
 import static org.junit.jupiter.api.Assertions.*;
+
+import model.SudokuBoard;
+import model.SudokuField;
+import model.SudokuRow;
 import org.junit.jupiter.api.Test;
+import solver.BacktrackingSudokuSolver;
 
 public class EqualsTest {
 

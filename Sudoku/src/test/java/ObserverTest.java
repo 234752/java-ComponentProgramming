@@ -1,5 +1,7 @@
 
+import model.SudokuBoard;
 import org.junit.jupiter.api.Test;
+import solver.BacktrackingSudokuSolver;
 
 public class ObserverTest {
 
