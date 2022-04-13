@@ -1,11 +1,9 @@
 package solver;
 
-import solver.SudokuSolver;
-import model.SudokuBoard;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import model.SudokuBoard;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
 
