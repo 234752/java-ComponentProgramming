@@ -9,7 +9,7 @@ public class DaoTest {
     public void testReadWrite() {
         SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
         SudokuBoardDaoFactory factory = new SudokuBoardDaoFactory();
-        Dao<SudokuBoard> dao = factory.getFileDao("test.txt");
+        Dao<SudokuBoard> dao = factory.getFileDao("src/test/java/test.txt");
         dao.write(board);
     }
 }

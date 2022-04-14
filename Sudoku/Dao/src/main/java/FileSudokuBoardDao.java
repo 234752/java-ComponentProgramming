@@ -1,3 +1,5 @@
+import solver.BacktrackingSudokuSolver;
+
 import java.io.*;
 
 public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard>, AutoCloseable {
@@ -10,19 +12,34 @@ public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard>, AutoCl
 
     @Override
     public SudokuBoard read() {
-        //FileInputStream fileInput = new FileInputStream(new File(filename));
-        //ObjectInputStream objectInput = new ObjectInputStream(fileInput);
-        //SudokuBoard board = (SudokuBoard)objectInput.readObject();
-        //fileInput.close();
-        //objectInput.close();
+        //SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
+        try {
+            FileInputStream fileInput = new FileInputStream(new File(filename));
+            ObjectInputStream objectInput = new ObjectInputStream(fileInput);
+            SudokuBoard board = (SudokuBoard)objectInput.readObject();
+            fileInput.close();
+            objectInput.close();
+            return board;
+        }
+        catch (Exception ex) {
+
+        }
         return null;
+
     }
 
     @Override
     public void write(SudokuBoard obj) {
-        //FileOutputStream output = new FileOutputStream(filename);
-        //output.write(obj);
-        //output.close();
+        try {
+            FileOutputStream fileOutput = new FileOutputStream(new File(filename));
+            ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
+            objectOutput.writeObject(obj);
+            fileOutput.close();
+            objectOutput.close();
+        }
+        catch (Exception ex) {
+
+        }
     }
 
     @Override
