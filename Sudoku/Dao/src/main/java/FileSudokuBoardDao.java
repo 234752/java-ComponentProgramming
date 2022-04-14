@@ -1,12 +1,16 @@
-public class FileSudokuBoardDao<SudokuBoard> implements Dao, AutoCloseable {
+public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard>, AutoCloseable {
+
+    public FileSudokuBoardDao (String filename) {
+
+    }
 
     @Override
-    public Object read() {
+    public SudokuBoard read() {
         return null;
     }
 
     @Override
-    public void write(Object obj) {
+    public void write(SudokuBoard obj) {
 
     }
 
