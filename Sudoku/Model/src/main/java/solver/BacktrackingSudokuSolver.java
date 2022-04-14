@@ -1,11 +1,12 @@
 package solver;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import model.SudokuBoard;
 
-public class BacktrackingSudokuSolver implements SudokuSolver {
+public class BacktrackingSudokuSolver implements SudokuSolver, Serializable {
 
     private List<Integer> digits = new ArrayList<>();
 
