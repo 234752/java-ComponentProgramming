@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import observe.Observer;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -7,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import solver.SudokuSolver;
 
 
-public class SudokuBoard extends Observer {
+public class SudokuBoard extends Observer implements Serializable {
 
     private SudokuField[][] fields = new SudokuField[9][9];
     private SudokuSolver sudokuSolver;
