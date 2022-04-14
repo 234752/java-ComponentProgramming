@@ -1,7 +1,4 @@
-import solver.BacktrackingSudokuSolver;
-
-public class FileSudokuBoardDao<T> implements Dao, AutoCloseable{
-
+public class FileSudokuBoardDao<SudokuBoard> implements Dao, AutoCloseable {
 
     @Override
     public Object read() {
@@ -10,6 +7,11 @@ public class FileSudokuBoardDao<T> implements Dao, AutoCloseable{
 
     @Override
     public void write(Object obj) {
+
+    }
+
+    @Override
+    public void close() throws Exception {
 
     }
 }
