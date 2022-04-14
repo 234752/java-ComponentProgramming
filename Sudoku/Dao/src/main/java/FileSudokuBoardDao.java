@@ -10,12 +10,12 @@ public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard>, AutoCl
 
     @Override
     public SudokuBoard read() {
-        FileInputStream fileInput = new FileInputStream(new File(filename));
-        ObjectInputStream objectInput = new ObjectInputStream(fileInput);
-        SudokuBoard board = (SudokuBoard)objectInput.readObject();
-        fileInput.close();
-        objectInput.close();
-        return board;
+        //FileInputStream fileInput = new FileInputStream(new File(filename));
+        //ObjectInputStream objectInput = new ObjectInputStream(fileInput);
+        //SudokuBoard board = (SudokuBoard)objectInput.readObject();
+        //fileInput.close();
+        //objectInput.close();
+        return null;
     }
 
     @Override
