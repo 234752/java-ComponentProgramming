@@ -1,12 +1,14 @@
-import solver.BacktrackingSudokuSolver;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard>, AutoCloseable {
 
     private String filename;
 
-    public FileSudokuBoardDao (String filename) {
+    public FileSudokuBoardDao(String filename) {
         this.filename = filename;
     }
 
@@ -19,8 +21,7 @@ public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard>, AutoCl
             fileInput.close();
             objectInput.close();
             return board;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             System.out.println(ex);
         }
         return null;
@@ -35,9 +36,8 @@ public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard>, AutoCl
             objectOutput.writeObject(obj);
             fileOutput.close();
             objectOutput.close();
-        }
-        catch (Exception ex) {
-
+        } catch (Exception ex) {
+            System.out.println(ex);
         }
     }
 
