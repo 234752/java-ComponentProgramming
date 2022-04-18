@@ -123,7 +123,7 @@ public class SudokuBoard extends Observer implements Serializable {
 
         return new EqualsBuilder()
                 .append(fields, that.fields)
-                //.append(sudokuSolver, that.sudokuSolver)
+                .append(sudokuSolver, that.sudokuSolver)
                 .isEquals();
     }
 
