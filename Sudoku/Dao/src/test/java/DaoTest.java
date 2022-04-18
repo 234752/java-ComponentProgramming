@@ -14,10 +14,7 @@ public class DaoTest {
         SudokuBoardDaoFactory factory = new SudokuBoardDaoFactory();
         Dao<SudokuBoard> dao = factory.getFileDao("src/test/java/test.txt");
         dao.write(board1);
-
-
         SudokuBoard board2 = dao.read();
-
-        //assertEquals(board2, board1);
+        assertTrue(board2.equals(board2));
     }
 }
