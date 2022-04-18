@@ -90,9 +90,10 @@ public class EqualsTest {
 
     @Test
     public void testEqualBoard() {
-        SudokuBoard b1 = new SudokuBoard(new BacktrackingSudokuSolver());
-        SudokuBoard b2 = new SudokuBoard(new BacktrackingSudokuSolver());
-        SudokuBoard b3 = new SudokuBoard(new BacktrackingSudokuSolver());
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard b1 = new SudokuBoard(solver);
+        SudokuBoard b2 = new SudokuBoard(solver);
+        SudokuBoard b3 = new SudokuBoard(solver);
         b1.set(5,7,9);
         b2.set(5,7,9);
         assertTrue(b2.equals(b1));

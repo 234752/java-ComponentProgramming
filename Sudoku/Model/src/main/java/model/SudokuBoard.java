@@ -121,11 +121,17 @@ public class SudokuBoard extends Observer implements Serializable {
 
         SudokuBoard that = (SudokuBoard) o;
 
-        return new EqualsBuilder().append(fields, that.fields).isEquals();
+        return new EqualsBuilder()
+                .append(fields, that.fields)
+                //.append(sudokuSolver, that.sudokuSolver)
+                .isEquals();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(fields).toHashCode();
+        return new HashCodeBuilder(17, 37)
+                .append(fields)
+                .append(sudokuSolver)
+                .toHashCode();
     }
 }
