@@ -92,10 +92,13 @@ public class EqualsTest {
     public void testEqualBoard() {
         SudokuBoard b1 = new SudokuBoard(new BacktrackingSudokuSolver());
         SudokuBoard b2 = new SudokuBoard(new BacktrackingSudokuSolver());
+        SudokuBoard b3 = new SudokuBoard(new BacktrackingSudokuSolver());
         b1.set(5,7,9);
-        assertTrue(b1.equals(b1));
-        assertFalse(b2.equals(b1));
-        assertNotEquals(b1.hashCode(), b2.hashCode());
+        b2.set(5,7,9);
+        assertTrue(b2.equals(b1));
+        assertFalse(b3.equals(b1));
+        assertNotEquals(b1.hashCode(), b3.hashCode());
+        assertEquals(b1.hashCode(),b2.hashCode());
 
         assertFalse(b1.equals(null));
         assertFalse(b1.equals(new SudokuRow()));
