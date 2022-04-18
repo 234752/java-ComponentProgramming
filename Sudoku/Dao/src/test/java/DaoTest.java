@@ -4,8 +4,7 @@ import solver.BacktrackingSudokuSolver;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DaoTest {
-
+public class DaoTest { //mvn clean install -U   is needed when output stream re-throws old exception
 
     @Test
     public void testReadWrite() {
