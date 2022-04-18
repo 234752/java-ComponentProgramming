@@ -17,8 +17,8 @@ public class EqualsTest {
         SudokuField testedField1 = new SudokuField(testedBoard);
         testedField1.setFieldValue(7);
         SudokuField testedField2 = new SudokuField(testedBoard);
-        testedField1.setFieldValue(7);
-        assertFalse(testedField1.equals(testedField2));
+        testedField2.setFieldValue(7);
+        assertTrue(testedField1.equals(testedField2));
         SudokuField testedField3 = testedField2;
         assertTrue(testedField3.equals(testedField2));
 
