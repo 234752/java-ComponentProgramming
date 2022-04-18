@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import model.SudokuBoard;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 
 public class BacktrackingSudokuSolver implements SudokuSolver, Serializable {
 
@@ -50,5 +51,21 @@ public class BacktrackingSudokuSolver implements SudokuSolver, Serializable {
             }
         }
         return false;                                             //if none of the values make board solvable - backtrack
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BacktrackingSudokuSolver that = (BacktrackingSudokuSolver) o;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return 0;
     }
 }
