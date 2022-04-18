@@ -14,6 +14,7 @@ public class DaoTest { //mvn clean install -U   is needed when output stream re-
         Dao<SudokuBoard> dao = factory.getFileDao("src/test/java/sb.txt");
         dao.write(board1);
         SudokuBoard board2 = dao.read();
-        assertTrue(board2.equals(board2));
+        assertTrue(board1.equals(board2));
+        assertTrue(board2.equals(board1));
     }
 }
