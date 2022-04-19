@@ -4,7 +4,7 @@ public abstract class Observable {
 
     private Observer observer;
 
-    protected void setObserver(Observer observer) {
+    public void setObserver(Observer observer) {
         this.observer = observer;
     }
 
