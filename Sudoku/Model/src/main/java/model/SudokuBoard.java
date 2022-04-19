@@ -22,6 +22,14 @@ public class SudokuBoard extends Observer implements Serializable {
         }
     }
 
+    public void setObserverOfFields() {
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+                fields[x][y].setObserver(this);
+            }
+        }
+    }
+
     @Override
     public void update() {
         if (observerIsTurnedOn) {
