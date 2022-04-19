@@ -5,7 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import model.SudokuBoard;
 
-public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard>, AutoCloseable {
+public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard> {
 
     private String filename;
 
@@ -44,6 +44,6 @@ public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard>, AutoCl
 
     @Override
     public void close() throws Exception {
-
+        System.out.println("Closed FileSudokuBoardDao");
     }
 }

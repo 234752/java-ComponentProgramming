@@ -1,4 +1,4 @@
-public interface Dao<T> {
+public interface Dao<T> extends AutoCloseable {
 
     public T read();
 
