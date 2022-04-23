@@ -97,6 +97,7 @@ public class EqualsTest {
         b1.set(5,7,9);
         b2.set(5,7,9);
         assertTrue(b2.equals(b1));
+        assertTrue(b1.equals(b1));
         assertFalse(b3.equals(b1));
         assertNotEquals(b1.hashCode(), b3.hashCode());
         assertEquals(b1.hashCode(),b2.hashCode());

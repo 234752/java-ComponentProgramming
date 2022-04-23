@@ -1,3 +1,4 @@
+import static org.junit.jupiter.api.Assertions.*;
 
 import model.SudokuBoard;
 import org.junit.jupiter.api.Test;
@@ -27,5 +28,6 @@ public class ObserverTest {
         testedBoard.set(8,8,6);
         testedBoard.set(7,7,6); //error message should be printed
         testedBoard.set(7,7,0);
+        assertDoesNotThrow(() -> testedBoard.setObserverOfFields());
     }
 }
