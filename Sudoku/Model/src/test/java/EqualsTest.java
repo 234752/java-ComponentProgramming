@@ -106,6 +106,17 @@ public class EqualsTest {
     }
 
     @Test
+    public void testEqualSolver() {
+        BacktrackingSudokuSolver s1 = new BacktrackingSudokuSolver();
+        BacktrackingSudokuSolver s2 = new BacktrackingSudokuSolver();
+
+        assertTrue(s1.equals(s2));
+        assertTrue(s1.equals(s1));
+        assertFalse(s1.equals(null));
+        assertFalse(s1.equals(new SudokuRow()));
+    }
+
+    @Test
     public void testToString() {
         SudokuBoard b1 = new SudokuBoard(new BacktrackingSudokuSolver());
         SudokuRow r1 = new SudokuRow();
