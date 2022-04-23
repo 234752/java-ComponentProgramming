@@ -1,4 +1,3 @@
-import observe.Observable;
 import org.junit.jupiter.api.Test;
 import model.SudokuBoard;
 import solver.BacktrackingSudokuSolver;

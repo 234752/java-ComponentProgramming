@@ -1,7 +1,7 @@
 public interface Dao<T> extends AutoCloseable {
 
-    public T read();
+    T read();
 
-    public void write(T obj);
+    void write(T obj);
 
 }
