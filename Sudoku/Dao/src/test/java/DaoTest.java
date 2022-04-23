@@ -1,3 +1,4 @@
+import observe.Observable;
 import org.junit.jupiter.api.Test;
 import model.SudokuBoard;
 import solver.BacktrackingSudokuSolver;
@@ -7,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DaoTest { //mvn clean install -U   is needed when output stream re-throws old exception
 
     @Test
-    public void testReadWrite() throws Exception {
+    public void testReadWrite() {
         SudokuBoard board1 = new SudokuBoard(new BacktrackingSudokuSolver());
         SudokuBoard board2 = new SudokuBoard(new BacktrackingSudokuSolver());
         board1.set(0,0,7);
@@ -26,5 +27,29 @@ public class DaoTest { //mvn clean install -U   is needed when output stream re-
         assertTrue(board2.equals(board1));
         board2.setObserverOfFields();
         board2.solveGame();
+    }
+
+    @Test
+    public void testInvalidRead() {
+        SudokuBoard board1 = new SudokuBoard(new BacktrackingSudokuSolver());
+        SudokuBoardDaoFactory factory = new SudokuBoardDaoFactory();
+
+        try (Dao<SudokuBoard> dao = factory.getFileDao("src/test/java/read.txt")) {
+            board1 = dao.read();
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+    }
+
+    @Test
+    public void testInvalidWrite() {
+        SudokuBoard board1 = new SudokuBoard(new BacktrackingSudokuSolver());
+        SudokuBoardDaoFactory factory = new SudokuBoardDaoFactory();
+
+        try (Dao<SudokuBoard> dao = factory.getFileDao("src/test/java/write")) {
+            dao.write(board1);
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
     }
 }

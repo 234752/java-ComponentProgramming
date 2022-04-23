@@ -1,9 +1,4 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import model.SudokuBoard;
+import java.io.*;
 
 public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard> {
 
@@ -15,7 +10,7 @@ public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard> {
 
     @Override
     public SudokuBoard read() {
-        try (FileInputStream fileInput = new FileInputStream(new File(filename));
+        try (FileInputStream fileInput = new FileInputStream(filename);
              ObjectInputStream objectInput = new ObjectInputStream(fileInput)) {
             SudokuBoard board = (SudokuBoard)objectInput.readObject();
             fileInput.close();
@@ -29,7 +24,7 @@ public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard> {
 
     @Override
     public void write(SudokuBoard obj) {
-        try (FileOutputStream fileOutput = new FileOutputStream(new File(filename));
+        try (FileOutputStream fileOutput = new FileOutputStream(filename);
              ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput)) {
             objectOutput.writeObject(obj);
             fileOutput.close();
