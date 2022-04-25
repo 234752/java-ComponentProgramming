@@ -11,13 +11,11 @@ public class DaoTest { //mvn clean install -U   is needed when output stream re-
         SudokuBoard board1 = new SudokuBoard(new BacktrackingSudokuSolver());
         SudokuBoard board2 = new SudokuBoard(new BacktrackingSudokuSolver());
         board1.set(0,0,7);
-        SudokuBoardDaoFactory factory = new SudokuBoardDaoFactory();
 
-        try (Dao<SudokuBoard> dao = factory.getFileDao("src/test/java/sb.txt")) {
+        try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("src/test/java/sb.txt")) {
             dao.write(board1);
             board2 = dao.read();
-            dao.close();        //+1 FileSudokuBoard/Dao<SudokuBoard> is closed in test methods.
-                                //task requirement?
+            dao.close();
         } catch (Exception exception) {
             System.out.println(exception);
         }
@@ -31,9 +29,8 @@ public class DaoTest { //mvn clean install -U   is needed when output stream re-
     @Test
     public void testInvalidRead() {
         SudokuBoard board1 = new SudokuBoard(new BacktrackingSudokuSolver());
-        SudokuBoardDaoFactory factory = new SudokuBoardDaoFactory();
 
-        try (Dao<SudokuBoard> dao = factory.getFileDao("src/test/java/read.txt")) {
+        try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("src/test/java/read.txt")) {
             board1 = dao.read();
         } catch (Exception exception) {
             System.out.println(exception);
@@ -43,9 +40,8 @@ public class DaoTest { //mvn clean install -U   is needed when output stream re-
     @Test
     public void testInvalidWrite() {
         SudokuBoard board1 = new SudokuBoard(new BacktrackingSudokuSolver());
-        SudokuBoardDaoFactory factory = new SudokuBoardDaoFactory();
 
-        try (Dao<SudokuBoard> dao = factory.getFileDao("src/test/java/write")) {
+        try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("src/test/java/write")) {
             dao.write(board1);
         } catch (Exception exception) {
             System.out.println(exception);
