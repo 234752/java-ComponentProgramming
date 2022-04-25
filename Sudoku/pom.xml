@@ -83,6 +83,7 @@
     </reporting>
 
     <build>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -170,6 +171,7 @@
         </plugins>
     </build>
 
+    <dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -192,6 +194,7 @@
             <version>17.0.1</version>
         </dependency>
     </dependencies>
+    </dependencyManagement>
 
     <developers>
         <developer>
