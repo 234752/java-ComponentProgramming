@@ -13,14 +13,12 @@ public class SudokuApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(SudokuApplication.class.getResource("main-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Sudoku");
         stage.setScene(scene);
         stage.show();
         ChoiceBox pog = (ChoiceBox) scene.lookup("#pog");
         pog.setItems(FXCollections.observableArrayList("Small Pog","Medium Pog","Big Pog"));
-        stage.setHeight(450);
-        stage.setWidth(370);
     }
 
     public static void main(String[] args) {
