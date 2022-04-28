@@ -1,6 +1,7 @@
 package pl.cp.gui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 
 public class SudokuController {
@@ -11,4 +12,5 @@ public class SudokuController {
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
+
 }
