@@ -19,6 +19,8 @@ public class SudokuApplication extends Application {
         stage.show();
         ChoiceBox pog = (ChoiceBox) scene.lookup("#pog");
         pog.setItems(FXCollections.observableArrayList("Small Pog","Medium Pog","Big Pog"));
+        stage.setHeight(450);
+        stage.setWidth(370);
     }
 
     public static void main(String[] args) {
