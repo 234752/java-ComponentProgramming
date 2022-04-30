@@ -1,10 +1,10 @@
-package solver;
+package pl.cp.solver;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import model.SudokuBoard;
+import pl.cp.model.SudokuBoard;
 
 public class BacktrackingSudokuSolver implements SudokuSolver, Serializable {
 

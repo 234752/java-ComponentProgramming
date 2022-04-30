@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
-import model.SudokuBoard;
-import solver.BacktrackingSudokuSolver;
+import pl.cp.model.SudokuBoard;
+import pl.cp.solver.BacktrackingSudokuSolver;
 
 import static org.junit.jupiter.api.Assertions.*;
 

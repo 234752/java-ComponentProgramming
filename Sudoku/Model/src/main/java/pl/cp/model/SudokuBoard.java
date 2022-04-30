@@ -1,11 +1,11 @@
-package model;
+package pl.cp.model;
 
 import java.io.Serializable;
-import observe.Observer;
+import pl.cp.observe.Observer;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import solver.SudokuSolver;
+import pl.cp.solver.SudokuSolver;
 
 
 public class SudokuBoard extends Observer implements Serializable {

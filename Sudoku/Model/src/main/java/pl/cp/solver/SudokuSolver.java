@@ -1,6 +1,6 @@
-package solver;
+package pl.cp.solver;
 
-import model.SudokuBoard;
+import pl.cp.model.SudokuBoard;
 
 public interface SudokuSolver {
     boolean solve(SudokuBoard board);

@@ -1,4 +1,4 @@
-package observe;
+package pl.cp.observe;
 
 public abstract class Observer {
 

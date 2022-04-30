@@ -1,8 +1,8 @@
-package model;
+package pl.cp.model;
 
 import java.io.Serializable;
-import observe.Observable;
-import observe.Observer;
+import pl.cp.observe.Observable;
+import pl.cp.observe.Observer;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;

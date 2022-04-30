@@ -1,4 +1,4 @@
-import model.SudokuBoard;
+import pl.cp.model.SudokuBoard;
 
 public class SudokuBoardDaoFactory {
 
