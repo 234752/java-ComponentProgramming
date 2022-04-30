@@ -8,20 +8,44 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DifficultyTest {
 
     @Test
-    public void checkEasy()
+    public void checkLevels()
     {
         SudokuBoard testedBoard = new SudokuBoard(new BacktrackingSudokuSolver());
-        testedBoard.solveGame();
-        Difficulty dif = Difficulty.EASY;
-        dif.removeFields(testedBoard);
 
-        int amount = 0;
+        Difficulty easy = Difficulty.EASY;
+        Difficulty med = Difficulty.MEDIUM;
+        Difficulty hard = Difficulty.HARD;
+
+        testedBoard.solveGame();
+        easy.removeFields(testedBoard);
+        int amountEasy = 0;
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
-                if (testedBoard.get(x, y) == 0) amount++;
+                if (testedBoard.get(x, y) == 0) amountEasy++;
             }
         }
-        assertEquals(amount, 20);
+
+        testedBoard.solveGame();
+        med.removeFields(testedBoard);
+        int amountMed = 0;
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+                if (testedBoard.get(x, y) == 0) amountMed++;
+            }
+        }
+
+        testedBoard.solveGame();
+        hard.removeFields(testedBoard);
+        int amountHard = 0;
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+                if (testedBoard.get(x, y) == 0) amountHard++;
+            }
+        }
+
+        assertEquals(amountEasy, 20);
+        assertEquals(amountMed, 40);
+        assertEquals(amountHard, 60);
     }
 
 }
