@@ -1,8 +1,7 @@
 module pl.cp.gui {
     requires javafx.controls;
     requires javafx.fxml;
-
-
-    opens pl.cp.gui to javafx.fxml;
+    requires Model;
     exports pl.cp.gui;
+
 }
