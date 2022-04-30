@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+import pl.cp.dao.Dao;
+import pl.cp.dao.SudokuBoardDaoFactory;
 import pl.cp.model.SudokuBoard;
 import pl.cp.solver.BacktrackingSudokuSolver;
 

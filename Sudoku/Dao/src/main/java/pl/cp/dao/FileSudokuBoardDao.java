@@ -1,3 +1,7 @@
+package pl.cp.dao;
+
+import pl.cp.dao.Dao;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -39,6 +43,6 @@ public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard> {
 
     @Override
     public void close() throws Exception {
-        System.out.println("Closed FileSudokuBoardDao");
+        System.out.println("Closed pl.cp.dao.FileSudokuBoardDao");
     }
 }
