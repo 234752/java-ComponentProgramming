@@ -11,9 +11,8 @@ public class CopyTest {
     @Test
     public void testField_shallowCopy() {
         SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
-        SudokuBoard board2 = new SudokuBoard(new BacktrackingSudokuSolver());
-        SudokuField field = new SudokuField(board);
-        SudokuField clonedField = new SudokuField(null);
+        SudokuField field = new SudokuField();
+        SudokuField clonedField = new SudokuField();
         field.setFieldValue(7);
         try {
             clonedField = (SudokuField) field.clone();
@@ -22,24 +21,33 @@ public class CopyTest {
         assertEquals(field, clonedField);
         assertNotSame(field, clonedField);
 
-        clonedField.setObserver(board2);
+        clonedField.setObserver(board);
         assertEquals(field, clonedField);
     }
 
     @Test
     public void testRow_deepCopy() {
-
-
+        SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
         SudokuRow row = new SudokuRow();
-        row.set(0, 5);
-        row.set(2, 7);
+        SudokuField f1 = new SudokuField();
+        f1.setFieldValue(1);
+        SudokuField f2 = new SudokuField();
+        f2.setFieldValue(2);
+        SudokuField f3 = new SudokuField();
+        f3.setFieldValue(3);
+
+        row.addNextField(f1);
+        row.addNextField(f2);
+        row.addNextField(f3);
+
         SudokuRow clonedRow = new SudokuRow();
         try {
             clonedRow = (SudokuRow) row.clone();
         } catch (CloneNotSupportedException ex) { }
+
         assertEquals(row, clonedRow);
 
-        clonedRow.set(1, 3);
+        row.set(1,7);
         assertNotEquals(row, clonedRow);
     }
 }
