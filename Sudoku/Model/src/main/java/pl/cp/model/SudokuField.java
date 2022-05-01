@@ -58,9 +58,7 @@ public class SudokuField extends Observable implements Serializable, Comparable<
     }
 
     @Override
-    public SudokuField clone() {
-        SudokuField field = new SudokuField(this.observer);
-        field.setFieldValue(this.getFieldValue());
-        return field;
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

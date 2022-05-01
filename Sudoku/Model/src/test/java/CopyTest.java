@@ -11,10 +11,18 @@ public class CopyTest {
     @Test
     public void testField_shallowCopy() {
         SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
+        SudokuBoard board2 = new SudokuBoard(new BacktrackingSudokuSolver());
         SudokuField field = new SudokuField(board);
-        SudokuField clonedField = field.clone();
+        SudokuField clonedField = new SudokuField(null);
+        field.setFieldValue(7);
+        try {
+            clonedField = (SudokuField) field.clone();
+        } catch (CloneNotSupportedException ex) { }
 
         assertEquals(field, clonedField);
         assertNotSame(field, clonedField);
+
+        clonedField.setObserver(board2);
+        assertEquals(field, clonedField);
     }
 }
