@@ -2,7 +2,7 @@ package pl.cp.observe;
 
 public abstract class Observable {
 
-    private Observer observer;
+    protected Observer observer;
 
     public void setObserver(Observer observer) {
         this.observer = observer;

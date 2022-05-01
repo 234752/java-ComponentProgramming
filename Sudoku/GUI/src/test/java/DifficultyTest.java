@@ -8,8 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DifficultyTest {
 
     @Test
-    public void checkLevels()
-    {
+    public void checkLevels() {
         SudokuBoard testedBoard = new SudokuBoard(new BacktrackingSudokuSolver());
 
         Difficulty easy = Difficulty.EASY;
