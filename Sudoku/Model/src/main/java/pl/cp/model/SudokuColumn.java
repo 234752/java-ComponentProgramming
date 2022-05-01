@@ -10,8 +10,9 @@ public class SudokuColumn extends SudokuSetOfNineFields {
     public Object clone() throws CloneNotSupportedException {
         SudokuColumn col = new SudokuColumn();
         for (int i = 0; i < this.fields.size(); i++) {
-            col.addNextField(new SudokuField());
-            col.set(i, this.fields.get(i).getFieldValue());
+            //col.addNextField(new SudokuField());
+            //col.set(i, this.fields.get(i).getFieldValue());
+            col.addNextField((SudokuField) this.fields.get(i).clone());
         }
         return col;
     }

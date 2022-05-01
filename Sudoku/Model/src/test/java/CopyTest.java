@@ -1,6 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import pl.cp.model.SudokuBoard;
+import pl.cp.model.SudokuColumn;
 import pl.cp.model.SudokuField;
 import pl.cp.model.SudokuRow;
 import org.junit.jupiter.api.Test;
@@ -49,5 +50,31 @@ public class CopyTest {
 
         row.set(1,7);
         assertNotEquals(row, clonedRow);
+    }
+
+    @Test
+    public void testColumn_deepCopy() {
+        SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
+        SudokuColumn column = new SudokuColumn();
+        SudokuField f1 = new SudokuField();
+        f1.setFieldValue(9);
+        SudokuField f2 = new SudokuField();
+        f2.setFieldValue(8);
+        SudokuField f3 = new SudokuField();
+        f3.setFieldValue(7);
+
+        column.addNextField(f1);
+        column.addNextField(f2);
+        column.addNextField(f3);
+
+        SudokuColumn clonedColumn = new SudokuColumn();
+        try {
+            clonedColumn = (SudokuColumn) column.clone();
+        } catch (CloneNotSupportedException ex) { }
+
+        assertEquals(column, clonedColumn);
+
+        column.set(2,1);
+        assertNotEquals(column, clonedColumn);
     }
 }
