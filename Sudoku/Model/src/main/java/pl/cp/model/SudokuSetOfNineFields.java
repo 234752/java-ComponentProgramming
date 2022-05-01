@@ -9,8 +9,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class SudokuSetOfNineFields implements Serializable, Cloneable {
 
-    private List<SudokuField> fields = new ArrayList<>();
-
+    protected List<SudokuField> fields = new ArrayList<>();
     public boolean verify() {
 
         int[] values = new int[10]; //counter for each digit 1-9
@@ -28,6 +27,10 @@ public class SudokuSetOfNineFields implements Serializable, Cloneable {
 
     public void addNextField(SudokuField field) {
         fields.add(field);
+    }
+
+    protected void set(int i, int value) {
+        fields.get(i).setFieldValue(value);
     }
 
     @Override
@@ -57,12 +60,4 @@ public class SudokuSetOfNineFields implements Serializable, Cloneable {
         return new HashCodeBuilder(17, 37).append(fields).toHashCode();
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        SudokuSetOfNineFields set = (SudokuSetOfNineFields) super.clone();
-        for (int i = 0; i < 9; i++) {
-            set.fields.set(i, (SudokuField) this.fields.get(i).clone());
-        }
-        return set;
-    }
 }
