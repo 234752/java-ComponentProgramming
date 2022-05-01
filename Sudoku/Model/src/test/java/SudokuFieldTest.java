@@ -26,5 +26,7 @@ public class SudokuFieldTest {
         testedField2.setFieldValue(3);
         assertEquals(testedField1.compareTo(testedField2), 3);
 
+        assertThrows(NullPointerException.class, ()->testedField1.compareTo(null));
+
     }
 }
