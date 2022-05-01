@@ -17,7 +17,8 @@ public class SudokuBoard extends Observer implements Serializable {
         sudokuSolver = solver;
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                fields[row][col] = new SudokuField(this);
+                fields[row][col] = new SudokuField();
+                fields[row][col].setObserver(this);
             }
         }
     }

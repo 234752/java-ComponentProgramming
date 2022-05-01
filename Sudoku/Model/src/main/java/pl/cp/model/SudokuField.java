@@ -11,9 +11,8 @@ public class SudokuField extends Observable implements Serializable, Comparable<
 
     private int value;
 
-    public SudokuField(Observer observer) {
+    public SudokuField() {
         value = 0;
-        setObserver(observer);
     }
 
     public int getFieldValue() {
@@ -22,7 +21,7 @@ public class SudokuField extends Observable implements Serializable, Comparable<
 
     public void setFieldValue(int newValue) {
         value = newValue;
-        notifyObserver();
+        if(observer != null) notifyObserver();
     }
 
     @Override

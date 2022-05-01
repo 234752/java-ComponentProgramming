@@ -14,9 +14,9 @@ public class EqualsTest {
 
     @Test
     public void testEqualFields() {
-        SudokuField testedField1 = new SudokuField(testedBoard);
+        SudokuField testedField1 = new SudokuField();
         testedField1.setFieldValue(7);
-        SudokuField testedField2 = new SudokuField(testedBoard);
+        SudokuField testedField2 = new SudokuField();
         testedField2.setFieldValue(7);
         assertTrue(testedField1.equals(testedField2));
         SudokuField testedField3 = testedField2;
@@ -40,14 +40,14 @@ public class EqualsTest {
         assertNotEquals(testedBoard.getRow(1).hashCode(), testedBoard.getRow(0).hashCode());
         assertFalse(testedBoard.getRow(1).equals(testedBoard.getColumn(2)));
 
-        assertFalse(r1.equals(new SudokuField(testedBoard)));
+        assertFalse(r1.equals(new SudokuField()));
         assertFalse(r1.equals(null));
     }
 
     @Test
     public void checkConsistency()
     {
-        SudokuField testedField1 = new SudokuField(testedBoard);
+        SudokuField testedField1 = new SudokuField();
         testedField1.setFieldValue(7);
         SudokuField testedField2 = testedField1;
         assertEquals(testedField1.hashCode(), testedField2.hashCode());
@@ -121,7 +121,7 @@ public class EqualsTest {
     public void testToString() {
         SudokuBoard b1 = new SudokuBoard(new BacktrackingSudokuSolver());
         SudokuRow r1 = new SudokuRow();
-        SudokuField f1 = new SudokuField(b1);
+        SudokuField f1 = new SudokuField();
         b1.toString();
         r1.toString();
         f1.toString();

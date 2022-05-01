@@ -10,9 +10,8 @@ public class SudokuFieldTest {
 
     @Test
     public void testCompareFields() {
-        SudokuBoard testedBoard = new SudokuBoard(new BacktrackingSudokuSolver());
-        SudokuField testedField1 = new SudokuField(testedBoard);
-        SudokuField testedField2 = new SudokuField(testedBoard);
+        SudokuField testedField1 = new SudokuField();
+        SudokuField testedField2 = new SudokuField();
 
         testedField1.setFieldValue(7);
         testedField2.setFieldValue(7);
