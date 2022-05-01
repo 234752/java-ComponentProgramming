@@ -25,4 +25,21 @@ public class CopyTest {
         clonedField.setObserver(board2);
         assertEquals(field, clonedField);
     }
+
+    @Test
+    public void testRow_deepCopy() {
+
+
+        SudokuRow row = new SudokuRow();
+        row.set(0, 5);
+        row.set(2, 7);
+        SudokuRow clonedRow = new SudokuRow();
+        try {
+            clonedRow = (SudokuRow) row.clone();
+        } catch (CloneNotSupportedException ex) { }
+        assertEquals(row, clonedRow);
+
+        clonedRow.set(1, 3);
+        assertNotEquals(row, clonedRow);
+    }
 }
