@@ -2,8 +2,8 @@ package pl.cp.model;
 
 public class SudokuRow extends SudokuSetOfNineFields {
 
-    public void set(int x, int value) {
-        super.set(x, value);
+    public void set(int y, int value) {
+        super.set(y, value);
     }
 
     @Override
