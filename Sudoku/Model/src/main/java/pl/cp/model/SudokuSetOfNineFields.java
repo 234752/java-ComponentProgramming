@@ -1,12 +1,13 @@
 package pl.cp.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class SudokuSetOfNineFields {
+public class SudokuSetOfNineFields implements Serializable, Cloneable {
 
     private List<SudokuField> fields = new ArrayList<>();
 
@@ -54,5 +55,14 @@ public class SudokuSetOfNineFields {
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37).append(fields).toHashCode();
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        SudokuSetOfNineFields set = (SudokuSetOfNineFields) super.clone();
+        for (int i = 0; i < 9; i++) {
+            set.fields.set(i, (SudokuField) this.fields.get(i).clone());
+        }
+        return set;
     }
 }
