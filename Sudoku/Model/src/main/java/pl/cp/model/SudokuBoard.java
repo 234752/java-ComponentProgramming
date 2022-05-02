@@ -5,10 +5,11 @@ import pl.cp.observe.Observer;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import pl.cp.solver.BacktrackingSudokuSolver;
 import pl.cp.solver.SudokuSolver;
 
 
-public class SudokuBoard extends Observer implements Serializable {
+public class SudokuBoard extends Observer implements Serializable, Cloneable {
 
     private SudokuField[][] fields = new SudokuField[9][9];
     private SudokuSolver sudokuSolver;
@@ -142,5 +143,16 @@ public class SudokuBoard extends Observer implements Serializable {
                 .append(fields)
                 .append(sudokuSolver)
                 .toHashCode();
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+                board.fields[x][y] = (SudokuField) this.fields[x][y].clone();
+            }
+        }
+        return board;
     }
 }
