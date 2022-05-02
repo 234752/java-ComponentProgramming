@@ -103,7 +103,7 @@ public class CopyTest {
 
     @Test
     public void testBoard_deepCopy() {
-        SudokuBoard board = new SudokuBoard(null);
+        SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
         board.set(7,7,7);
         board.set(0,0,3);
         board.set(3,7,8);

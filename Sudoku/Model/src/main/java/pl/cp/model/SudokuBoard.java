@@ -24,6 +24,16 @@ public class SudokuBoard extends Observer implements Serializable, Cloneable {
         }
     }
 
+    public SudokuBoard(SudokuBoard prototype) {
+        SudokuSolver prototypeSolver = prototype.sudokuSolver;
+        SudokuBoard newBoard = new SudokuBoard(prototypeSolver);
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+                newBoard.fields[x][y].setFieldValue(prototype.fields[x][y].getFieldValue());
+            }
+        }
+    }
+
     public void setObserverOfFields() {
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
