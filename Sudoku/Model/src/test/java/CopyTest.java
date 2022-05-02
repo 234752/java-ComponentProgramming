@@ -121,4 +121,25 @@ public class CopyTest {
         clonedBoard.set(0,2,5);
         assertEquals(board, clonedBoard);
     }
+
+    @Test
+    public void testBoard_prototype() {
+        SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
+        board.set(7,7,7);
+        board.set(0,0,3);
+        board.set(3,7,8);
+
+        SudokuBoard copiedBoard = new SudokuBoard(board);
+        try {
+            copiedBoard = (SudokuBoard) board.clone();
+        } catch (CloneNotSupportedException ex) { }
+
+        assertEquals(board, copiedBoard);
+
+        board.set(0,2,5);
+        assertNotEquals(board, copiedBoard);
+
+        copiedBoard.set(0,2,5);
+        assertEquals(board, copiedBoard);
+    }
 }
