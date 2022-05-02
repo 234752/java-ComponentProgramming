@@ -100,4 +100,25 @@ public class CopyTest {
         box.set(0,2,5);
         assertNotEquals(box, clonedBox);
     }
+
+    @Test
+    public void testBoard_deepCopy() {
+        SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
+        board.set(7,7,7);
+        board.set(0,0,3);
+        board.set(3,7,8);
+
+        SudokuBoard clonedBoard = new SudokuBoard(null);
+        try {
+            clonedBoard = (SudokuBoard) board.clone();
+        } catch (CloneNotSupportedException ex) { }
+
+        assertEquals(board, clonedBoard);
+
+        board.set(0,2,5);
+        assertNotEquals(board, clonedBoard);
+
+        clonedBoard.set(0,2,5);
+        assertEquals(board, clonedBoard);
+    }
 }
