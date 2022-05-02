@@ -147,7 +147,7 @@ public class SudokuBoard extends Observer implements Serializable, Cloneable {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
+        SudokuBoard board = new SudokuBoard(this.sudokuSolver);
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 board.fields[x][y] = (SudokuField) this.fields[x][y].clone();
