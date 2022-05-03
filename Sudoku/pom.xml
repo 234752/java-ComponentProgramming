@@ -34,6 +34,7 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
+                    <excludes>**/module-info.java</excludes>
                     <configLocation>checkstyle2022.xml</configLocation>
                     <encoding>UTF-8</encoding>
                     <consoleOutput>true</consoleOutput>
@@ -50,6 +51,9 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>pl/cp/gui/**</excludes>                       <!--EXCLUDE-->
+                </configuration>
                 <reportSets>
                     <reportSet>
                         <reports>
