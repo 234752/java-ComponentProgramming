@@ -34,17 +34,14 @@ public class SudokuApplication extends Application {
         startButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                clearBoard();
                 mainBoard.solveGame();
-                for (int x = 0; x < 9; x++) {
-                    for (int y = 0; y < 9; y++) {
-                        fields[x][y].setText(Integer.toString(mainBoard.get(x, y)));
-                    }
-                }
+                printBoard();
             }
         });
 
         difficultyChoice = (ChoiceBox) scene.lookup("#cb1");
-        difficultyChoice.setItems(FXCollections.observableArrayList("Small Pog","Medium Pog","Big Pog"));
+        difficultyChoice.setItems(FXCollections.observableArrayList("Easy","Medium","Hard"));
 
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
@@ -55,5 +52,21 @@ public class SudokuApplication extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    private void printBoard() {
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+                fields[x][y].setText(Integer.toString(mainBoard.get(x, y)));
+            }
+        }
+    }
+
+    private void clearBoard() {
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+                mainBoard.set(x, y, 0);
+            }
+        }
     }
 }
