@@ -10,6 +10,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 public class SudokuSetOfNineFields implements Serializable, Cloneable {
 
     protected List<SudokuField> fields = new ArrayList<>();
+
     public boolean verify() {
 
         int[] values = new int[10]; //counter for each digit 1-9

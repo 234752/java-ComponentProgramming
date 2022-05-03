@@ -1,11 +1,10 @@
 package pl.cp.model;
 
 import java.io.Serializable;
-import pl.cp.observe.Observer;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import pl.cp.solver.BacktrackingSudokuSolver;
+import pl.cp.observe.Observer;
 import pl.cp.solver.SudokuSolver;
 
 

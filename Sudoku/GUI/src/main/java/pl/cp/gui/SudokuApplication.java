@@ -1,13 +1,12 @@
 package pl.cp.gui;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class SudokuApplication extends Application {
     @Override

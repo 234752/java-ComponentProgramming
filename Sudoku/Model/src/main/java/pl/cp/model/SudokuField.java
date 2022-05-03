@@ -1,11 +1,11 @@
 package pl.cp.model;
 
 import java.io.Serializable;
-import pl.cp.observe.Observable;
-import pl.cp.observe.Observer;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import pl.cp.observe.Observable;
+
 
 public class SudokuField extends Observable implements Serializable, Comparable<SudokuField>, Cloneable {
 
@@ -21,7 +21,9 @@ public class SudokuField extends Observable implements Serializable, Comparable<
 
     public void setFieldValue(int newValue) {
         value = newValue;
-        if(observer != null) notifyObserver();
+        if (observer != null) {
+            notifyObserver();
+        }
     }
 
     @Override
