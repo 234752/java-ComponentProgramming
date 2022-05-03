@@ -1,7 +1,5 @@
 package pl.cp.dao;
 
-import pl.cp.dao.Dao;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;

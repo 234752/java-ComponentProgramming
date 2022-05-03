@@ -10,7 +10,6 @@
     <version>2.0</version>
     <modules>
         <module>Model</module>
-        <module>Dao</module>
         <module>GUI</module>
     </modules>
 
