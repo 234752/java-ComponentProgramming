@@ -12,6 +12,10 @@ import javafx.stage.Stage;
 import pl.cp.model.SudokuBoard;
 
 public class SudokuApplication extends Application {
+
+    private SudokuBoard mainBoard = new SudokuBoard(new BacktrackingSudokuSolver());
+    private TextField fields[][] = new TextField[9][9];
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(SudokuApplication.class.getResource("main-view.fxml"));
@@ -21,13 +25,12 @@ public class SudokuApplication extends Application {
         stage.show();
         ChoiceBox pog = (ChoiceBox) scene.lookup("#pog");
         pog.setItems(FXCollections.observableArrayList("Small Pog","Medium Pog","Big Pog"));
-        TextField fields[][] = new TextField[9][9];
+
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 fields[x][y] = (TextField) scene.lookup("#tf"+Integer.toString(x)+Integer.toString(y));
             }
         }
-        SudokuBoard mainBoard = new SudokuBoard(new BacktrackingSudokuSolver());
         mainBoard.solveGame();
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
