@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import pl.cp.difficulty.Difficulty;
 import pl.cp.solver.BacktrackingSudokuSolver;
 import javafx.stage.Stage;
 import pl.cp.model.SudokuBoard;
@@ -36,12 +37,14 @@ public class SudokuApplication extends Application {
             public void handle(ActionEvent actionEvent) {
                 clearBoard();
                 mainBoard.solveGame();
+                String level = difficultyChoice.getValue().toString();
                 printBoard();
             }
         });
 
         difficultyChoice = (ChoiceBox) scene.lookup("#cb1");
         difficultyChoice.setItems(FXCollections.observableArrayList("Easy","Medium","Hard"));
+        difficultyChoice.getSelectionModel().select(0);
 
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
@@ -52,6 +55,20 @@ public class SudokuApplication extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    private Difficulty fetchDifficulty()
+    {
+        Difficulty difficulty = Difficulty.EASY; //default is easy
+        String level = difficultyChoice.getValue().toString();
+
+        if (level == "Medium") {
+            difficulty = Difficulty.MEDIUM;
+        } else if (level == "Hard") {
+            difficulty = Difficulty.HARD;
+        }
+
+        return difficulty;
     }
 
     private void printBoard() {
