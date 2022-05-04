@@ -121,6 +121,9 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.7</version>
+                <configuration>
+                    <excludes>pl/cp/gui/**</excludes>                       <!--EXCLUDE-->
+                </configuration>
                 <executions>
                     <execution>
                         <id>default-prepare-agent</id>
