@@ -75,7 +75,11 @@ public class SudokuApplication extends Application {
     private void printBoard() {
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
-                fields[x][y].setText(Integer.toString(mainBoard.get(x, y)));
+                if (mainBoard.get(x, y) != 0) {
+                    fields[x][y].setText(Integer.toString(mainBoard.get(x, y)));
+                } else {
+                    fields[x][y].setText("");
+                }
             }
         }
     }
