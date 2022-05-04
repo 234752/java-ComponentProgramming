@@ -8,10 +8,10 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="525.0" style="-fx-background-color: #008080;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="b1" layoutX="319.0" layoutY="456.0" mnemonicParsing="false" text="START" />
-      <ChoiceBox fx:id="cb1" layoutX="45.0" layoutY="456.0" prefWidth="150.0" />
+      <Button fx:id="b1" layoutX="424.0" layoutY="24.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #00FFFF;" text="START" />
+      <ChoiceBox fx:id="cb1" layoutX="424.0" layoutY="68.0" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #00FFFF;" />
       <HBox alignment="TOP_CENTER" layoutX="15.0" layoutY="14.0" prefHeight="44.0" prefWidth="396.0">
       <children>
          <TextField fx:id="tf00" alignment="CENTER" prefHeight="44.0" prefWidth="44.0">
