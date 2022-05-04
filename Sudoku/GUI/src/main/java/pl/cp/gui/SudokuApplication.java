@@ -31,6 +31,16 @@ public class SudokuApplication extends Application {
         stage.show();
 
         //setup
+        initializeBoardElements(scene);
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+
+    private void initializeBoardElements(Scene scene) {
+
+        //button
         startButton = (Button) scene.lookup("#b1");
         startButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -43,19 +53,17 @@ public class SudokuApplication extends Application {
             }
         });
 
+        //difficulty box
         difficultyChoice = (ChoiceBox) scene.lookup("#cb1");
         difficultyChoice.setItems(FXCollections.observableArrayList("Easy","Medium","Hard"));
         difficultyChoice.getSelectionModel().select(0);
 
+        //fields
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 fields[x][y] = (TextField) scene.lookup("#tf"+Integer.toString(x)+Integer.toString(y));
             }
         }
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 
     private Difficulty fetchDifficulty()
