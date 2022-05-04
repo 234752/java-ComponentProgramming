@@ -10,17 +10,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import pl.cp.difficulty.Difficulty;
-import pl.cp.solver.BacktrackingSudokuSolver;
 import javafx.stage.Stage;
+import pl.cp.difficulty.Difficulty;
 import pl.cp.model.SudokuBoard;
+import pl.cp.solver.BacktrackingSudokuSolver;
+
+
 
 public class SudokuApplication extends Application {
 
     private Button startButton;
     private ChoiceBox difficultyChoice;
     private SudokuBoard mainBoard = new SudokuBoard(new BacktrackingSudokuSolver());
-    private TextField fields[][] = new TextField[9][9];
+    private TextField[][] fields = new TextField[9][9];
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -61,13 +63,12 @@ public class SudokuApplication extends Application {
         //fields
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
-                fields[x][y] = (TextField) scene.lookup("#tf"+Integer.toString(x)+Integer.toString(y));
+                fields[x][y] = (TextField) scene.lookup("#tf" + Integer.toString(x) + Integer.toString(y));
             }
         }
     }
 
-    private Difficulty fetchDifficulty()
-    {
+    private Difficulty fetchDifficulty() {
         Difficulty difficulty = Difficulty.EASY; //default is easy
         String level = difficultyChoice.getValue().toString();
 
