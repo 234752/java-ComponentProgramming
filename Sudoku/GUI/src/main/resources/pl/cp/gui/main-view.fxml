@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
@@ -452,5 +453,13 @@
             </TextField>
          </children>
       </HBox>
+      <Line endX="146.5" endY="14.0" startX="146.49998474121094" startY="410.0" />
+      <Line endX="279.5" endY="14.0" startX="279.50006103515625" startY="410.0" />
+      <Line endX="15.0" endY="146.0" startX="411.00006103515625" startY="145.99998474121094" />
+      <Line endX="15.0" endY="278.0" startX="411.00006103515625" startY="278.0" />
+      <Line endX="15.0" endY="410.0" startX="15.0" startY="14.0" />
+      <Line endX="411.0" endY="14.0" startX="14.999984741210938" startY="13.999984741210938" />
+      <Line endX="15.0" endY="410.0" startX="411.00006103515625" startY="410.0" />
+      <Line endX="411.7071533203125" endY="14.70709228515625" startX="411.00006103515625" startY="410.0" />
    </children>
 </Pane>
