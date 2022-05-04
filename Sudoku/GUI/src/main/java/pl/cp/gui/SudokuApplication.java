@@ -37,7 +37,8 @@ public class SudokuApplication extends Application {
             public void handle(ActionEvent actionEvent) {
                 clearBoard();
                 mainBoard.solveGame();
-                String level = difficultyChoice.getValue().toString();
+                Difficulty difficulty = fetchDifficulty();
+                difficulty.removeFields(mainBoard);
                 printBoard();
             }
         });
