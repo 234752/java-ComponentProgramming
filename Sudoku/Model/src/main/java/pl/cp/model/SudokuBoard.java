@@ -1,6 +1,8 @@
 package pl.cp.model;
 
 import java.io.Serializable;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -11,6 +13,7 @@ import pl.cp.solver.SudokuSolver;
 public class SudokuBoard extends Observer implements Serializable, Cloneable {
 
     private SudokuField[][] fields = new SudokuField[9][9];
+    private transient SimpleStringProperty[][] fieldsProperties = new SimpleStringProperty[9][9];
     private SudokuSolver sudokuSolver;
 
     public SudokuBoard(SudokuSolver solver) {
@@ -31,6 +34,18 @@ public class SudokuBoard extends Observer implements Serializable, Cloneable {
                 newBoard.fields[x][y].setFieldValue(prototype.fields[x][y].getFieldValue());
             }
         }
+    }
+
+    public void initializeProperties() {
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+                fieldsProperties[x][y] = new SimpleStringProperty(this.get(x,y) == 0 ? "" : Integer.toString(this.get(x,y)));
+            }
+        }
+    }
+
+    public StringProperty getProperty(int x, int y) {
+        return fieldsProperties[x][y];
     }
 
     public void setObserverOfFields() {
@@ -58,6 +73,7 @@ public class SudokuBoard extends Observer implements Serializable, Cloneable {
 
     public void set(int x, int y, int value) {
         fields[x][y].setFieldValue(value);
+        fieldsProperties[x][y].set(value == 0 ? "" : Integer.toString(value));
     }
 
     private boolean checkBoard() {

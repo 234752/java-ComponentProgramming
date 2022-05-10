@@ -25,7 +25,7 @@ public class SudokuApplication extends Application {
     private ChoiceBox difficultyChoice;
     private SudokuBoard mainBoard = new SudokuBoard(new BacktrackingSudokuSolver());
     private TextField[][] fields = new TextField[9][9];
-    private SimpleStringProperty[][] fieldsProperties = new SimpleStringProperty[9][9];
+    //private SimpleStringProperty[][] fieldsProperties = new SimpleStringProperty[9][9];
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -64,11 +64,13 @@ public class SudokuApplication extends Application {
         difficultyChoice.getSelectionModel().select(0);
 
         //fields
+        mainBoard.initializeProperties();
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 fields[x][y] = (TextField) scene.lookup("#tf" + x + y);
-                fieldsProperties[x][y] = new SimpleStringProperty("");
-                Bindings.bindBidirectional(fields[x][y].textProperty(), fieldsProperties[x][y]);
+                //fieldsProperties[x][y] = new SimpleStringProperty("");
+                //Bindings.bindBidirectional(fields[x][y].textProperty(), fieldsProperties[x][y]);
+                Bindings.bindBidirectional(fields[x][y].textProperty(), mainBoard.getProperty(x,y));
             }
         }
     }
@@ -90,9 +92,9 @@ public class SudokuApplication extends Application {
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 if (mainBoard.get(x, y) != 0) {
-                    fieldsProperties[x][y].set(Integer.toString(mainBoard.get(x, y)));
+                    //fieldsProperties[x][y].set(Integer.toString(mainBoard.get(x, y)));
                 } else {
-                    fieldsProperties[x][y].set("");
+                    //fieldsProperties[x][y].set("");
                 }
             }
         }
