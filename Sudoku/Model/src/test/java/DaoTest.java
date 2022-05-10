@@ -17,7 +17,6 @@ public class DaoTest { //mvn clean install -U   is needed when output stream re-
         try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("src/test/java/sb.txt")) {
             dao.write(board1);
             board2 = dao.read();
-            dao.close();
         } catch (Exception exception) {
             System.out.println(exception);
         }

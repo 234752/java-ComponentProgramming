@@ -73,7 +73,9 @@ public class SudokuBoard extends Observer implements Serializable, Cloneable {
 
     public void set(int x, int y, int value) {
         fields[x][y].setFieldValue(value);
-        fieldsProperties[x][y].set(value == 0 ? "" : Integer.toString(value));
+        if (fieldsProperties != null && fieldsProperties[x][y] != null) {
+            fieldsProperties[x][y].set(value == 0 ? "" : Integer.toString(value));
+        }
     }
 
     private boolean checkBoard() {
