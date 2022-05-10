@@ -1,6 +1,7 @@
 package pl.cp.model;
 
 import java.io.Serializable;
+import javafx.beans.property.SimpleIntegerProperty;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -11,8 +12,12 @@ public class SudokuField extends Observable implements Serializable, Comparable<
 
     private int value;
 
+    private transient SimpleIntegerProperty valueProperty;
+
+
     public SudokuField() {
         value = 0;
+        valueProperty = new SimpleIntegerProperty(0);
     }
 
     public int getFieldValue() {
@@ -21,6 +26,7 @@ public class SudokuField extends Observable implements Serializable, Comparable<
 
     public void setFieldValue(int newValue) {
         value = newValue;
+        valueProperty = new SimpleIntegerProperty(newValue);
         if (observer != null) {
             notifyObserver();
         }
