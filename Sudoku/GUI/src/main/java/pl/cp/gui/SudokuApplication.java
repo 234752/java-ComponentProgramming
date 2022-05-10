@@ -13,7 +13,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
-import javafx.util.converter.IntegerStringConverter;
+import javafx.util.converter.DefaultStringConverter;
 import pl.cp.difficulty.Difficulty;
 import pl.cp.model.SudokuBoard;
 import pl.cp.solver.BacktrackingSudokuSolver;
@@ -72,11 +72,10 @@ public class SudokuApplication extends Application {
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 fields[x][y] = (TextField) scene.lookup("#tf" + x + y);
-                fields[x][y].textProperty().set("");
                 Bindings.bindBidirectional(fields[x][y].textProperty(), mainBoard.getProperty(x,y));
 
                 //validation of text fields - integer only
-                fields[x][y].setTextFormatter(new TextFormatter<Integer>(new IntegerStringConverter(), 0, integerFilter));
+                fields[x][y].setTextFormatter(new TextFormatter<String>(new DefaultStringConverter(),"",  integerFilter));
             }
         }
     }
