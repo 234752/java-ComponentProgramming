@@ -1,8 +1,6 @@
 package pl.cp.model;
 
 import java.io.Serializable;
-
-import javafx.beans.property.IntegerProperty;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -52,10 +50,6 @@ public class SudokuBoard extends Observer implements Serializable, Cloneable {
                 System.out.println("invalid value of field inserted");
             }
         }
-    }
-
-    public IntegerProperty getProperty(int x, int y) {
-        return fields[x][y].getValueProperty();
     }
 
     public int get(int x, int y) {
