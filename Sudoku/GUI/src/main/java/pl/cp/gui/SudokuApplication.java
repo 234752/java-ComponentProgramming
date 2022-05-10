@@ -47,15 +47,11 @@ public class SudokuApplication extends Application {
 
         //button
         startButton = (Button) scene.lookup("#b1");
-        startButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                clearBoard();
-                mainBoard.solveGame();
-                Difficulty difficulty = fetchDifficulty();
-                difficulty.removeFields(mainBoard);
-                printBoard();
-            }
+        startButton.setOnAction(actionEvent -> {
+            clearBoard();
+            mainBoard.solveGame();
+            Difficulty difficulty = fetchDifficulty();
+            difficulty.removeFields(mainBoard);
         });
 
         //difficulty box
@@ -68,8 +64,6 @@ public class SudokuApplication extends Application {
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 fields[x][y] = (TextField) scene.lookup("#tf" + x + y);
-                //fieldsProperties[x][y] = new SimpleStringProperty("");
-                //Bindings.bindBidirectional(fields[x][y].textProperty(), fieldsProperties[x][y]);
                 Bindings.bindBidirectional(fields[x][y].textProperty(), mainBoard.getProperty(x,y));
             }
         }
@@ -86,18 +80,6 @@ public class SudokuApplication extends Application {
         }
 
         return difficulty;
-    }
-
-    private void printBoard() {
-        for (int x = 0; x < 9; x++) {
-            for (int y = 0; y < 9; y++) {
-                if (mainBoard.get(x, y) != 0) {
-                    //fieldsProperties[x][y].set(Integer.toString(mainBoard.get(x, y)));
-                } else {
-                    //fieldsProperties[x][y].set("");
-                }
-            }
-        }
     }
 
     private void clearBoard() {
