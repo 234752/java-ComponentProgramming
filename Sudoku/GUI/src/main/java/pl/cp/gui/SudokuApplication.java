@@ -2,6 +2,8 @@ package pl.cp.gui;
 
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,6 +25,7 @@ public class SudokuApplication extends Application {
     private ChoiceBox difficultyChoice;
     private SudokuBoard mainBoard = new SudokuBoard(new BacktrackingSudokuSolver());
     private TextField[][] fields = new TextField[9][9];
+    private SimpleStringProperty[][] fieldsProperties = new SimpleStringProperty[9][9];
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -63,7 +66,9 @@ public class SudokuApplication extends Application {
         //fields
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
-                fields[x][y] = (TextField) scene.lookup("#tf" + Integer.toString(x) + Integer.toString(y));
+                fields[x][y] = (TextField) scene.lookup("#tf" + x + y);
+                fieldsProperties[x][y] = new SimpleStringProperty("");
+                Bindings.bindBidirectional(fields[x][y].textProperty(), fieldsProperties[x][y]);
             }
         }
     }
@@ -85,9 +90,9 @@ public class SudokuApplication extends Application {
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 if (mainBoard.get(x, y) != 0) {
-                    fields[x][y].setText(Integer.toString(mainBoard.get(x, y)));
+                    fieldsProperties[x][y].set(Integer.toString(mainBoard.get(x, y)));
                 } else {
-                    fields[x][y].setText("");
+                    fieldsProperties[x][y].set("");
                 }
             }
         }
