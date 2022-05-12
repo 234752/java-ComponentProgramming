@@ -3,6 +3,8 @@ package pl.cp.model;
 import java.io.Serializable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -36,11 +38,20 @@ public class SudokuBoard extends Observer implements Serializable, Cloneable {
         }
     }
 
+    private void addListener(int x, int y) {
+        fieldsProperties[x][y].addListener((observableValue, oldValue, newValue)
+                -> {
+            if(newValue.matches("[1-9]")) set(x, y, Integer.parseInt(fieldsProperties[x][y].getValue()));
+            if(newValue.matches("")) set(x, y, 0);
+        });
+    }
+
     public void initializeProperties() {
         fieldsProperties = new SimpleStringProperty[9][9];
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 fieldsProperties[x][y] = new SimpleStringProperty(this.get(x,y) == 0 ? "" : Integer.toString(this.get(x,y)));
+                addListener(x, y);
             }
         }
     }
