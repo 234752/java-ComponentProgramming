@@ -1,6 +1,7 @@
 package pl.cp.gui;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 
@@ -93,7 +94,10 @@ public class SudokuApplication extends Application {
 
         //difficulty box
         difficultyChoice = (ChoiceBox) scene.lookup("#cb1");
-        difficultyChoice.setItems(FXCollections.observableArrayList("Easy","Medium","Hard"));
+        difficultyChoice.setItems(FXCollections.observableArrayList(
+                resourceBundle.getString("difficulty0"),
+                resourceBundle.getString("difficulty1"),
+                resourceBundle.getString("difficulty2")));
         difficultyChoice.getSelectionModel().select(0);
 
         //fields
@@ -121,9 +125,9 @@ public class SudokuApplication extends Application {
         Difficulty difficulty = Difficulty.EASY; //default is easy
         String level = difficultyChoice.getValue().toString();
 
-        if (level == "Medium") {
+        if (Objects.equals(level, resourceBundle.getString("difficulty1"))) {
             difficulty = Difficulty.MEDIUM;
-        } else if (level == "Hard") {
+        } else if (Objects.equals(level, resourceBundle.getString("difficulty2"))) {
             difficulty = Difficulty.HARD;
         }
 

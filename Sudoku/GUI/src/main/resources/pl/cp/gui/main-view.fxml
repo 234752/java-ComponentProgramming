@@ -10,7 +10,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="525.0" style="-fx-background-color: #008080;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="startButton" layoutX="424.0" layoutY="24.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #00FFFF;" text="START" />
+      <Button fx:id="startButton" layoutX="424.0" layoutY="24.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #00FFFF;" />
       <ChoiceBox fx:id="cb1" layoutX="424.0" layoutY="68.0" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #00FFFF;" />
       <HBox alignment="TOP_CENTER" layoutX="15.0" layoutY="14.0" prefHeight="44.0" prefWidth="396.0">
       <children>
@@ -461,7 +461,7 @@
       <Line endX="411.0" endY="14.0" startX="14.999984741210938" startY="13.999984741210938" />
       <Line endX="15.0" endY="410.0" startX="411.00006103515625" startY="410.0" />
       <Line endX="411.7071533203125" endY="14.70709228515625" startX="411.00006103515625" startY="410.0" />
-      <Button fx:id="saveButton" layoutX="424.0" layoutY="156.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #00FFFF;" text="SAVE" />
-      <Button fx:id="loadButton" layoutX="424.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #00FFFF;" text="LOAD" />
+      <Button fx:id="saveButton" layoutX="424.0" layoutY="156.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #00FFFF;" />
+      <Button fx:id="loadButton" layoutX="424.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #00FFFF;" />
    </children>
 </Pane>
