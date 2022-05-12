@@ -1,6 +1,7 @@
 package pl.cp.gui;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 
 import javafx.application.Application;
@@ -25,6 +26,8 @@ import pl.cp.solver.BacktrackingSudokuSolver;
 
 public class SudokuApplication extends Application {
 
+    private ResourceBundle resourceBundle;
+
     private Button startButton;
     private Button saveButton;
     private Button loadButton;
@@ -44,7 +47,8 @@ public class SudokuApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(SudokuApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Sudoku");
+        resourceBundle = ResourceBundle.getBundle("Language_EN");
+        stage.setTitle(resourceBundle.getString("title"));
         stage.setScene(scene);
         stage.show();
 
@@ -60,6 +64,7 @@ public class SudokuApplication extends Application {
 
         //button
         startButton = (Button) scene.lookup("#startButton");
+        startButton.setText(resourceBundle.getString("startButtonLabel"));
         startButton.setOnAction(actionEvent -> {
             clearBoard();
             mainBoard.solveGame();
@@ -67,6 +72,7 @@ public class SudokuApplication extends Application {
             difficulty.removeFields(mainBoard);
         });
         saveButton = (Button) scene.lookup("#saveButton");
+        saveButton.setText(resourceBundle.getString("saveButtonLabel"));
         saveButton.setOnAction(actionEvent -> {
             try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("pog.txt")) {
                 dao.write(mainBoard);
@@ -74,8 +80,9 @@ public class SudokuApplication extends Application {
                 System.out.println(exception);
             }
         });
-        saveButton = (Button) scene.lookup("#loadButton");
-        saveButton.setOnAction(actionEvent -> {
+        loadButton = (Button) scene.lookup("#loadButton");
+        loadButton.setText(resourceBundle.getString("loadButtonLabel"));
+        loadButton.setOnAction(actionEvent -> {
             try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("pog.txt")) {
                 mainBoard = dao.read();
                 bindBoardProperties();
