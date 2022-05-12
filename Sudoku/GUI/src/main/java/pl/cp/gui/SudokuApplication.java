@@ -14,6 +14,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
 import javafx.util.converter.DefaultStringConverter;
+import pl.cp.dao.Dao;
+import pl.cp.dao.FileSudokuBoardDao;
+import pl.cp.dao.SudokuBoardDaoFactory;
 import pl.cp.difficulty.Difficulty;
 import pl.cp.model.SudokuBoard;
 import pl.cp.solver.BacktrackingSudokuSolver;
@@ -23,6 +26,7 @@ import pl.cp.solver.BacktrackingSudokuSolver;
 public class SudokuApplication extends Application {
 
     private Button startButton;
+    private Button saveButton;
     private ChoiceBox difficultyChoice;
     private SudokuBoard mainBoard = new SudokuBoard(new BacktrackingSudokuSolver());
     private TextField[][] fields = new TextField[9][9];
@@ -54,12 +58,20 @@ public class SudokuApplication extends Application {
     private void initializeBoardElements(Scene scene) {
 
         //button
-        startButton = (Button) scene.lookup("#b1");
+        startButton = (Button) scene.lookup("#startButton");
         startButton.setOnAction(actionEvent -> {
             clearBoard();
             mainBoard.solveGame();
             Difficulty difficulty = fetchDifficulty();
             difficulty.removeFields(mainBoard);
+        });
+        saveButton = (Button) scene.lookup("#saveButton");
+        saveButton.setOnAction(actionEvent -> {
+            try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("src/test/java/sb.txt")) {
+                dao.write(mainBoard);
+            } catch (Exception exception) {
+                System.out.println(exception);
+            }
         });
 
         //difficulty box
