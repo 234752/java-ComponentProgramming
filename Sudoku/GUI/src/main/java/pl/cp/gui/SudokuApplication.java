@@ -27,6 +27,7 @@ public class SudokuApplication extends Application {
 
     private Button startButton;
     private Button saveButton;
+    private Button loadButton;
     private ChoiceBox difficultyChoice;
     private SudokuBoard mainBoard = new SudokuBoard(new BacktrackingSudokuSolver());
     private TextField[][] fields = new TextField[9][9];
@@ -69,6 +70,14 @@ public class SudokuApplication extends Application {
         saveButton.setOnAction(actionEvent -> {
             try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("src/test/java/sb.txt")) {
                 dao.write(mainBoard);
+            } catch (Exception exception) {
+                System.out.println(exception);
+            }
+        });
+        saveButton = (Button) scene.lookup("#loadButton");
+        saveButton.setOnAction(actionEvent -> {
+            try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("src/test/java/sb.txt")) {
+                mainBoard = dao.read();
             } catch (Exception exception) {
                 System.out.println(exception);
             }
