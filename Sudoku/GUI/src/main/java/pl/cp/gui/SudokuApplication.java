@@ -71,6 +71,7 @@ public class SudokuApplication extends Application {
             mainBoard.solveGame();
             Difficulty difficulty = fetchDifficulty();
             difficulty.removeFields(mainBoard);
+            blockFields();
         });
         saveButton = (Button) scene.lookup("#saveButton");
         saveButton.setText(resourceBundle.getString("saveButtonLabel"));
@@ -138,6 +139,18 @@ public class SudokuApplication extends Application {
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 mainBoard.set(x, y, 0);
+            }
+        }
+    }
+
+    private void blockFields() {
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+                if (fields[x][y].textProperty().get().matches("")) {
+                    fields[x][y].setDisable(false);
+                } else {
+                    fields[x][y].setDisable(true);
+                }
             }
         }
     }
