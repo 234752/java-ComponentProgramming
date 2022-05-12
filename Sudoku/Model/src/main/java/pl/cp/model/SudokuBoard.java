@@ -13,7 +13,7 @@ import pl.cp.solver.SudokuSolver;
 public class SudokuBoard extends Observer implements Serializable, Cloneable {
 
     private SudokuField[][] fields = new SudokuField[9][9];
-    private transient SimpleStringProperty[][] fieldsProperties = new SimpleStringProperty[9][9];
+    private transient SimpleStringProperty[][] fieldsProperties;
     private SudokuSolver sudokuSolver;
 
     public SudokuBoard(SudokuSolver solver) {
@@ -37,6 +37,7 @@ public class SudokuBoard extends Observer implements Serializable, Cloneable {
     }
 
     public void initializeProperties() {
+        fieldsProperties = new SimpleStringProperty[9][9];
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 fieldsProperties[x][y] = new SimpleStringProperty(this.get(x,y) == 0 ? "" : Integer.toString(this.get(x,y)));

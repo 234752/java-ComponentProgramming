@@ -68,7 +68,7 @@ public class SudokuApplication extends Application {
         });
         saveButton = (Button) scene.lookup("#saveButton");
         saveButton.setOnAction(actionEvent -> {
-            try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("src/test/java/sb.txt")) {
+            try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("pog.txt")) {
                 dao.write(mainBoard);
             } catch (Exception exception) {
                 System.out.println(exception);
@@ -76,8 +76,9 @@ public class SudokuApplication extends Application {
         });
         saveButton = (Button) scene.lookup("#loadButton");
         saveButton.setOnAction(actionEvent -> {
-            try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("src/test/java/sb.txt")) {
+            try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("pog.txt")) {
                 mainBoard = dao.read();
+                bindBoardProperties();
             } catch (Exception exception) {
                 System.out.println(exception);
             }
@@ -89,14 +90,22 @@ public class SudokuApplication extends Application {
         difficultyChoice.getSelectionModel().select(0);
 
         //fields
-        mainBoard.initializeProperties();
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 fields[x][y] = (TextField) scene.lookup("#tf" + x + y);
-                Bindings.bindBidirectional(fields[x][y].textProperty(), mainBoard.getProperty(x,y));
 
                 //validation of text fields - integer only
                 fields[x][y].setTextFormatter(new TextFormatter<String>(new DefaultStringConverter(),"",  integerFilter));
+            }
+        }
+        bindBoardProperties();
+    }
+
+    private void bindBoardProperties() {
+        mainBoard.initializeProperties();
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+                Bindings.bindBidirectional(fields[x][y].textProperty(), mainBoard.getProperty(x,y));
             }
         }
     }
