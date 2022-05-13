@@ -10,10 +10,7 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.converter.DefaultStringConverter;
 import pl.cp.dao.Dao;
@@ -34,6 +31,8 @@ public class SudokuApplication extends Application {
     private Button loadButton;
     private Button englishButton;
     private Button polishButton;
+    private Button checkButton;
+    private Label checkLabel;
     private ChoiceBox difficultyChoice;
     private SudokuBoard mainBoard = new SudokuBoard(new BacktrackingSudokuSolver());
     private TextField[][] fields = new TextField[9][9];
@@ -64,7 +63,10 @@ public class SudokuApplication extends Application {
 
     private void initializeBoardElements(Scene scene) {
 
-        //button
+        //label with results
+        checkLabel = (Label) scene.lookup("#checkLabel");
+
+        //buttons
         startButton = (Button) scene.lookup("#startButton");
         startButton.setOnAction(actionEvent -> {
             clearBoard();
@@ -100,6 +102,14 @@ public class SudokuApplication extends Application {
             resourceBundle = ResourceBundle.getBundle("Language_PL");
             updateLanguage();
         });
+        checkButton = (Button) scene.lookup("#checkButton");
+        checkButton.setOnAction(actionEvent -> {
+            if (mainBoard.checkBoard()) {
+                checkLabel.setText(resourceBundle.getString("resultPositive"));
+            } else {
+                checkLabel.setText(resourceBundle.getString("resultNegative"));
+            }
+        });
 
         //difficulty box
         difficultyChoice = (ChoiceBox) scene.lookup("#cb1");
@@ -115,7 +125,7 @@ public class SudokuApplication extends Application {
         }
         bindBoardProperties();
         updateLanguage();
-        difficultyChoice.getSelectionModel().select(0);
+
     }
 
     private void bindBoardProperties() {
@@ -166,9 +176,12 @@ public class SudokuApplication extends Application {
         loadButton.setText(resourceBundle.getString("loadButtonLabel"));
         englishButton.setText(resourceBundle.getString("englishButtonLabel"));
         polishButton.setText(resourceBundle.getString("polishButtonLabel"));
+        checkButton.setText(resourceBundle.getString("checkButtonLabel"));
+        checkLabel.setText("");
         difficultyChoice.setItems(FXCollections.observableArrayList(
                 resourceBundle.getString("difficulty0"),
                 resourceBundle.getString("difficulty1"),
                 resourceBundle.getString("difficulty2")));
+        difficultyChoice.getSelectionModel().select(0);
     }
 }

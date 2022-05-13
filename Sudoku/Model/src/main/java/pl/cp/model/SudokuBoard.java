@@ -90,7 +90,7 @@ public class SudokuBoard extends Observer implements Serializable, Cloneable {
         }
     }
 
-    private boolean checkBoard() {
+    public boolean checkBoard() {
 
         for (int col = 0; col < 9; col++) {
             if (!getColumn(col).verify()) {
