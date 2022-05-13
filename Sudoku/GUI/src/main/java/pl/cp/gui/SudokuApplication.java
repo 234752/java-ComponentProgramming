@@ -93,6 +93,7 @@ public class SudokuApplication extends Application {
             } catch (Exception exception) {
                 System.out.println(exception);
             }
+            blockFields();
         });
         englishButton = (Button) scene.lookup("#englishButton");
         englishButton.setOnAction(actionEvent -> {
@@ -168,10 +169,10 @@ public class SudokuApplication extends Application {
     private void blockFields() {
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
-                if (fields[x][y].textProperty().get().matches("")) {
-                    fields[x][y].setDisable(false);
-                } else {
+                if (mainBoard.isLocked(x, y)) {
                     fields[x][y].setDisable(true);
+                } else {
+                    fields[x][y].setDisable(false);
                 }
             }
         }
