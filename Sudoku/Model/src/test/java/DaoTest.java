@@ -14,7 +14,7 @@ public class DaoTest { //mvn clean install -U   is needed when output stream re-
         SudokuBoard board2 = new SudokuBoard(new BacktrackingSudokuSolver());
         board1.set(0,0,7);
 
-        try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("src/test/java/sb.txt")) {
+        try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("target/boardSavedFromDaoTest.txt")) {
             dao.write(board1);
             board2 = dao.read();
         } catch (Exception exception) {

@@ -79,7 +79,7 @@ public class SudokuApplication extends Application {
         });
         saveButton = (Button) scene.lookup("#saveButton");
         saveButton.setOnAction(actionEvent -> {
-            try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("pog.txt")) {
+            try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("target/boardSavedFromGUI.txt")) {
                 dao.write(mainBoard);
             } catch (Exception exception) {
                 System.out.println(exception);
@@ -87,7 +87,7 @@ public class SudokuApplication extends Application {
         });
         loadButton = (Button) scene.lookup("#loadButton");
         loadButton.setOnAction(actionEvent -> {
-            try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("pog.txt")) {
+            try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("target/boardSavedFromGUI.txt")) {
                 mainBoard = dao.read();
                 bindBoardProperties();
             } catch (Exception exception) {
