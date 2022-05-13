@@ -7,6 +7,8 @@ import java.util.function.UnaryOperator;
 
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -118,6 +120,12 @@ public class SudokuApplication extends Application {
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 fields[x][y] = (TextField) scene.lookup("#tf" + x + y);
+                fields[x][y].textProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                        checkLabel.setText("");
+                    }
+                });
 
                 //validation of text fields - integer only
                 fields[x][y].setTextFormatter(new TextFormatter<String>(new DefaultStringConverter(),"",  integerFilter));
@@ -125,7 +133,6 @@ public class SudokuApplication extends Application {
         }
         bindBoardProperties();
         updateLanguage();
-
     }
 
     private void bindBoardProperties() {
