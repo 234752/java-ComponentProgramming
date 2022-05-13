@@ -49,7 +49,6 @@ public class SudokuApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(SudokuApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         resourceBundle = ResourceBundle.getBundle("Language_EN");
-        stage.setTitle(resourceBundle.getString("title"));
         stage.setScene(scene);
         stage.show();
 
@@ -65,7 +64,6 @@ public class SudokuApplication extends Application {
 
         //button
         startButton = (Button) scene.lookup("#startButton");
-        startButton.setText(resourceBundle.getString("startButtonLabel"));
         startButton.setOnAction(actionEvent -> {
             clearBoard();
             mainBoard.solveGame();
@@ -74,7 +72,6 @@ public class SudokuApplication extends Application {
             blockFields();
         });
         saveButton = (Button) scene.lookup("#saveButton");
-        saveButton.setText(resourceBundle.getString("saveButtonLabel"));
         saveButton.setOnAction(actionEvent -> {
             try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("pog.txt")) {
                 dao.write(mainBoard);
@@ -83,7 +80,6 @@ public class SudokuApplication extends Application {
             }
         });
         loadButton = (Button) scene.lookup("#loadButton");
-        loadButton.setText(resourceBundle.getString("loadButtonLabel"));
         loadButton.setOnAction(actionEvent -> {
             try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("pog.txt")) {
                 mainBoard = dao.read();
@@ -95,11 +91,6 @@ public class SudokuApplication extends Application {
 
         //difficulty box
         difficultyChoice = (ChoiceBox) scene.lookup("#cb1");
-        difficultyChoice.setItems(FXCollections.observableArrayList(
-                resourceBundle.getString("difficulty0"),
-                resourceBundle.getString("difficulty1"),
-                resourceBundle.getString("difficulty2")));
-        difficultyChoice.getSelectionModel().select(0);
 
         //fields
         for (int x = 0; x < 9; x++) {
@@ -111,6 +102,7 @@ public class SudokuApplication extends Application {
             }
         }
         bindBoardProperties();
+        updateLanguage();
     }
 
     private void bindBoardProperties() {
@@ -153,5 +145,16 @@ public class SudokuApplication extends Application {
                 }
             }
         }
+    }
+
+    private void updateLanguage() {
+        startButton.setText(resourceBundle.getString("startButtonLabel"));
+        saveButton.setText(resourceBundle.getString("saveButtonLabel"));
+        loadButton.setText(resourceBundle.getString("loadButtonLabel"));
+        difficultyChoice.setItems(FXCollections.observableArrayList(
+                resourceBundle.getString("difficulty0"),
+                resourceBundle.getString("difficulty1"),
+                resourceBundle.getString("difficulty2")));
+        difficultyChoice.getSelectionModel().select(0);
     }
 }
