@@ -463,5 +463,7 @@
       <Line endX="411.7071533203125" endY="14.70709228515625" startX="411.00006103515625" startY="410.0" />
       <Button fx:id="saveButton" layoutX="424.0" layoutY="156.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #00FFFF;" />
       <Button fx:id="loadButton" layoutX="424.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #00FFFF;" />
+      <Button fx:id="englishButton" layoutX="424.0" layoutY="332.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #00FFFF;" />
+      <Button fx:id="polishButton" layoutX="424.0" layoutY="376.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #00FFFF;" />
    </children>
 </Pane>

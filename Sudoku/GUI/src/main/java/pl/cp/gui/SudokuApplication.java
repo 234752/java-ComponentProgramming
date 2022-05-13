@@ -32,6 +32,8 @@ public class SudokuApplication extends Application {
     private Button startButton;
     private Button saveButton;
     private Button loadButton;
+    private Button englishButton;
+    private Button polishButton;
     private ChoiceBox difficultyChoice;
     private SudokuBoard mainBoard = new SudokuBoard(new BacktrackingSudokuSolver());
     private TextField[][] fields = new TextField[9][9];
@@ -88,6 +90,16 @@ public class SudokuApplication extends Application {
                 System.out.println(exception);
             }
         });
+        englishButton = (Button) scene.lookup("#englishButton");
+        englishButton.setOnAction(actionEvent -> {
+            resourceBundle = ResourceBundle.getBundle("Language_EN");
+            updateLanguage();
+        });
+        polishButton = (Button) scene.lookup("#polishButton");
+        polishButton.setOnAction(actionEvent -> {
+            resourceBundle = ResourceBundle.getBundle("Language_PL");
+            updateLanguage();
+        });
 
         //difficulty box
         difficultyChoice = (ChoiceBox) scene.lookup("#cb1");
@@ -103,6 +115,7 @@ public class SudokuApplication extends Application {
         }
         bindBoardProperties();
         updateLanguage();
+        difficultyChoice.getSelectionModel().select(0);
     }
 
     private void bindBoardProperties() {
@@ -151,10 +164,11 @@ public class SudokuApplication extends Application {
         startButton.setText(resourceBundle.getString("startButtonLabel"));
         saveButton.setText(resourceBundle.getString("saveButtonLabel"));
         loadButton.setText(resourceBundle.getString("loadButtonLabel"));
+        englishButton.setText(resourceBundle.getString("englishButtonLabel"));
+        polishButton.setText(resourceBundle.getString("polishButtonLabel"));
         difficultyChoice.setItems(FXCollections.observableArrayList(
                 resourceBundle.getString("difficulty0"),
                 resourceBundle.getString("difficulty1"),
                 resourceBundle.getString("difficulty2")));
-        difficultyChoice.getSelectionModel().select(0);
     }
 }
