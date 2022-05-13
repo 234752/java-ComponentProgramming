@@ -34,7 +34,15 @@ public enum Difficulty {
                     break;
                 }
             }
-
+        }
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (board.get(row, col) != 0) {
+                    board.lockField(row, col);
+                } else {
+                    board.unlockField(row, col);
+                }
+            }
         }
     }
 

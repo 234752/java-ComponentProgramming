@@ -17,6 +17,7 @@ public class SudokuBoard extends Observer implements Serializable, Cloneable {
     private SudokuField[][] fields = new SudokuField[9][9];
     private transient SimpleStringProperty[][] fieldsProperties;
     private SudokuSolver sudokuSolver;
+    private boolean[][] lockedFields = new boolean[9][9];
 
     public SudokuBoard(SudokuSolver solver) {
         sudokuSolver = solver;
@@ -58,6 +59,18 @@ public class SudokuBoard extends Observer implements Serializable, Cloneable {
 
     public StringProperty getProperty(int x, int y) {
         return fieldsProperties[x][y];
+    }
+
+    public void lockField(int x, int y) {
+        lockedFields[x][y] = true;
+    }
+
+    public void unlockField(int x, int y) {
+        lockedFields[x][y] = false;
+    }
+
+    public boolean isLocked(int x, int y) {
+        return lockedFields[x][y];
     }
 
     public void setObserverOfFields() {
