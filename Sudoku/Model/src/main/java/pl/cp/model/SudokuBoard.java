@@ -42,8 +42,12 @@ public class SudokuBoard extends Observer implements Serializable, Cloneable {
     private void addListener(int x, int y) {
         fieldsProperties[x][y].addListener((observableValue, oldValue, newValue)
                 -> {
-            if(newValue.matches("[1-9]")) set(x, y, Integer.parseInt(fieldsProperties[x][y].getValue()));
-            if(newValue.matches("")) set(x, y, 0);
+            if (newValue.matches("[1-9]")) {
+                set(x, y, Integer.parseInt(fieldsProperties[x][y].getValue()));
+            }
+            if (newValue.matches("")) {
+                set(x, y, 0);
+            }
         });
     }
 
