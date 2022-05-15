@@ -52,7 +52,10 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <configuration>
-                    <excludes>pl/cp/gui/**</excludes>                       <!--EXCLUDE-->
+                    <excludes>
+                        <exclude>pl/cp/author/**</exclude>                    <!--EXCLUDE-->
+                        <exclude>pl/cp/gui/**</exclude>                       <!--EXCLUDE-->
+                    </excludes>
                 </configuration>
                 <reportSets>
                     <reportSet>
@@ -122,7 +125,10 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.7</version>
                 <configuration>
-                    <excludes>pl/cp/gui/**</excludes>                       <!--EXCLUDE-->
+                    <excludes>
+                        <exclude>pl/cp/author/**</exclude>                    <!--EXCLUDE-->
+                        <exclude>pl/cp/gui/**</exclude>                       <!--EXCLUDE-->
+                    </excludes>
                 </configuration>
                 <executions>
                     <execution>
