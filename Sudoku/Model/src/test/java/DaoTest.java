@@ -4,9 +4,14 @@ import pl.cp.dao.SudokuBoardDaoFactory;
 import pl.cp.model.SudokuBoard;
 import pl.cp.solver.BacktrackingSudokuSolver;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DaoTest { //mvn clean install -U   is needed when output stream re-throws old exception
+
+
 
     @Test
     public void testReadWrite() {
@@ -34,7 +39,6 @@ public class DaoTest { //mvn clean install -U   is needed when output stream re-
         try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("src/test/java/read.txt")) {
             board1 = dao.read();
         } catch (Exception exception) {
-            System.out.println(exception);
         }
     }
 
@@ -45,7 +49,6 @@ public class DaoTest { //mvn clean install -U   is needed when output stream re-
         try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("src/test/java/write")) {
             dao.write(board1);
         } catch (Exception exception) {
-            System.out.println(exception);
         }
     }
 }

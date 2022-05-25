@@ -4,8 +4,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard> {
+
+    private static Logger logger = Logger.getLogger(FileSudokuBoardDao.class.getName());
 
     private String filename;
 
@@ -22,7 +26,7 @@ public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard> {
             objectInput.close();
             return board;
         } catch (Exception ex) {
-            System.out.println(ex);
+            logger.log(Level.WARNING, "read error");
             return null;
         }
     }
@@ -32,15 +36,13 @@ public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard> {
         try (FileOutputStream fileOutput = new FileOutputStream(filename);
              ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput)) {
             objectOutput.writeObject(obj);
-            fileOutput.close();
-            objectOutput.close();
         } catch (Exception ex) {
-            System.out.println(ex);
+            logger.log(Level.WARNING, "write error");
         }
     }
 
     @Override
     public void close() throws Exception {
-        System.out.println("Closed pl.cp.dao.FileSudokuBoardDao");
+        logger.log(Level.INFO, "closed");
     }
 }
