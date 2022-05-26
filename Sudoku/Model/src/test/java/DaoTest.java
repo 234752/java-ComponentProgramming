@@ -1,12 +1,9 @@
 import org.junit.jupiter.api.Test;
 import pl.cp.dao.Dao;
 import pl.cp.dao.SudokuBoardDaoFactory;
+import pl.cp.exception.DaoException;
 import pl.cp.model.SudokuBoard;
 import pl.cp.solver.BacktrackingSudokuSolver;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DaoTest { //mvn clean install -U   is needed when output stream re-throws old exception
@@ -23,7 +20,7 @@ public class DaoTest { //mvn clean install -U   is needed when output stream re-
             dao.write(board1);
             board2 = dao.read();
         } catch (Exception exception) {
-            System.out.println(exception);
+
         }
 
         assertTrue(board1.equals(board2));
