@@ -2,6 +2,7 @@ module Model {
     requires org.apache.commons.lang3;
     requires javafx.base;
     requires java.logging;
+    requires slf4j.api;
 
     exports pl.cp.model;
     exports pl.cp.observe;

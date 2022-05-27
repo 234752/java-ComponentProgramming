@@ -2,7 +2,8 @@ package pl.cp.model;
 
 import java.io.Serializable;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -16,7 +17,7 @@ import pl.cp.solver.SudokuSolver;
 
 public class SudokuBoard extends Observer implements Serializable, Cloneable {
 
-    private static Logger logger = Logger.getLogger(SudokuBoard.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(SudokuBoard.class.getName());
 
     private SudokuField[][] fields = new SudokuField[9][9];
     private transient SimpleStringProperty[][] fieldsProperties;
@@ -93,9 +94,9 @@ public class SudokuBoard extends Observer implements Serializable, Cloneable {
     public void update() {
         if (observerIsTurnedOn) {
             if (checkBoard()) {
-                logger.log(Level.INFO, "valid value of field inserted");
+                logger.info( "valid value of field inserted");
             } else {
-                logger.log(Level.INFO, "invalid value of field inserted");
+                logger.info( "invalid value of field inserted");
             }
         }
     }
