@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.cp.dao.Dao;
 import pl.cp.dao.SudokuBoardDaoFactory;
 import pl.cp.exception.DaoException;
@@ -8,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DaoTest { //mvn clean install -U   is needed when output stream re-throws old exception
 
-
+    private static Logger logger = LoggerFactory.getLogger(SudokuBoard.class.getName());
 
     @Test
     public void testReadWrite() {
@@ -20,7 +22,7 @@ public class DaoTest { //mvn clean install -U   is needed when output stream re-
             dao.write(board1);
             board2 = dao.read();
         } catch (Exception exception) {
-
+            logger.info(exception.toString());
         }
 
         assertTrue(board1.equals(board2));
@@ -36,6 +38,7 @@ public class DaoTest { //mvn clean install -U   is needed when output stream re-
         try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("src/test/java/read.txt")) {
             board1 = dao.read();
         } catch (Exception exception) {
+            logger.info(exception.toString());
         }
     }
 
@@ -46,7 +49,7 @@ public class DaoTest { //mvn clean install -U   is needed when output stream re-
         try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("src/test/java/write")) {
             dao.write(board1);
         } catch (Exception exception) {
-
+            logger.info(exception.toString());
         }
     }
 }
