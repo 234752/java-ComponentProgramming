@@ -1,17 +1,19 @@
 package pl.cp.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.cp.exception.DaoException;
+import pl.cp.model.SudokuBoard;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard> {
 
-    private static Logger logger = Logger.getLogger(FileSudokuBoardDao.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(pl.cp.model.SudokuBoard.class.getName());
 
     private String filename;
 
@@ -28,7 +30,7 @@ public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard> {
             objectInput.close();
             return board;
         } catch (Exception ex) {
-            logger.log(Level.WARNING, "read error");
+            logger.info("read error");
             throw new DaoException(ex.getMessage());
         }
     }
@@ -39,13 +41,13 @@ public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard> {
              ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput)) {
             objectOutput.writeObject(obj);
         } catch (Exception ex) {
-            logger.log(Level.WARNING, "write error");
+            logger.info("write error");
             throw new DaoException(ex.getMessage());
         }
     }
 
     @Override
     public void close() throws Exception {
-        logger.log(Level.INFO, "closed");
+        logger.info("closed");
     }
 }
