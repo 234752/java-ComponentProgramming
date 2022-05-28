@@ -9,11 +9,14 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 
 public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard> {
 
     private static Logger logger = LoggerFactory.getLogger(pl.cp.model.SudokuBoard.class.getName());
+
+    private ResourceBundle bundle = ResourceBundle.getBundle("Exceptions_EN");
 
     private String filename;
 
@@ -30,8 +33,8 @@ public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard> {
             objectInput.close();
             return board;
         } catch (Exception ex) {
-            logger.info("read error");
-            throw new DaoException(ex.getMessage());
+            logger.info("daoReadError");
+            throw  DaoException.getDaoException(bundle, "daoReadError");
         }
     }
 
@@ -41,13 +44,13 @@ public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard> {
              ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput)) {
             objectOutput.writeObject(obj);
         } catch (Exception ex) {
-            logger.info("write error");
-            throw new DaoException(ex.getMessage());
+            logger.info("daoWriteError");
+            throw  DaoException.getDaoException(bundle, "daoWriteError");
         }
     }
 
     @Override
     public void close() throws Exception {
-        logger.info("closed");
+        logger.info("daoClosed");
     }
 }
