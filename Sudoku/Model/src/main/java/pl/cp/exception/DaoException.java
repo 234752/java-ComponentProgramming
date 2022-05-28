@@ -8,7 +8,7 @@ public class DaoException extends Exception {
         return new DaoException(bundle.getString(resourceBundleKey));
     }
 
-    public DaoException(String message) {
+    private DaoException(String message) {
         super(message);
     }
 }
