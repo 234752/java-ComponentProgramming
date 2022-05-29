@@ -1,16 +1,13 @@
 package pl.cp.dao;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import pl.cp.exception.DaoException;
-import pl.cp.model.SudokuBoard;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import pl.cp.exception.DaoException;
 
 public class FileSudokuBoardDao<SudokuBoard> implements Dao<SudokuBoard> {
 
