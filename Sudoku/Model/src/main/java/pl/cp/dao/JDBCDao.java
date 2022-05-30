@@ -25,9 +25,6 @@ public class JDBCDao<SudokuBoard> implements Dao<SudokuBoard> {
 
             Statement statement = conn.createStatement();
 
-
-            // create table
-            //statement.executeUpdate("Create table boards (id int primary key)");
             String pog = "Create table boards (id int primary key";
 
             for (int i = 0; i<3; i++) {
@@ -41,8 +38,14 @@ public class JDBCDao<SudokuBoard> implements Dao<SudokuBoard> {
             PreparedStatement ps = conn.prepareStatement(pog);
             ps.execute();
 
-            // insert 2 rows
-            statement.executeUpdate("insert into boards values (102,1,2,3,4,5,6,7,8,9)");
+            statement.executeUpdate("insert into boards (id) values (102)");
+            for (int i = 0; i<3; i++) {
+                for (int j = 0; j<3; j++) {
+                    String sql = "update boards set f"+i+j+" = " +j+ " where id = 102";
+                    PreparedStatement ps2 = conn.prepareStatement(sql);
+                    ps2.execute();
+                }
+            }
 
             // query
             ResultSet set = statement.executeQuery("SELECT * FROM boards");
