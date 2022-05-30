@@ -3,6 +3,7 @@ module Model {
     requires javafx.base;
     requires java.logging;
     requires slf4j.api;
+    requires java.sql;
 
     exports pl.cp.model;
     exports pl.cp.observe;
