@@ -13,40 +13,41 @@ public class JDBCDao<SudokuBoard> implements Dao<SudokuBoard> {
         Connection conn;
 
         public static void main(String[] args) throws SQLException {
-            JDBCDao app = new JDBCDao();
+            JDBCDao db = new JDBCDao();
 
-            app.connectionToDerby();
-            //app.normalDbUsage();
+            db.connect();
+            db.DDL();
         }
 
-        public void connectionToDerby() throws SQLException {
-            // -------------------------------------------
-            // URL format is
-            // jdbc:derby:<local directory to save data>
-            // -------------------------------------------
-            String dbUrl = "jdbc:derby:memory:demo;create=true";
+        public void connect() throws SQLException {
+            String dbUrl = "jdbc:derby:memory:SudokuDB;create=true";
             conn = DriverManager.getConnection(dbUrl);
         }
 
-        public void normalDbUsage() throws SQLException {
-            Statement stmt = conn.createStatement();
+        public void DDL() throws SQLException {
+            Statement statement = conn.createStatement();
 
             // drop table
             // stmt.executeUpdate("Drop Table users");
 
             // create table
-            stmt.executeUpdate("Create table users (id int primary key, name varchar(30))");
+            statement.executeUpdate("Create table boards (id int primary key, f00 int, f01 int, f02 int)");
 
             // insert 2 rows
-            stmt.executeUpdate("insert into users values (1,'tom')");
-            stmt.executeUpdate("insert into users values (2,'peter')");
+            statement.executeUpdate("insert into boards values (1,1,2,3)");
+            statement.executeUpdate("insert into boards values (2,4,5,6)");
+
 
             // query
-            ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+            ResultSet set = statement.executeQuery("SELECT * FROM boards");
 
             // print out query result
-            while (rs.next()) {
-                System.out.printf("%d\t%s\n", rs.getInt("id"), rs.getString("name"));
+            while (set.next()) {
+                System.out.printf("%d\t%s\t%s\t%s\n", set.getInt("id"),
+                        set.getInt("f00"),
+                        set.getInt("f01"),
+                        set.getInt("f02")
+                );
             }
         }
 
