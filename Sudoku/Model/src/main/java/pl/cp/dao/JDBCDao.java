@@ -15,10 +15,28 @@ public class JDBCDao implements Dao<SudokuBoard> {
 
     public void connect() throws DaoException {
         try {
-            String dbUrl = "jdbc:derby:memory:SudokuDB;create=true";
+            String dbUrl = "jdbc:derby:./target/SudokuDB2;create=true";
+            //String dbUrl = "jdbc:derby:memory:SudokuDB;create=true";
             conn = DriverManager.getConnection(dbUrl);
         } catch (SQLException ex) {
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoConnectError");
+        }
+    }
+
+    public void createDatabase() throws DaoException {
+        try {
+            throw new SQLException();
+        } catch (SQLException ex) {
+            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoCreateDatabaseError");        //NEW
+        }
+    }
+
+    public void nukeDatabase() throws DaoException {
+        try {
+            Statement statement = conn.createStatement();
+            statement.executeUpdate("drop table boards");
+        } catch (SQLException ex) {
+            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoCreateDatabaseError");                //NEW
         }
     }
 
@@ -84,7 +102,7 @@ public class JDBCDao implements Dao<SudokuBoard> {
     }
 
     @Override
-    public void close() throws Exception {
+    public void close() throws DaoException {
 
     }
 }

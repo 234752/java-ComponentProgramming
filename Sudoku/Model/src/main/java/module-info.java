@@ -9,4 +9,5 @@ module Model {
     exports pl.cp.observe;
     exports pl.cp.solver;
     exports pl.cp.dao;
+    exports pl.cp.exception;
 }

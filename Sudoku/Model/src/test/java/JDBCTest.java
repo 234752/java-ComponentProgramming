@@ -14,19 +14,19 @@ public class JDBCTest {
 
     @Test
     public void testReadWrite() {
-        JDBCDao dao = new JDBCDao();
-        try {
+
+        try (JDBCDao dao = new JDBCDao(); JDBCDao dao2 = new JDBCDao();) {
             dao.connect();
+            dao2.connect();
+            dao.nukeDatabase();
             dao.createNewBoard(102);
             SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
-            board.set(1,1,7);
+            board.set(1,1,9);
             dao.write(board);
-            SudokuBoard board2 = dao.read();
-            assertEquals(board2.get(1,1), 7);
+            SudokuBoard board2 = dao2.read();
+            assertEquals(board2.get(1,1), 9);
         } catch (DaoException ex) {
-            fail();
+            fail(ex);
         }
-
-
     }
 }
