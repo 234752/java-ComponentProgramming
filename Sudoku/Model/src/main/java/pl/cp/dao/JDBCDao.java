@@ -72,7 +72,23 @@ public class JDBCDao implements Dao<SudokuBoard> {
 
     @Override
     public SudokuBoard read() throws DaoException {
-        return null;
+        SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet set = statement.executeQuery("SELECT * FROM boards where id = 102");
+            if(set.next()) {
+                for (int i = 0; i<9; i++) {
+                    for (int j = 0; j<9; j++) {
+                        board.set(i, j, set.getInt("f"+i+j));
+                    }
+                }
+                return board;
+            }
+            return null;
+
+        } catch (SQLException ex) {
+            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoReadError");
+        }
     }
 
     @Override
@@ -81,13 +97,13 @@ public class JDBCDao implements Dao<SudokuBoard> {
             String id = "102";
             for (int i = 0; i<9; i++) {
                 for (int j = 0; j<9; j++) {
-                    //PreparedStatement updateBoard = conn.prepareStatement("update boards set f"+i+j+" = " +obj.get(i,j)+ " where id = ?");
-                    //updateBoard.setObject(1, id);
-                    //updateBoard.execute();
+                    PreparedStatement updateBoard = conn.prepareStatement("update boards set f"+i+j+" = " +obj.get(i,j)+ " where id = ?");
+                    updateBoard.setObject(1, id);
+                    updateBoard.execute();
                 }
             }
         } catch (Exception ex) {
-            //throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoWriteError");
+            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoWriteError");
         }
     }
 

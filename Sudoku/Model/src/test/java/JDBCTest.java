@@ -8,8 +8,7 @@ import pl.cp.solver.BacktrackingSudokuSolver;
 
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JDBCTest {
 
@@ -20,7 +19,10 @@ public class JDBCTest {
             dao.connect();
             dao.createNewBoard(102);
             SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
+            board.set(1,1,7);
             dao.write(board);
+            SudokuBoard board2 = dao.read();
+            assertEquals(board2.get(1,1), 7);
         } catch (Exception ex) {
             fail();
         }
