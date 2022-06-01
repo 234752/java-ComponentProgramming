@@ -47,6 +47,8 @@ public class JDBCTest {
             dao.createNewBoard(102);
             SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
             board.set(1,1,9);
+            dao.selectBoard("102");
+            dao2.selectBoard("102");
             dao.write(board);
             SudokuBoard board2 = dao2.read();
             assertEquals(board2.get(1,1), 9);

@@ -13,6 +13,11 @@ public class JDBCDao implements Dao<SudokuBoard> {
 
     private Connection conn;
     private Statement statement;
+    private String boardName;
+
+    public void selectBoard(String name) {
+        boardName = name;
+    }
 
     public void connect() throws DaoException {
         try {
@@ -69,7 +74,7 @@ public class JDBCDao implements Dao<SudokuBoard> {
     public SudokuBoard read() throws DaoException {
         SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
         try {
-            ResultSet set = statement.executeQuery("SELECT * FROM boards where id = 102");
+            ResultSet set = statement.executeQuery("SELECT * FROM boards where id = "+boardName);
             if(set.next()) {
                 for (int i = 0; i<9; i++) {
                     for (int j = 0; j<9; j++) {
@@ -88,11 +93,10 @@ public class JDBCDao implements Dao<SudokuBoard> {
     @Override
     public void write(SudokuBoard obj) throws DaoException {
         try {
-            String id = "102";
             for (int i = 0; i<9; i++) {
                 for (int j = 0; j<9; j++) {
                     PreparedStatement updateBoard = conn.prepareStatement("update boards set f"+i+j+" = " +obj.get(i,j)+ " where id = ?");
-                    updateBoard.setObject(1, id);
+                    updateBoard.setObject(1, boardName);
                     updateBoard.execute();
                 }
             }
