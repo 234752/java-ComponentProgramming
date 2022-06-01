@@ -13,6 +13,31 @@ import static org.junit.jupiter.api.Assertions.*;
 public class JDBCTest {
 
     @Test
+    public void createDatabase() {
+
+        try (JDBCDao dao = new JDBCDao()) {
+            dao.connect();
+            dao.createNewBoard(102);
+            SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
+            board.set(1,1,9);
+            dao.write(board);
+        } catch (DaoException ex) {
+            fail(ex);
+        }
+    }
+
+    @Test
+    public void nukeDatabase() {
+
+        try (JDBCDao dao = new JDBCDao()) {
+            dao.connect();
+            dao.nukeDatabase();
+        } catch (DaoException ex) {
+            fail(ex);
+        }
+    }
+
+    @Test
     public void testReadWrite() {
 
         try (JDBCDao dao = new JDBCDao(); JDBCDao dao2 = new JDBCDao();) {
@@ -25,6 +50,7 @@ public class JDBCTest {
             dao.write(board);
             SudokuBoard board2 = dao2.read();
             assertEquals(board2.get(1,1), 9);
+
         } catch (DaoException ex) {
             fail(ex);
         }

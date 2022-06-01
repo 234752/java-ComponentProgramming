@@ -11,13 +11,15 @@ import java.util.ResourceBundle;
 
 public class JDBCDao implements Dao<SudokuBoard> {
 
-    Connection conn;
+    private Connection conn;
+    private Statement statement;
 
     public void connect() throws DaoException {
         try {
-            String dbUrl = "jdbc:derby:./target/SudokuDB2;create=true";
+            String dbUrl = "jdbc:derby:./target/SudokuDB;create=true";
             //String dbUrl = "jdbc:derby:memory:SudokuDB;create=true";
             conn = DriverManager.getConnection(dbUrl);
+            statement = conn.createStatement();
         } catch (SQLException ex) {
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoConnectError");
         }
@@ -33,7 +35,7 @@ public class JDBCDao implements Dao<SudokuBoard> {
 
     public void nukeDatabase() throws DaoException {
         try {
-            Statement statement = conn.createStatement();
+
             statement.executeUpdate("drop table boards");
         } catch (SQLException ex) {
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoCreateDatabaseError");                //NEW
@@ -42,7 +44,6 @@ public class JDBCDao implements Dao<SudokuBoard> {
 
     public void createNewBoard(int id) throws DaoException {
         try {
-            Statement statement = conn.createStatement();
             String ddl = "Create table boards (id int primary key";
 
             for (int i = 0; i<9; i++) {
@@ -68,7 +69,6 @@ public class JDBCDao implements Dao<SudokuBoard> {
     public SudokuBoard read() throws DaoException {
         SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
         try {
-            Statement statement = conn.createStatement();
             ResultSet set = statement.executeQuery("SELECT * FROM boards where id = 102");
             if(set.next()) {
                 for (int i = 0; i<9; i++) {
