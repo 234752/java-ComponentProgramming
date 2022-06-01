@@ -1,10 +1,12 @@
 package pl.cp.dao;
 
 import pl.cp.exception.DaoException;
+import pl.cp.model.SudokuBoard;
 
 import java.sql.*;
+import java.util.ResourceBundle;
 
-public class JDBCDao<SudokuBoard> implements Dao<SudokuBoard> {
+public class JDBCDao implements Dao<SudokuBoard> {
 
 
     Connection conn;
@@ -80,7 +82,18 @@ public class JDBCDao<SudokuBoard> implements Dao<SudokuBoard> {
 
     @Override
     public void write(SudokuBoard obj) throws DaoException {
-
+        try {
+            String id = "102";
+            for (int i = 0; i<9; i++) {
+                for (int j = 0; j<9; j++) {
+                    PreparedStatement updateBoard = conn.prepareStatement("update boards set f"+i+j+" = " +obj.get(i,j)+ " where id = ?");
+                    updateBoard.setObject(1, id);
+                    updateBoard.execute();
+                }
+            }
+        } catch (SQLException ex) {
+            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoWriteError");
+        }
     }
 
     @Override
