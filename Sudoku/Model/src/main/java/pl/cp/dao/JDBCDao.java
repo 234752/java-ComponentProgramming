@@ -30,9 +30,16 @@ public class JDBCDao implements Dao<SudokuBoard> {
         }
     }
 
-    public void createDatabase() throws DaoException {
+    public void createTables() throws DaoException {
         try {
-            throw new SQLException();
+            String ddl = "Create table boards (id int primary key";
+            for (int i = 0; i<9; i++) {
+                for (int j = 0; j<9; j++) {
+                    ddl += ", f"+i+j+" int";
+                }
+            }
+            ddl+=")";
+            statement.executeUpdate(ddl);
         } catch (SQLException ex) {
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoCreateDatabaseError");        //NEW
         }
@@ -40,7 +47,6 @@ public class JDBCDao implements Dao<SudokuBoard> {
 
     public void nukeDatabase() throws DaoException {
         try {
-
             statement.executeUpdate("drop table boards");
         } catch (SQLException ex) {
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoNukeDatabaseError");                //NEW
@@ -49,17 +55,6 @@ public class JDBCDao implements Dao<SudokuBoard> {
 
     public void createNewBoard(int id) throws DaoException {
         try {
-            String ddl = "Create table boards (id int primary key";
-
-            for (int i = 0; i<9; i++) {
-                for (int j = 0; j<9; j++) {
-                    ddl += ", f"+i+j+" int";
-                }
-            }
-            ddl+=")";
-
-            statement.executeUpdate(ddl);
-
             PreparedStatement initialInsert = conn.prepareStatement("insert into boards (id) values (?)");
             initialInsert.setObject(1, id);
             initialInsert.execute();

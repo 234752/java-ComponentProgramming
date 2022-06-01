@@ -17,6 +17,7 @@ public class JDBCTest {
 
         try (JDBCDao dao = new JDBCDao()) {
             dao.connect();
+            dao.createTables();
             dao.createNewBoard(102);
             SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
             board.set(1,1,9);
@@ -44,6 +45,7 @@ public class JDBCTest {
             dao.connect();
             dao2.connect();
             dao.nukeDatabase();
+            dao.createTables();
             dao.createNewBoard(102);
             SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
             board.set(1,1,9);
