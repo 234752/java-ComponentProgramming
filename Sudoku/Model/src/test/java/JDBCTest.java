@@ -23,7 +23,7 @@ public class JDBCTest {
             dao.write(board);
             SudokuBoard board2 = dao.read();
             assertEquals(board2.get(1,1), 7);
-        } catch (Exception ex) {
+        } catch (DaoException ex) {
             fail();
         }
 
