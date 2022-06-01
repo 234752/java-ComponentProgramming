@@ -43,7 +43,7 @@ public class JDBCDao implements Dao<SudokuBoard> {
 
             statement.executeUpdate("drop table boards");
         } catch (SQLException ex) {
-            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoCreateDatabaseError");                //NEW
+            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoNukeDatabaseError");                //NEW
         }
     }
 
