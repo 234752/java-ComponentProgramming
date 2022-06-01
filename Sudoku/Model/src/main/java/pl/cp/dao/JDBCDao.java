@@ -2,21 +2,16 @@ package pl.cp.dao;
 
 import pl.cp.exception.DaoException;
 import pl.cp.model.SudokuBoard;
+import pl.cp.model.SudokuField;
+import pl.cp.model.SudokuRow;
+import pl.cp.solver.BacktrackingSudokuSolver;
 
 import java.sql.*;
 import java.util.ResourceBundle;
 
 public class JDBCDao implements Dao<SudokuBoard> {
 
-
     Connection conn;
-
-    public static void main(String[] args) throws SQLException {
-        JDBCDao db = new JDBCDao();
-
-        db.connect();
-        db.createNewBoard(102);
-    }
 
     public void connect() throws SQLException {
         String dbUrl = "jdbc:derby:memory:SudokuDB;create=true";
@@ -86,13 +81,13 @@ public class JDBCDao implements Dao<SudokuBoard> {
             String id = "102";
             for (int i = 0; i<9; i++) {
                 for (int j = 0; j<9; j++) {
-                    PreparedStatement updateBoard = conn.prepareStatement("update boards set f"+i+j+" = " +obj.get(i,j)+ " where id = ?");
-                    updateBoard.setObject(1, id);
-                    updateBoard.execute();
+                    //PreparedStatement updateBoard = conn.prepareStatement("update boards set f"+i+j+" = " +obj.get(i,j)+ " where id = ?");
+                    //updateBoard.setObject(1, id);
+                    //updateBoard.execute();
                 }
             }
-        } catch (SQLException ex) {
-            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoWriteError");
+        } catch (Exception ex) {
+            //throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoWriteError");
         }
     }
 
