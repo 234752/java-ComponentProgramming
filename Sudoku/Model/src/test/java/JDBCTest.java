@@ -43,16 +43,16 @@ public class JDBCTest {
 
         try (JDBCDao dao = new JDBCDao(); JDBCDao dao2 = new JDBCDao();) {
             dao.connect();
-            //dao2.connect();
+            dao2.connect();
             dao.createTables();
             dao.createNewBoard("tested board 1");
             SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
             board.set(1,1,9);
             dao.selectBoard("tested board 1");
-            //dao2.selectBoard("102");
+            dao2.selectBoard("tested board 1");
             dao.write(board);
-            //SudokuBoard board2 = dao2.read();
-            //assertEquals(board2.get(1,1), 9);
+            SudokuBoard board2 = dao2.read();
+            assertEquals(board2.get(1,1), 9);
 
         } catch (DaoException ex) {
             fail(ex);

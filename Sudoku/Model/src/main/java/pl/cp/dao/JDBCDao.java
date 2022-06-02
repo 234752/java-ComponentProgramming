@@ -71,17 +71,17 @@ public class JDBCDao implements Dao<SudokuBoard> {
     public SudokuBoard read() throws DaoException {
         SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
         try {
-            ResultSet set = statement.executeQuery("SELECT * FROM boards where id = "+boardName);
-            if(set.next()) {
-                for (int i = 0; i<9; i++) {
-                    for (int j = 0; j<9; j++) {
-                        board.set(i, j, set.getInt("f"+i+j));
-                    }
+            int boardId = fetchBoardId(boardName);
+            ResultSet set = statement.executeQuery("select * from fields where board_id = " + boardId);
+            while(set.next()) {
+                board.set(set.getInt("x"), set.getInt("y"), set.getInt("value"));
+                if (set.getBoolean("is_locked")) {
+                    board.lockField(set.getInt("x"), set.getInt("y"));
+                } else {
+                    board.unlockField(set.getInt("x"), set.getInt("y"));
                 }
-                return board;
             }
-            return null;
-
+            return board;
         } catch (SQLException ex) {
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoReadError");
         }
