@@ -1,12 +1,17 @@
 package pl.cp.dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ResourceBundle;
 import pl.cp.exception.DaoException;
 import pl.cp.model.SudokuBoard;
 import pl.cp.solver.BacktrackingSudokuSolver;
-import java.sql.*;
-import java.util.ResourceBundle;
 
-public class JDBCDao implements Dao<SudokuBoard> {
+public class JdbcDao implements Dao<SudokuBoard> {
 
     private Connection conn;
     private Statement statement;
@@ -40,7 +45,7 @@ public class JDBCDao implements Dao<SudokuBoard> {
                     + "board_id int references boards(id), x int, y int, value int,"
                     + "is_locked boolean)");
         } catch (SQLException ex) {
-            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoCreateDatabaseError");        //NEW
+            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoCreateDatabaseError");
         }
     }
 
@@ -49,7 +54,7 @@ public class JDBCDao implements Dao<SudokuBoard> {
             statement.executeUpdate("drop table fields");
             statement.executeUpdate("drop table boards");
         } catch (SQLException ex) {
-            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoNukeDatabaseError");                //NEW
+            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoNukeDatabaseError");
         }
     }
 
@@ -70,7 +75,7 @@ public class JDBCDao implements Dao<SudokuBoard> {
         try {
             int boardId = fetchBoardId(boardName);
             ResultSet set = statement.executeQuery("select * from fields where board_id = " + boardId);
-            while(set.next()) {
+            while (set.next()) {
                 board.set(set.getInt("x"), set.getInt("y"), set.getInt("value"));
                 if (set.getBoolean("is_locked")) {
                     board.lockField(set.getInt("x"), set.getInt("y"));
@@ -88,8 +93,8 @@ public class JDBCDao implements Dao<SudokuBoard> {
     public void write(SudokuBoard obj) throws DaoException {
         try {
             int boardId = fetchBoardId(boardName);
-            for (int i = 0; i<9; i++) {
-                for (int j = 0; j<9; j++) {
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
                     PreparedStatement updateBoard = conn.prepareStatement(
                             "insert into fields (board_id, x, y, value, is_locked) values ("
                                     + boardId + ", "

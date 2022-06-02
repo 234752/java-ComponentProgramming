@@ -1,12 +1,9 @@
 import org.junit.jupiter.api.Test;
-import pl.cp.dao.Dao;
-import pl.cp.dao.JDBCDao;
+import pl.cp.dao.JdbcDao;
 import pl.cp.dao.SudokuBoardDaoFactory;
 import pl.cp.exception.DaoException;
 import pl.cp.model.SudokuBoard;
 import pl.cp.solver.BacktrackingSudokuSolver;
-
-import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +12,7 @@ public class JDBCTest {
     @Test
     public void testReadWrite() {
 
-        try (JDBCDao dao = SudokuBoardDaoFactory.getJDBCDao(); JDBCDao dao2 = SudokuBoardDaoFactory.getJDBCDao();) {
+        try (JdbcDao dao = SudokuBoardDaoFactory.getJdbcDao(); JdbcDao dao2 = SudokuBoardDaoFactory.getJdbcDao()) {
             dao.connect();
             dao2.connect();
 
@@ -25,11 +22,12 @@ public class JDBCTest {
             dao2.selectBoard("tested board 1");
 
             SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
-            board.set(1,1,9);
+            board.solveGame();
             dao.write(board);
 
             SudokuBoard board2 = dao2.read();
-            assertEquals(board2.get(1,1), 9);
+            assertEquals(board, board2);
+            assertNotSame(board, board2);
 
         } catch (DaoException ex) {
             fail(ex);
@@ -39,7 +37,7 @@ public class JDBCTest {
     @Test
     public void nukeDatabase() {
 
-        try (JDBCDao dao = SudokuBoardDaoFactory.getJDBCDao()) {
+        try (JdbcDao dao = SudokuBoardDaoFactory.getJdbcDao()) {
             dao.connect();
             dao.nukeDatabase();
         } catch (DaoException ex) {
