@@ -38,6 +38,8 @@ public class SudokuApplication extends Application {
     private Button checkButton;
     private Label checkLabel;
     private ChoiceBox difficultyChoice;
+    private ChoiceBox databaseChoiceBox;
+    private TextField databaseTextField;
     private SudokuBoard mainBoard = new SudokuBoard(new BacktrackingSudokuSolver());
     private TextField[][] fields = new TextField[9][9];
 
@@ -118,8 +120,10 @@ public class SudokuApplication extends Application {
 
         //difficulty box
         difficultyChoice = (ChoiceBox) scene.lookup("#cb1");
+        databaseChoiceBox = (ChoiceBox) scene.lookup("#cb2");
 
         //fields
+        databaseTextField = (TextField) scene.lookup("#tfDatabase");
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 fields[x][y] = (TextField) scene.lookup("#tf" + x + y);
