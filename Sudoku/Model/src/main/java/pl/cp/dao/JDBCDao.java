@@ -64,7 +64,6 @@ public class JDBCDao implements Dao<SudokuBoard> {
         } catch (SQLException ex) {
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoCreateError");
         }
-
     }
 
 
@@ -91,10 +90,19 @@ public class JDBCDao implements Dao<SudokuBoard> {
     @Override
     public void write(SudokuBoard obj) throws DaoException {
         try {
+            int boardId = 0;
             for (int i = 0; i<9; i++) {
                 for (int j = 0; j<9; j++) {
-                    PreparedStatement updateBoard = conn.prepareStatement("update boards set f"+i+j+" = " +obj.get(i,j)+ " where id = ?");
-                    updateBoard.setObject(1, boardName);
+                    //PreparedStatement updateBoard = conn.prepareStatement("update boards set f"+i+j+" = " +obj.get(i,j)+ " where id = ?");
+                    //updateBoard.setObject(1, boardName);
+                    //updateBoard.execute();
+                    PreparedStatement updateBoard = conn.prepareStatement(
+                            "insert into fields (board_id, x, y, value) values ("
+                                    + boardId + ", "
+                                    + i + ", "
+                                    + j + ", "
+                                    + obj.get(i,j)
+                                    + ")");
                     updateBoard.execute();
                 }
             }
