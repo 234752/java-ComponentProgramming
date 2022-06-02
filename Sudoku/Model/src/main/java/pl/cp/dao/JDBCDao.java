@@ -2,10 +2,7 @@ package pl.cp.dao;
 
 import pl.cp.exception.DaoException;
 import pl.cp.model.SudokuBoard;
-import pl.cp.model.SudokuField;
-import pl.cp.model.SudokuRow;
 import pl.cp.solver.BacktrackingSudokuSolver;
-
 import java.sql.*;
 import java.util.ResourceBundle;
 
@@ -114,7 +111,7 @@ public class JDBCDao implements Dao<SudokuBoard> {
         if (set.next()) {
             return set.getInt("id");
         } else {
-            throw new SQLException("bruh");
+            throw new SQLException();
         }
     }
 
