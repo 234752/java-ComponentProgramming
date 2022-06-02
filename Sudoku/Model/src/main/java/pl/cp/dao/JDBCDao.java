@@ -90,8 +90,7 @@ public class JDBCDao implements Dao<SudokuBoard> {
     @Override
     public void write(SudokuBoard obj) throws DaoException {
         try {
-            int boardId = 0;
-
+            int boardId = fetchBoardId(boardName);
             for (int i = 0; i<9; i++) {
                 for (int j = 0; j<9; j++) {
                     PreparedStatement updateBoard = conn.prepareStatement(
@@ -107,6 +106,15 @@ public class JDBCDao implements Dao<SudokuBoard> {
             }
         } catch (Exception ex) {
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoWriteError");
+        }
+    }
+
+    private int fetchBoardId(String name) throws SQLException {
+        ResultSet set = statement.executeQuery("select * from boards where board_name = '" + name + "'");
+        if (set.next()) {
+            return set.getInt("id");
+        } else {
+            throw new SQLException("bruh");
         }
     }
 
