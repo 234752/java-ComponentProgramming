@@ -19,6 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
 import javafx.util.converter.DefaultStringConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.cp.dao.Dao;
 import pl.cp.dao.JdbcDao;
 import pl.cp.dao.SudokuBoardDaoFactory;
@@ -32,6 +34,7 @@ import pl.cp.solver.BacktrackingSudokuSolver;
 public class SudokuApplication extends Application {
 
     private ResourceBundle resourceBundle;
+    private static Logger logger = LoggerFactory.getLogger(SudokuApplication.class.getName());
 
     private Button startButton;
     private Button saveButton;
@@ -96,7 +99,7 @@ public class SudokuApplication extends Application {
                 dao.write(mainBoard);
                 updateDatabaseChoiceBox();
             } catch (Exception exception) {
-                System.out.println(exception);
+                logger.info(exception.getMessage());
             }
         });
         loadButton = (Button) scene.lookup("#loadButton");
@@ -109,7 +112,7 @@ public class SudokuApplication extends Application {
                 bindBoardProperties();
                 updateDatabaseChoiceBox();
             } catch (Exception exception) {
-                System.out.println(exception);
+                logger.info(exception.getMessage());
             }
             blockFields();
         });
@@ -138,7 +141,7 @@ public class SudokuApplication extends Application {
                 dao.nukeDatabase();
                 updateDatabaseChoiceBox();
             } catch (Exception exception) {
-                System.out.println(exception);
+                logger.info(exception.getMessage());
             }
         });
 
@@ -217,7 +220,7 @@ public class SudokuApplication extends Application {
             databaseChoiceBox.setItems(dao.getAllBoardNames());
             databaseChoiceBox.getSelectionModel().select(0);
         } catch (Exception exception) {
-            System.out.println(exception);
+            logger.info(exception.getMessage());
         }
     }
 
