@@ -38,6 +38,7 @@ public class SudokuApplication extends Application {
     private Button englishButton;
     private Button polishButton;
     private Button checkButton;
+    private Button dropButton;
     private Label checkLabel;
     private ChoiceBox difficultyChoice;
     private ChoiceBox databaseChoiceBox;
@@ -63,7 +64,6 @@ public class SudokuApplication extends Application {
 
         //setup
         initializeBoardElements(scene);
-        //testReadWrite();
     }
 
     public static void main(String[] args) {
@@ -123,6 +123,15 @@ public class SudokuApplication extends Application {
                 checkLabel.setText(resourceBundle.getString("resultPositive"));
             } else {
                 checkLabel.setText(resourceBundle.getString("resultNegative"));
+            }
+        });
+        dropButton = (Button) scene.lookup("#dropButton");
+        dropButton.setOnAction(actionEvent -> {
+            try (JdbcDao dao = SudokuBoardDaoFactory.getJdbcDao()) {
+                dao.connect();
+                dao.nukeDatabase();
+            } catch (Exception exception) {
+                System.out.println(exception);
             }
         });
 
@@ -199,33 +208,12 @@ public class SudokuApplication extends Application {
         englishButton.setText(resourceBundle.getString("englishButtonLabel"));
         polishButton.setText(resourceBundle.getString("polishButtonLabel"));
         checkButton.setText(resourceBundle.getString("checkButtonLabel"));
+        dropButton.setText(resourceBundle.getString("dropButtonLabel"));
         checkLabel.setText("");
         difficultyChoice.setItems(FXCollections.observableArrayList(
                 resourceBundle.getString("difficulty0"),
                 resourceBundle.getString("difficulty1"),
                 resourceBundle.getString("difficulty2")));
         difficultyChoice.getSelectionModel().select(0);
-    }
-
-    public void testReadWrite() {
-
-        try (JdbcDao dao = SudokuBoardDaoFactory.getJdbcDao(); JdbcDao dao2 = SudokuBoardDaoFactory.getJdbcDao()) {
-            dao.connect();
-            dao2.connect();
-
-            dao.createTables();
-            dao.createNewBoard("tested board 1");
-            dao.selectBoard("tested board 1");
-            dao2.selectBoard("tested board 1");
-
-            SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
-            board.solveGame();
-            dao.write(board);
-
-            SudokuBoard board2 = dao2.read();
-
-        } catch (DaoException ex) {
-            System.out.println(ex);
-        }
     }
 }

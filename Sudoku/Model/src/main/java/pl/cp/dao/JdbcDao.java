@@ -63,10 +63,10 @@ public class JdbcDao implements Dao<SudokuBoard> {
             ResultSet boardsExist = conn.getMetaData().getTables(null, null, "BOARDS", null);
             ResultSet fieldsExist = conn.getMetaData().getTables(null, null, "FIELDS", null);
 
-            if (!fieldsExist.next()) {
+            if (fieldsExist.next()) {
                 statement.executeUpdate("drop table fields");
             }
-            if (!boardsExist.next()) {
+            if (boardsExist.next()) {
                 statement.executeUpdate("drop table boards");
             }
 
