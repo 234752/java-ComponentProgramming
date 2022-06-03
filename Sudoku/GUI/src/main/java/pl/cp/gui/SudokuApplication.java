@@ -101,9 +101,13 @@ public class SudokuApplication extends Application {
         });
         loadButton = (Button) scene.lookup("#loadButton");
         loadButton.setOnAction(actionEvent -> {
-            try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("target/boardSavedFromGUI.txt")) {
+            try (JdbcDao dao = SudokuBoardDaoFactory.getJdbcDao()) {
+                String name = databaseChoiceBox.getSelectionModel().getSelectedItem().toString();
+                dao.connect();
+                dao.selectBoard(name);
                 mainBoard = dao.read();
                 bindBoardProperties();
+                updateDatabaseChoiceBox();
             } catch (Exception exception) {
                 System.out.println(exception);
             }
