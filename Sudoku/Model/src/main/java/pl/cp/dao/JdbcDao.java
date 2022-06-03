@@ -60,8 +60,16 @@ public class JdbcDao implements Dao<SudokuBoard> {
 
     public void nukeDatabase() throws DaoException {
         try {
-            statement.executeUpdate("drop table fields");
-            statement.executeUpdate("drop table boards");
+            ResultSet boardsExist = conn.getMetaData().getTables(null, null, "BOARDS", null);
+            ResultSet fieldsExist = conn.getMetaData().getTables(null, null, "FIELDS", null);
+
+            if (!fieldsExist.next()) {
+                statement.executeUpdate("drop table fields");
+            }
+            if (!boardsExist.next()) {
+                statement.executeUpdate("drop table boards");
+            }
+
         } catch (SQLException ex) {
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoNukeDatabaseError");
         }
