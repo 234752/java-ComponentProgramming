@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import pl.cp.exception.DaoException;
 import pl.cp.model.SudokuBoard;
 import pl.cp.solver.BacktrackingSudokuSolver;
@@ -85,6 +88,18 @@ public class JdbcDao implements Dao<SudokuBoard> {
         }
     }
 
+    public ObservableList getAllBoardNames() throws DaoException {
+        try {
+            ObservableList names = FXCollections.observableArrayList();
+            ResultSet set = statement.executeQuery("select * from boards");
+            while (set.next()) {
+                names.add(set.getString("board_name"));
+            }
+            return names;
+        } catch (SQLException ex) {
+            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoGetBoardNamesError");
+        }
+    }
 
     @Override
     public SudokuBoard read() throws DaoException {

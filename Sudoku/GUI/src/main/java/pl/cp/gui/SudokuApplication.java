@@ -9,6 +9,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -93,6 +94,7 @@ public class SudokuApplication extends Application {
                 dao.createNewBoard(name);
                 dao.selectBoard(name);
                 dao.write(mainBoard);
+                updateDatabaseChoiceBox();
             } catch (Exception exception) {
                 System.out.println(exception);
             }
@@ -130,6 +132,7 @@ public class SudokuApplication extends Application {
             try (JdbcDao dao = SudokuBoardDaoFactory.getJdbcDao()) {
                 dao.connect();
                 dao.nukeDatabase();
+                updateDatabaseChoiceBox();
             } catch (Exception exception) {
                 System.out.println(exception);
             }
@@ -137,7 +140,10 @@ public class SudokuApplication extends Application {
 
         //difficulty box
         difficultyChoice = (ChoiceBox) scene.lookup("#cb1");
+
+        //database boards list
         databaseChoiceBox = (ChoiceBox) scene.lookup("#cb2");
+        updateDatabaseChoiceBox();
 
         //fields
         databaseTextField = (TextField) scene.lookup("#tfDatabase");
@@ -198,6 +204,16 @@ public class SudokuApplication extends Application {
                     fields[x][y].setDisable(false);
                 }
             }
+        }
+    }
+
+    private void updateDatabaseChoiceBox() {
+        try (JdbcDao dao = SudokuBoardDaoFactory.getJdbcDao()) {
+            dao.connect();
+            databaseChoiceBox.setItems(dao.getAllBoardNames());
+            databaseChoiceBox.getSelectionModel().select(0);
+        } catch (Exception exception) {
+            System.out.println(exception);
         }
     }
 
