@@ -23,7 +23,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
 
     public void connect() throws DaoException {
         try {
-            String dbUrl = "jdbc:derby:./target/SudokuDB;create=true";
+            String dbUrl = "jdbc:derby:./database/SudokuDB;create=true";
             //String dbUrl = "jdbc:derby:memory:SudokuDB;create=true";
             conn = DriverManager.getConnection(dbUrl);
             statement = conn.createStatement();

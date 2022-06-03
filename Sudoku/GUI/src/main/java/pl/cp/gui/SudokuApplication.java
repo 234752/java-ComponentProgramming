@@ -19,8 +19,10 @@ import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
 import javafx.util.converter.DefaultStringConverter;
 import pl.cp.dao.Dao;
+import pl.cp.dao.JdbcDao;
 import pl.cp.dao.SudokuBoardDaoFactory;
 import pl.cp.difficulty.Difficulty;
+import pl.cp.exception.DaoException;
 import pl.cp.model.SudokuBoard;
 import pl.cp.solver.BacktrackingSudokuSolver;
 
@@ -61,6 +63,7 @@ public class SudokuApplication extends Application {
 
         //setup
         initializeBoardElements(scene);
+        //testReadWrite();
     }
 
     public static void main(String[] args) {
@@ -83,7 +86,12 @@ public class SudokuApplication extends Application {
         });
         saveButton = (Button) scene.lookup("#saveButton");
         saveButton.setOnAction(actionEvent -> {
-            try (Dao<SudokuBoard> dao = SudokuBoardDaoFactory.getFileDao("target/boardSavedFromGUI.txt")) {
+            try (JdbcDao dao = SudokuBoardDaoFactory.getJdbcDao()) {
+                String name = databaseTextField.getText();
+                dao.connect();
+                dao.createTables();
+                dao.createNewBoard(name);
+                dao.selectBoard(name);
                 dao.write(mainBoard);
             } catch (Exception exception) {
                 System.out.println(exception);
@@ -197,5 +205,27 @@ public class SudokuApplication extends Application {
                 resourceBundle.getString("difficulty1"),
                 resourceBundle.getString("difficulty2")));
         difficultyChoice.getSelectionModel().select(0);
+    }
+
+    public void testReadWrite() {
+
+        try (JdbcDao dao = SudokuBoardDaoFactory.getJdbcDao(); JdbcDao dao2 = SudokuBoardDaoFactory.getJdbcDao()) {
+            dao.connect();
+            dao2.connect();
+
+            dao.createTables();
+            dao.createNewBoard("tested board 1");
+            dao.selectBoard("tested board 1");
+            dao2.selectBoard("tested board 1");
+
+            SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
+            board.solveGame();
+            dao.write(board);
+
+            SudokuBoard board2 = dao2.read();
+
+        } catch (DaoException ex) {
+            System.out.println(ex);
+        }
     }
 }
