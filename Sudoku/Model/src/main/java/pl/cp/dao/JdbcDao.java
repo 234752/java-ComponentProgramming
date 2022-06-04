@@ -177,11 +177,12 @@ public class JdbcDao implements Dao<SudokuBoard> {
         }
     }
 
-    private void revertChanges() {
+    private boolean revertChanges() {
         try {
             conn.rollback();
+            return true;
         } catch (SQLException ex) {
-
+            return false;
         }
     }
 
