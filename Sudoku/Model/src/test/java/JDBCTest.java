@@ -44,4 +44,18 @@ public class JDBCTest {
             fail(ex);
         }
     }
+
+    @Test
+    public void testExceptions() {
+        try (JdbcDao dao = SudokuBoardDaoFactory.getJdbcDao()) {
+            dao.connect();
+            dao.nukeDatabase();
+            assertThrows(DaoException.class, () -> dao.createNewBoard("board"));
+            dao.selectBoard("not existing board");
+            assertThrows(DaoException.class, dao::read);
+            assertThrows(DaoException.class, () -> dao.write(new SudokuBoard(new BacktrackingSudokuSolver())));
+        } catch (DaoException ex) {
+            fail(ex);
+        }
+    }
 }
