@@ -31,6 +31,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
             statement = conn.createStatement();
             conn.setAutoCommit(false);
         } catch (SQLException ex) {
+            revertChanges();
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoConnectError");
         }
     }
@@ -58,6 +59,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
                     + "is_locked boolean)");
             conn.commit();
         } catch (SQLException ex) {
+            revertChanges();
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoCreateDatabaseError");
         }
     }
@@ -75,6 +77,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
             }
             conn.commit();
         } catch (SQLException ex) {
+            revertChanges();
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoNukeDatabaseError");
         }
     }
@@ -86,6 +89,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
             initialInsert.execute();
             conn.commit();
         } catch (SQLException ex) {
+            revertChanges();
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoCreateError");
         }
     }
@@ -100,6 +104,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
             }
             return names;
         } catch (SQLException ex) {
+            revertChanges();
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoGetBoardNamesError");
         }
     }
@@ -110,6 +115,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
             conn.commit();
             if (boards.next()) return false;
         } catch (SQLException ex) {
+            revertChanges();
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoNameTakenError");
         }
         return true;
@@ -132,6 +138,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
             }
             return board;
         } catch (SQLException ex) {
+            revertChanges();
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoReadError");
         }
     }
@@ -155,6 +162,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
             }
             conn.commit();
         } catch (Exception ex) {
+            revertChanges();
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoWriteError");
         }
     }
@@ -169,12 +177,20 @@ public class JdbcDao implements Dao<SudokuBoard> {
         }
     }
 
+    private void revertChanges() {
+        try {
+            conn.rollback();
+        } catch (SQLException ex) {
+
+        }
+    }
+
     @Override
     public void close() throws DaoException {
         try {
             conn.setAutoCommit(true);
         } catch (SQLException ex) {
-            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoWriteError");
+            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoClosed");
         }
     }
 }
