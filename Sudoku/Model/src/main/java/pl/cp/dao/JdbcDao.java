@@ -29,6 +29,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
             //String dbUrl = "jdbc:derby:memory:SudokuDB;create=true";
             conn = DriverManager.getConnection(dbUrl);
             statement = conn.createStatement();
+            conn.setAutoCommit(false);
         } catch (SQLException ex) {
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoConnectError");
         }
@@ -55,6 +56,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
                     + "as identity (start with 0, increment by 1),"
                     + "board_id int references boards(id), x int, y int, value int,"
                     + "is_locked boolean)");
+            conn.commit();
         } catch (SQLException ex) {
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoCreateDatabaseError");
         }
@@ -71,7 +73,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
             if (boardsExist.next()) {
                 statement.executeUpdate("drop table boards");
             }
-
+            conn.commit();
         } catch (SQLException ex) {
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoNukeDatabaseError");
         }
@@ -82,6 +84,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
             PreparedStatement initialInsert = conn.prepareStatement("insert into boards (board_name) values (?)");
             initialInsert.setObject(1, name);
             initialInsert.execute();
+            conn.commit();
         } catch (SQLException ex) {
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoCreateError");
         }
@@ -91,6 +94,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
         try {
             ObservableList names = FXCollections.observableArrayList();
             ResultSet set = statement.executeQuery("select * from boards");
+            conn.commit();
             while (set.next()) {
                 names.add(set.getString("board_name"));
             }
@@ -103,6 +107,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
     public boolean verifyBoardName(String name) throws DaoException {
         try {
             ResultSet boards = statement.executeQuery("select * from boards where board_name = '" + name + "'");
+            conn.commit();
             if (boards.next()) return false;
         } catch (SQLException ex) {
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoNameTakenError");
@@ -116,6 +121,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
         try {
             int boardId = fetchBoardId(boardName);
             ResultSet set = statement.executeQuery("select * from fields where board_id = " + boardId);
+            conn.commit();
             while (set.next()) {
                 board.set(set.getInt("x"), set.getInt("y"), set.getInt("value"));
                 if (set.getBoolean("is_locked")) {
@@ -147,6 +153,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
                     updateBoard.execute();
                 }
             }
+            conn.commit();
         } catch (Exception ex) {
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoWriteError");
         }
@@ -154,6 +161,7 @@ public class JdbcDao implements Dao<SudokuBoard> {
 
     private int fetchBoardId(String name) throws SQLException {
         ResultSet set = statement.executeQuery("select * from boards where board_name = '" + name + "'");
+        conn.commit();
         if (set.next()) {
             return set.getInt("id");
         } else {
@@ -163,6 +171,10 @@ public class JdbcDao implements Dao<SudokuBoard> {
 
     @Override
     public void close() throws DaoException {
-
+        try {
+            conn.setAutoCommit(true);
+        } catch (SQLException ex) {
+            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoWriteError");
+        }
     }
 }
