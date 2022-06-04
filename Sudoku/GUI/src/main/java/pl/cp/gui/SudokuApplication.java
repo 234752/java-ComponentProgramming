@@ -222,6 +222,7 @@ public class SudokuApplication extends Application {
             databaseChoiceBox.setItems(dao.getAllBoardNames());
             databaseChoiceBox.getSelectionModel().select(0);
         } catch (Exception exception) {
+            databaseChoiceBox.setItems(FXCollections.observableArrayList());
             logger.info(exception.getMessage());
         }
     }
