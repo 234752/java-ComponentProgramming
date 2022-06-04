@@ -113,7 +113,9 @@ public class JdbcDao implements Dao<SudokuBoard> {
         try {
             ResultSet boards = statement.executeQuery("select * from boards where board_name = '" + name + "'");
             conn.commit();
-            if (boards.next()) return false;
+            if (boards.next()) {
+                return false;
+            }
         } catch (SQLException ex) {
             revertChanges();
             throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoNameTakenError");
