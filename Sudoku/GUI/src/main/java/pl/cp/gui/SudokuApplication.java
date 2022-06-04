@@ -91,10 +91,15 @@ public class SudokuApplication extends Application {
                 String name = databaseTextField.getText();
                 dao.connect();
                 dao.createTables();
+                if (!dao.verifyBoardName(name)) {
+                    checkLabel.setText(resourceBundle.getString("nameTakenLabel"));
+                    return;
+                }
                 dao.createNewBoard(name);
                 dao.selectBoard(name);
                 dao.write(mainBoard);
                 updateDatabaseChoiceBox();
+                checkLabel.setText("");
             } catch (Exception exception) {
                 logger.info(exception.getMessage());
             }
