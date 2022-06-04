@@ -100,6 +100,16 @@ public class JdbcDao implements Dao<SudokuBoard> {
         }
     }
 
+    public boolean verifyBoardName(String name) throws DaoException {
+        try {
+            ResultSet boards = statement.executeQuery("select * from boards where board_name = '" + name + "'");
+            if (boards.next()) return false;
+        } catch (SQLException ex) {
+            throw DaoException.getDaoException(ResourceBundle.getBundle("Exceptions_PL"), "daoNameTakenError");
+        }
+        return true;
+    }
+
     @Override
     public SudokuBoard read() throws DaoException {
         SudokuBoard board = new SudokuBoard(new BacktrackingSudokuSolver());
